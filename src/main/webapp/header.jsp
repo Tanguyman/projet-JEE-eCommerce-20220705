@@ -3,7 +3,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.hytekFront.beans.CategoriesBean" %>
 <%@ page import="com.hytekFront.beans.SousCategoriesBean" %>
-<%@page import="com.hytekFront.beans.CoordonneesBean"%>
+<%@ page import="com.hytekFront.beans.CoordonneesBean"%>
 <%-- 
 <%@ page import="fr.commerceFront.beans.Shopping_ListBean" %>
 <%@ page import="fr.commerceFront.beans.Shopping_LineBean" %> 
@@ -72,10 +72,21 @@ CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee"
 		                                        <a href="Index"><img src="assets/img/logo/logo.png" alt="Hytek-logo" height="30px" width="100%" ></a>
 		                                    </div>
                                     	</li>
-                                        <li><a href="ConnexionInscription">Connexion / Inscription</a></li>
-                                        <li><a href="cart-page.html">Favoris</a></li>
-                                        <li><a href="checkout-page.html">Commande</a></li>
-                                        <li><a href="#">Pannier</a></li>
+                                    	<%
+                                    	if ( (boolean)session.getAttribute("isConnected") ) {
+                                    	%>
+                                        <li><a href="#"><i class="fa-solid fa-user p-1"></i><%= session.getAttribute("userNameBySession")  %></a></li>
+                                        <li><a href="#"><i class="fa-solid fa-up-right-from-square p-1"></i>Déconnexion</a></li>
+                                        <%
+                                        } else {
+                                        %>
+                                        <li><a href="ConnexionInscription?loginFrom=index">Connexion / Inscription</a></li>
+                                        <%
+                                        }
+                                        %>
+                                        <li><a href="cart-page.html"><i class="fa-solid fa-heart p-1"></i>Favoris</a></li>
+                                        <li><a href="#"><img src="assets/img/icon/bag.png" alt="" height="25px" class="align-top p-1">Pannier</a></li>
+                                        <li><a href="checkout-page.html"><i class="fa-solid fa-credit-card p-1"></i>Commande</a></li>
 
                                     </ul>
                                 </div>

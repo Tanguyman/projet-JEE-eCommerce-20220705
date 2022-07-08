@@ -13,27 +13,32 @@ public class UtilisateursBean {
 	private String password;
 	private boolean archiver;
 
+	private ArrayList<AdressesBean> adresses;
+	private ArrayList<CommandesBean> commandes;
 	private ArrayList<CommentairesBean> commentaires;
-	/*
-	 * private ArrayList<Adresses_livraisonBean> adresses; private
-	 * ArrayList<FavorisBean> favoris; private ArrayList<Visites> visites;
-	 */
+	private ArrayList<FavorisBean> favoris;
+	// private ArrayList<Visites> visites;
 
 	public UtilisateursBean() {
 		super();
 	}
 
-	/*
-	 * public UtilisateursBean(int id, String nom, String prenom, Date
-	 * date_inscription, String email, String password, boolean archiver,
-	 * ArrayList<Adresses_livraison> adresses, ArrayList<CommentairesBean>
-	 * commentaires, ArrayList<Favoris> favoris, ArrayList<Visites> visites) {
-	 * super(); this.id = id; this.nom = nom; this.prenom = prenom;
-	 * this.date_inscription = date_inscription; this.email = email; this.password =
-	 * password; this.archiver = archiver; this.adresses = adresses;
-	 * this.commentaires = commentaires; this.favoris = favoris; this.visites =
-	 * visites; }
-	 */
+	public UtilisateursBean(int id, String nom, String prenom, Date date_inscription, String email, String password,
+			boolean archiver, ArrayList<AdressesBean> adresses, ArrayList<CommandesBean> commandes,
+			ArrayList<CommentairesBean> commentaires, ArrayList<FavorisBean> favoris) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.date_inscription = date_inscription;
+		this.email = email;
+		this.password = password;
+		this.archiver = archiver;
+		this.adresses = adresses;
+		this.commandes = commandes;
+		this.commentaires = commentaires;
+		this.favoris = favoris;
+	}
 
 	public int getId() {
 		return id;
@@ -91,34 +96,44 @@ public class UtilisateursBean {
 		this.archiver = archiver;
 	}
 
+	public ArrayList<AdressesBean> getAdresses() {
+		return adresses;
+	}
+
+	public void setAdresses(ArrayList<AdressesBean> adresses) {
+		this.adresses = adresses;
+	}
+
+	public ArrayList<CommandesBean> getCommandes() {
+		return commandes;
+	}
+
+	public void setCommandes(ArrayList<CommandesBean> commandes) {
+		this.commandes = commandes;
+	}
+
 	public ArrayList<CommentairesBean> getCommentaires() {
 		return commentaires;
 	}
-	
+
 	public void setCommentaires(ArrayList<CommentairesBean> commentaires) {
 		this.commentaires = commentaires;
 	}
-	
-	/*
-	 * public ArrayList<Adresses_livraisonBean> getAdresses() { return adresses; }
-	 * 
-	 * public void setAdresses(ArrayList<Adresses_livraisonBean> adresses) {
-	 * this.adresses = adresses; }
-	 * 
-	 * public ArrayList<FavorisBean> getFavoris() { return favoris; }
-	 * 
-	 * public void setFavoris(ArrayList<FavorisBean> favoris) { this.favoris =
-	 * favoris; }
-	 * 
-	 * public ArrayList<VisitesBean> getVisites() { return visites; }
-	 * 
-	 * public void setVisites(ArrayList<VisitesBean> visites) { this.visites =
-	 * visites; }
-	 */
+
+	public ArrayList<FavorisBean> getFavoris() {
+		return favoris;
+	}
+
+	public void setFavoris(ArrayList<FavorisBean> favoris) {
+		this.favoris = favoris;
+	}
+
 	@Override
 	public String toString() {
 		return "UtilisateursBean [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", date_inscription="
-				+ date_inscription + ", email=" + email + ", password=" + password + ", archiver=" + archiver + "]";
+				+ date_inscription + ", email=" + email + ", password=" + password + ", archiver=" + archiver
+				+ ", adresses=" + adresses + ", commandes=" + commandes + ", commentaires=" + commentaires
+				+ ", favoris=" + favoris + "]";
 	}
 
 }

@@ -55,7 +55,7 @@
 	
 	    <!-- =================Page Title Area Starts================= -->
 	
-	    <div class="page-title-area pt-130 pb-120 " style="background-image: url(assets/img/bg/chechout-page-bg.jpg);">
+	    <div class="page-title-area pt-130 pb-120" style="background-image: url(assets/img/bg/chechout-page-bg.jpg); opacity: 0.6;">
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-xl-12">
@@ -87,33 +87,50 @@
 	                <div class="col-xl-5 col-lg-6 col-md-8 col-sm-9">
 	                    <div class="login-detalis pt-40 pr-40 pl-40 pb-40">
 	                        <h4>Connexion</h4>
-	                        <div class="login-input">
-	                            <input type="text" placeholder="Enter your email....">
-	                            <input type="text" placeholder="Enter your Password....">
-	                        </div>
-	                        <div class="or text-center">
-	                            <span>OR</span>
-	                        </div>
-	                        <div class="login-account text-center pt-10">
-	                            <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a>
-	                            <a href="#"><i class="fab fa-google-plus-g"></i>Google</a>
-	                        </div>
-	                        <div class="login-button text-center pt-30">
-	                            <a href="#" >Login</a>
-	                        </div>
-	                        <div class="login-information pt-25">
-	                            <div class="remember-me">
-	                                <input type="checkbox" id="checkbox-1"><label for="checkbox-1">Remember Me</label>
-	                                <span class="float-right">Forgot <span>password?</span></span>
-	                            </div>
-	                        </div>
+                        	<%
+							if (request.getAttribute("message") != null) {
+							%>
+							<div class="pt-20">
+								<div class="alert alert-danger text-center" role="alert">
+									<%=request.getAttribute("message")%>
+								</div>
+							</div>	
+							<%
+							}
+							%>
+	                        <form method="post" action="ConnexionInscription">
+	                        	<input type="hidden" class="form-control"
+									name="loginFrom" 
+									value="<%= request.getAttribute("loginFrom") %>"
+								/>
+		                        <div class="login-input pt-20">
+		                            <input type="text" placeholder="Entrer votre email..." value="dj.tanguy.paris@gmail.com" name="mail">
+		                            <input type="text" placeholder="Entrez votre mot de passe..." value="11aaAA@@" name="password">
+		                        </div>
+		                        <div class="or text-center">
+		                            <span>OU</span>
+		                        </div>
+		                        <div class="login-account text-center pt-20">
+		                            <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a>
+		                            <a href="#"><i class="fab fa-google"></i>Google</a>
+		                        </div>
+		                        <div class="login-button text-center pt-30">
+			                        <button type="submit" name="buttonConnection">Se connecter</button>
+		                        </div>
+	                        </form>
+		                        <div class="login-information pt-25">
+		                            <div class="remember-me">
+		                                <input type="checkbox" id="checkbox-1"><label for="checkbox-1">Se rappeler de moi</label>
+		                                <span class="float-right"><span>Mot de passe</span> oublié ?</span>
+		                            </div>
+		                        </div>
 	                    </div>
 	                </div>
 	                
 	                <div class="col-xl-5 col-lg-6 col-md-8 col-sm-9">
 	                    <div class="login-detalis pt-40 pr-40 pl-40 pb-40">
 	                        <h4>Inscription</h4>
-	                        <div class="login-input">
+	                        <div class="login-input pt-20">
 	                            <input type="text" placeholder="Full Name...">
 	                            <input type="text" placeholder="Enter your email....">
 	                            <input type="text" placeholder="Enter your Password....">
@@ -121,20 +138,14 @@
 	                            
 	                        </div>
 	                        <div class="or text-center">
-	                            <span>OR</span>
+	                            <span>OU</span>
 	                        </div>
-	                        <div class="login-account text-center pt-10">
+	                        <div class="login-account text-center pt-20">
 	                            <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a>
 	                            <a href="#"><i class="fab fa-google-plus-g"></i>Google</a>
 	                        </div>
 	                        <div class="login-button text-center pt-30">
-	                            <a href="#" >Login</a>
-	                        </div>
-	                        <div class="login-information pt-25">
-	                            <div class="remember-me">
-	                                <input type="checkbox" id="checkbox-1"><label for="checkbox-1">Remember Me</label>
-	                                <span class="float-right">Forgot <span>password?</span></span>
-	                            </div>
+	                            <a href="#" >Inscription</a>
 	                        </div>
 	                    </div>
 	                </div>
