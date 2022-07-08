@@ -1108,83 +1108,12 @@ ArrayList<SliderBean> sliders = (ArrayList) request.getAttribute("sliders");
 -->       
     <!-- =================Blog Area Ends================= -->
 
-
-
-    <!-- =================Brand Area Starts================= -->
-<!-- 
-        <div class="brand-area">
-            <div class="container">
-                <div class="brand-active">
-                    <div class="single-brand">
-                        <div class="brand-img">
-                            <img src="assets/img/brand/brand1.png" alt="brand">
-                        </div>
-                    </div>
-                    <div class="single-brand">
-                        <div class="brand-img">
-                            <img src="assets/img/brand/brand2.png" alt="brand">
-                        </div>
-                    </div>
-                    <div class="single-brand">
-                        <div class="brand-img">
-                            <img src="assets/img/brand/brand3.png" alt="brand">
-                        </div>
-                    </div>
-                    <div class="single-brand">
-                        <div class="brand-img">
-                            <img src="assets/img/brand/brand4.png" alt="brand">
-                        </div>
-                    </div>
-                    <div class="single-brand">
-                        <div class="brand-img">
-                            <img src="assets/img/brand/brand1.png" alt="brand">
-                        </div>
-                    </div>
-                    <div class="single-brand">
-                        <div class="brand-img">
-                            <img src="assets/img/brand/brand2.png" alt="brand">
-                        </div>
-                    </div>
-                    <div class="single-brand">
-                        <div class="brand-img">
-                            <img src="assets/img/brand/brand3.png" alt="brand">
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
- -->
-    <!-- =================Brand Area Starts================= -->
-
-
-
-    <!-- =================Subscribe Area Starts================= -->
-<!-- 
-    <div class="subscribe-area subscribe-area-2 subscribe-area-8 pt-20 pb-30 ">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-6 col-lg-5 col-md-5 col-sm-12">
-                    <div class="discount-text ">
-                        <p>Get Discount 30% Off !</p>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-7 col-md-7 col-sm-12">
-                    <form action="#">
-                        <input type="email" placeholder="Enter Your Email...">
-                        <button>Subscribe</button>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
- -->
-    <!-- =================Subscribe Area Starts================= -->
  
-    <!-- =================Footer Area Starts================= -->
+    <!-- =================Footer Include Starts================= -->
+    
 	<jsp:include page="/Footer" />
-	<!-- =================Footer Area Ends================= -->
+	
+	<!-- =================Footer Include Ends================= -->
 
     <!-- scripts -->
     

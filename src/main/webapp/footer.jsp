@@ -1,6 +1,91 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <!-- ================= Subscribe Area Starts ================= -->
+<!-- 
+    <div class="subscribe-area pt-50 mt-50 pb-35">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12 col-12 offset-xl-3 offset-lg-2 offset-md-1">
+                    <div class="mess-icon text-center pb-30">
+                        <img src="assets/img/icon/email-red.png" alt="messages">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12 col-12 offset-xl-3 offset-lg-2 offset-md-1">
+                    <form action="#">
+                        <input type="email" placeholder="Enter Your Email...">
+                        <button>Subscribe</button>
+                    </form>
+                    <div class="discount-text text-center pt-50">
+                        <p>Get Discount 30% Off !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+ -->    <!-- ================= Subscribe Area Ends ================= -->
+
+    <!-- =================Brand Area Starts================= -->
+<!-- 
+    <div class="brand-area pt-50 ">
+        <div class="container">
+            <div class="brand-active">
+                
+                <div class="single-brand">
+                    <div class="brand-img">
+                        <img src="assets/img/brand/brand1.png" alt="brand">
+                    </div>
+                </div>
+                <div class="single-brand">
+                    <div class="brand-img">
+                        <img src="assets/img/brand/brand2.png" alt="brand">
+                    </div>
+                </div>
+                <div class="single-brand">
+                    <div class="brand-img">
+                        <img src="assets/img/brand/brand4.png" alt="brand">
+                    </div>
+                </div>
+                <div class="single-brand">
+                    <div class="brand-img">
+                        <img src="assets/img/brand/brand3.png" alt="brand">
+                    </div>
+                </div>
+                <div class="single-brand">
+                    <div class="brand-img">
+                        <img src="assets/img/brand/brand1.png" alt="brand">
+                    </div>
+                </div>
+                <div class="single-brand">
+                    <div class="brand-img">
+                        <img src="assets/img/brand/brand4.png" alt="brand">
+                    </div>
+                </div>
+                <div class="single-brand">
+                    <div class="brand-img">
+                        <img src="assets/img/brand/brand2.png" alt="brand">
+                    </div>
+                </div>
+                <div class="single-brand">
+                    <div class="brand-img">
+                        <img src="assets/img/brand/brand4.png" alt="brand">
+                    </div>
+                </div>
+                <div class="single-brand">
+                    <div class="brand-img">
+                        <img src="assets/img/brand/brand3.png" alt="brand">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ -->
+    <!-- =================Brand Area Ends================= -->
+    
+    
+    <!-- =================Footer Area Starts================= -->
     <footer class="footer-area footer-area-2 footer-area-6">
         <div class="footer-menu pt-40 pb-40">
             <div class="container">
@@ -78,3 +163,4 @@
             </div>
         </div>
     </footer>
+    <!-- =================Footer Area Ends================= -->

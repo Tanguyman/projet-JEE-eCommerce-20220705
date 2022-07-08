@@ -72,8 +72,7 @@ CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee"
 		                                        <a href="Index"><img src="assets/img/logo/logo.png" alt="Hytek-logo" height="30px" width="100%" ></a>
 		                                    </div>
                                     	</li>
-                                        <li><a href="login-page.html">Connexion</a></li>
-                                        <li><a href="login-page.html">Déconnexion</a></li>
+                                        <li><a href="ConnexionInscription">Connexion / Inscription</a></li>
                                         <li><a href="cart-page.html">Favoris</a></li>
                                         <li><a href="checkout-page.html">Commande</a></li>
                                         <li><a href="#">Pannier</a></li>

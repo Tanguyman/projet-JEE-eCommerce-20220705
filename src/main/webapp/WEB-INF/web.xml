@@ -49,4 +49,14 @@
     <servlet-name>Produits</servlet-name>
     <url-pattern>/Produits</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ConnexionInscription</display-name>
+    <servlet-name>ConnexionInscription</servlet-name>
+    <servlet-class>com.hytekFront.servlets.ConnexionInscription</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConnexionInscription</servlet-name>
+    <url-pattern>/ConnexionInscription</url-pattern>
+  </servlet-mapping>
 </web-app>
