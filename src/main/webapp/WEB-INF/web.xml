@@ -4,7 +4,7 @@
     <description></description>
     <display-name>Index</display-name>
     <servlet-name>Index</servlet-name>
-    <servlet-class>control.Index</servlet-class>
+    <servlet-class>com.hytekFront.servlets.Index</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Index</servlet-name>
@@ -19,4 +19,34 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>Header</display-name>
+    <servlet-name>Header</servlet-name>
+    <servlet-class>com.hytekFront.servlets.Header</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Header</servlet-name>
+    <url-pattern>/Header</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Footer</display-name>
+    <servlet-name>Footer</servlet-name>
+    <servlet-class>com.hytekFront.servlets.Footer</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Footer</servlet-name>
+    <url-pattern>/Footer</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Produits</display-name>
+    <servlet-name>Produits</servlet-name>
+    <servlet-class>com.hytekFront.servlets.Produits</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Produits</servlet-name>
+    <url-pattern>/Produits</url-pattern>
+  </servlet-mapping>
 </web-app>
