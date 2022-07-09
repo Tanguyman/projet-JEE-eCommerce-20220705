@@ -59,4 +59,14 @@
     <servlet-name>ConnexionInscription</servlet-name>
     <url-pattern>/ConnexionInscription</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Deconnexion</display-name>
+    <servlet-name>Deconnexion</servlet-name>
+    <servlet-class>com.hytekFront.servlets.Deconnexion</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Deconnexion</servlet-name>
+    <url-pattern>/Deconnexion</url-pattern>
+  </servlet-mapping>
 </web-app>

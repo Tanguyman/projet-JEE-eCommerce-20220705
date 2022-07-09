@@ -1,29 +1,23 @@
 package com.hytekFront.servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import com.hytekFront.beans.ProduitsBean;
-import com.hytekFront.beans.SliderBean;
-import com.hytekFront.dao.Database;
-import com.hytekFront.dao.ProduitsDao;
-import com.hytekFront.dao.SliderDao;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class Index
+ * Servlet implementation class Deconnexion
  */
-public class Index extends HttpServlet {
+public class Deconnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Index() {
+    public Deconnexion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,18 +29,17 @@ public class Index extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
-		
-		Database.Connect();
-		
-		SliderDao sliderDao = new SliderDao();
-		ProduitsDao p = new ProduitsDao();
-		
-		ArrayList<SliderBean> colSlider = sliderDao.getAll();
-		ArrayList<ProduitsBean> colProds = p.getAllProduitForHomePage();
-		
-		request.setAttribute("produits", colProds);
-		request.setAttribute("sliders", colSlider);
-		request.getRequestDispatcher("index.jsp").forward(request, response);
+
+		// Récupérer la session
+		HttpSession session = request.getSession(true);
+
+		// Vider la mémoire
+		// session.invalidate(); // Avec invalidate() je perds le panier
+		session.setAttribute("isConnected", null);
+		session.setAttribute("userId", 0);
+		session.setAttribute("userNameBySession", "");
+
+		response.sendRedirect("Index");
 	}
 
 	/**
