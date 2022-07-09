@@ -79,4 +79,14 @@
     <servlet-name>Recherches</servlet-name>
     <url-pattern>/Recherches</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Contact</display-name>
+    <servlet-name>Contact</servlet-name>
+    <servlet-class>com.hytekFront.servlets.Contact</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Contact</servlet-name>
+    <url-pattern>/Contact</url-pattern>
+  </servlet-mapping>
 </web-app>

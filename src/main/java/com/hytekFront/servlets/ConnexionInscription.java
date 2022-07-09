@@ -73,7 +73,8 @@ public class ConnexionInscription extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("isConnected", true);
 				session.setAttribute("userId", passwordVerification.getId());
-				session.setAttribute("userNameBySession", passwordVerification.getPrenom());
+				session.setAttribute("userLastNameBySession", passwordVerification.getPrenom());
+				session.setAttribute("userMailBySession", passwordVerification.getEmail());
 				
 				if (loginFrom.equals("index")) {
 //					response.sendRedirect("User_Home");

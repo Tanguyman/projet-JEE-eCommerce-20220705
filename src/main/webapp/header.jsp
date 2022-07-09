@@ -148,7 +148,7 @@ CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee"
                                     <div class="main-menu pt-5">
                                         <nav id="mobile-menu">
                                             <ul>
-                                                <li><a href="index.html">Page d’accueil</a></li>
+                                                <li><a href="Index">Page d’accueil</a></li>
 <!-- 
                                                 <li><a href="blog-page.html">Features</a>
                                                     <div class="badge">New</div>
@@ -231,7 +231,7 @@ CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee"
  -->
 
 
-                                                <li><a href="contact-page.html">Nous Contacter</a></li>
+                                                <li><a href="Contact">Nous Contacter</a></li>
                                             </ul>
                                         </nav>
                                     </div>
