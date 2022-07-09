@@ -69,4 +69,14 @@
     <servlet-name>Deconnexion</servlet-name>
     <url-pattern>/Deconnexion</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Recherches</display-name>
+    <servlet-name>Recherches</servlet-name>
+    <servlet-class>com.hytekFront.servlets.Recherches</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Recherches</servlet-name>
+    <url-pattern>/Recherches</url-pattern>
+  </servlet-mapping>
 </web-app>

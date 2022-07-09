@@ -241,8 +241,8 @@ CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee"
                                         <div class="search mt-10 position-relative  ">
                                             <a href="#" class="bg-transparent"><img src="assets/img/icon/search.png" alt=""></a>
                                             <div class="search-form">
-                                                <form action="#">
-                                                    <input type="text" placeholder="Enter your keywords.....">
+                                                <form action="Recherches">
+                                                    <input type="text" placeholder="Tapez un mot clé pour trouver un produit." name="word">
                                                 </form>
                                             </div>
                                         </div>
