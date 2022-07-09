@@ -80,7 +80,7 @@ CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee"
                                         <%
                                         } else {
                                         %>
-                                        <li><a href="ConnexionInscription?loginFrom=index">Connexion / Inscription</a></li>
+                                        <li><a href="ConnexionInscription?loginFrom=index"><i class="fa-solid fa-arrow-right-to-bracket p-1"></i>Connexion / Inscription</a></li>
                                         <%
                                         }
                                         %>

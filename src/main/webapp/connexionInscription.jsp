@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 	<head>
 	    <meta charset="UTF-8">
@@ -9,8 +9,10 @@
 	    <meta name="description" content="shop, ecommerce, store, multipurpose, shopify, woocommerce, html5, css3, sass">
 	
 	    <!-- fav -->
-	  
-	  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	    
+	    <!-- FONTAWESOME -->
+	    <script src="https://kit.fontawesome.com/bff2375f4b.js" crossorigin="anonymous"></script>
 	
 	    <!-- title -->
 	    <title>Connexion / Inscription</title>
@@ -98,11 +100,12 @@
 							<%
 							}
 							%>
-	                        <form method="post" action="ConnexionInscription">
+	                        <form id="loginForm" method="post" action="ConnexionInscription">
 	                        	<input type="hidden" class="form-control"
 									name="loginFrom" 
 									value="<%= request.getAttribute("loginFrom") %>"
 								/>
+								<input type="hidden" name="buttonConnection">
 		                        <div class="login-input pt-20">
 		                            <input type="text" placeholder="Entrer votre email..." value="dj.tanguy.paris@gmail.com" name="mail">
 		                            <input type="text" placeholder="Entrez votre mot de passe..." value="11aaAA@@" name="password">
@@ -114,8 +117,11 @@
 		                            <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a>
 		                            <a href="#"><i class="fab fa-google"></i>Google</a>
 		                        </div>
-		                        <div class="login-button text-center pt-30">
+		                        <!-- <div class="login-button text-center pt-30">
 			                        <button type="submit" name="buttonConnection">Se connecter</button>
+		                        </div> -->
+		                        <div class="login-button text-center pt-30">
+		                            <a id="loginButton" href="#">connexion</a>
 		                        </div>
 	                        </form>
 		                        <div class="login-information pt-25">
@@ -130,23 +136,110 @@
 	                <div class="col-xl-5 col-lg-6 col-md-8 col-sm-9">
 	                    <div class="login-detalis pt-40 pr-40 pl-40 pb-40">
 	                        <h4>Inscription</h4>
-	                        <div class="login-input pt-20">
-	                            <input type="text" placeholder="Full Name...">
-	                            <input type="text" placeholder="Enter your email....">
-	                            <input type="text" placeholder="Enter your Password....">
-	                            <input type="text" placeholder="(+99) 00000000000">
-	                            
-	                        </div>
-	                        <div class="or text-center">
-	                            <span>OU</span>
-	                        </div>
-	                        <div class="login-account text-center pt-20">
-	                            <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a>
-	                            <a href="#"><i class="fab fa-google-plus-g"></i>Google</a>
-	                        </div>
-	                        <div class="login-button text-center pt-30">
-	                            <a href="#" >Inscription</a>
-	                        </div>
+	                        <%
+							if (request.getAttribute("messageInscriptionValidated") != null) {
+							%>
+							<div class="form-group">
+								<div class="alert alert-success text-center" role="alert">
+									<br>
+									<%=request.getAttribute("messageInscriptionValidated")%><br>
+									<br>
+								</div>
+							</div>
+							<%
+							}
+							%>
+                              	<%
+							if (request.getAttribute("messageEmailIsInDatabase") != null) {
+							%>
+							<div class="form-group">
+								<div class="alert alert-danger text-center" role="alert">
+									
+									<%=request.getAttribute("messageEmailIsInDatabase")%><br>
+									<a href="#"> Avez-vous oublié votre mot de passe ? </a>
+									<br>
+									
+								</div>
+							</div>
+							<%
+							}
+							%>
+							<%
+							if (request.getAttribute("messageInvalidName") != null) {
+							%>
+							<div class="form-group">
+								<div class="alert alert-danger" role="alert">
+									
+									<%=request.getAttribute("messageInvalidName")%>
+									<br>
+									
+								</div>
+							</div>
+							<%
+							}
+							%>
+							<%
+							if (request.getAttribute("messageInvalidEmail") != null) {
+							%>
+							<div class="form-group">
+								<div class="alert alert-danger text-center" role="alert">
+									
+									<%=request.getAttribute("messageInvalidEmail")%>
+									<br>
+									
+								</div>
+							</div>	
+							<%
+							}
+							%>
+							<%
+							if (request.getAttribute("messageInvalidPassword") != null) {
+							%>
+							<div class="form-group">
+								<div class="alert alert-danger" role="alert">
+									
+									<%=request.getAttribute("messageInvalidPassword")%>
+									<br>
+									
+								</div>
+							</div>
+							<%
+							}
+							%>
+							<%
+							if (request.getAttribute("messagePasswordNotEqual") != null) {
+							%>
+							<div class="form-group">
+								<div class="alert alert-danger text-center" role="alert">
+									
+									<%=request.getAttribute("messagePasswordNotEqual")%>
+									<br>
+									
+								</div>
+							</div>
+							<%
+							}
+							%>
+	                        <form id="decoForm" method="post" action="ConnexionInscription">
+		                        <div class="login-input pt-20">
+		                        	<input type="hidden" name="signInButton">
+		                            <input type="text" placeholder="Entrez votre nom" name="firstName">
+		                            <input type="text" placeholder="Entrez votre prénom" name="lastName">
+		                            <input type="email" placeholder="Entrez votre e-mail" name="mail">
+		                            <input type="password" placeholder="Entrez votre mot de passe" name="password">
+		                            <input type="password" placeholder="Confirmez votre mot de passe" name="password2">
+		                        </div>
+		                        <div class="or text-center">
+		                            <span>OU</span>
+		                        </div>
+		                        <div class="login-account text-center pt-20">
+		                            <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a>
+		                            <a href="#"><i class="fab fa-google-plus-g"></i>Google</a>
+		                        </div>
+		                        <div class="login-button text-center pt-30">
+		                            <a id="decoButton" href="#">Inscription</a>
+		                        </div>
+							</form>
 	                    </div>
 	                </div>
 	            </div>
@@ -183,6 +276,17 @@
 	     <script src="assets/js/vendor/jquery.magnific-popup.min.js"></script>
 	     <script src="assets/js/vendor/wow-1.3.0.min.js"></script>  
 	     <script src="assets/js/main.js"></script>
+	     
+	     <script type="text/javascript">
+	     document.getElementById("decoButton").onclick = function() {
+	    	 document.getElementById("decoForm").submit();
+	   	 }
+	     </script>
+	     <script type="text/javascript">
+	     document.getElementById("loginButton").onclick = function() {
+	    	 document.getElementById("loginForm").submit();
+	   	 }
+	     </script>
 	
 	</body>
 
