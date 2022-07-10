@@ -7,6 +7,8 @@ public class SousCategoriesBean {
 	private String titre;
 	private int fk_categorie;
 	private boolean archiver;
+	
+	private CategoriesBean categorie;
 
 	// CONSTRUCTORS
 	public SousCategoriesBean() {
@@ -32,6 +34,15 @@ public class SousCategoriesBean {
 		this.titre = titre;
 		this.fk_categorie = fk_categorie;
 		this.archiver = archiver;
+	}
+
+	public SousCategoriesBean(int id, String titre, int fk_categorie, boolean archiver, CategoriesBean categorie) {
+		super();
+		this.id = id;
+		this.titre = titre;
+		this.fk_categorie = fk_categorie;
+		this.archiver = archiver;
+		this.categorie = categorie;
 	}
 
 	// PROPERTIES	
@@ -67,9 +78,17 @@ public class SousCategoriesBean {
 		this.archiver = archiver;
 	}
 
+	public CategoriesBean getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(CategoriesBean categorie) {
+		this.categorie = categorie;
+	}
+
 	@Override
 	public String toString() {
 		return "SousCategoriesBean [id=" + id + ", titre=" + titre + ", fk_categorie=" + fk_categorie + ", archiver="
-				+ archiver + "]";
+				+ archiver + ", categorie=" + categorie + "]";
 	}
 }

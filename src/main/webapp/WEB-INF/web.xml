@@ -89,4 +89,14 @@
     <servlet-name>Contact</servlet-name>
     <url-pattern>/Contact</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Produits_List</display-name>
+    <servlet-name>Produits_List</servlet-name>
+    <servlet-class>com.hytekFront.servlets.Produits_List</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Produits_List</servlet-name>
+    <url-pattern>/Produits_List</url-pattern>
+  </servlet-mapping>
 </web-app>

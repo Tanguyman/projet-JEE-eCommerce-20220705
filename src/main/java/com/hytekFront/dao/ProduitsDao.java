@@ -8,7 +8,58 @@ import java.util.ArrayList;
 import com.hytekFront.beans.ProduitsBean;
 
 public class ProduitsDao {
-	
+
+	// READ / RETRIEVE ALL PRODUCTS OF A Sous Catégorie
+	public ArrayList<ProduitsBean> getAllProductsForProduitsList( int fk_sous_categorie ) {
+		
+		ArrayList<ProduitsBean> list = new ArrayList<ProduitsBean>();
+		
+		try {
+
+			PreparedStatement ps = Database.connexion
+					.prepareStatement("SELECT * FROM produits WHERE fk_sous_categorie=?");
+			ps.setInt(1, fk_sous_categorie);
+
+			ResultSet rs = ps.executeQuery();
+
+			SousCategoriesDao scd = new SousCategoriesDao();
+			CommentairesDao cd = new CommentairesDao();
+			
+			while (rs.next()) {
+				
+				ProduitsBean o = new ProduitsBean();
+				
+				o.setId(rs.getInt("id"));
+				o.setTitre(rs.getString("titre"));
+				o.setDescription(rs.getString("description"));
+				o.setPrix(rs.getDouble("prix"));
+				o.setImage(rs.getString("image"));
+				o.setFk_sous_categorie(rs.getInt("fk_sous_categorie"));
+				o.setStock(rs.getInt("stock"));
+				o.setStock_min(rs.getInt("stock_min"));
+				o.setArchiver(rs.getBoolean("archiver"));
+				
+				o.setSous_categorie( scd.getById( rs.getInt( "fk_sous_categorie" ) ) );
+				o.setCommentaires( cd.getByFk_prod( rs.getInt( "id" ) ) );
+				o.setNote_moyenne( cd.avrScoreProduct( rs.getInt( "id" ) ) );
+				
+
+				list.add(o);
+				
+			}
+
+			return list;
+
+		} catch (Exception ex) {
+			
+			ex.printStackTrace();
+			return null;
+			
+		}
+	}
+		
+
+		
 	// READ / RETRIEVE THE LAST 10 PRODUCTS
 	public ArrayList<ProduitsBean> getAllProduitForHomePage() {
 		

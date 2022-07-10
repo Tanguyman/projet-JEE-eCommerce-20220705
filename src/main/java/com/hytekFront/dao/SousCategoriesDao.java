@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.hytekFront.beans.CategoriesBean;
 import com.hytekFront.beans.SousCategoriesBean;
 
 public class SousCategoriesDao {
@@ -57,6 +58,11 @@ public class SousCategoriesDao {
 			o.setFk_categorie(rs.getInt("fk_categorie"));
 			o.setArchiver(rs.getBoolean("archiver"));
 			
+			CategoriesDao cd = new CategoriesDao();
+			CategoriesBean cb = cd.getById( rs.getInt("fk_categorie") );
+			
+			o.setCategorie(cb);
+			
 			return o;
 
 		} catch (Exception ex) {
@@ -65,7 +71,7 @@ public class SousCategoriesDao {
 		}
 	}
 	
-	// READ / RETRIEVE ALL sous_categorie FOR ONE categorie
+	// READ / RETRIEVE ALL sous_categories FOR A categorie
 	public ArrayList<SousCategoriesBean> getByFk_categorie(int id) {
 		
 		ArrayList<SousCategoriesBean> list = new ArrayList<SousCategoriesBean>();
@@ -118,6 +124,42 @@ public class SousCategoriesDao {
 				o.setId(rs.getInt("id"));
 				o.setTitre(rs.getString("titre"));
 				o.setFk_categorie(rs.getInt("fk_categorie"));
+				
+				list.add(o);
+				
+			}
+
+			return list;
+
+		} catch (Exception ex) {
+			
+			ex.printStackTrace();
+			return null;
+			
+		}
+	}
+	
+	// READ / RETRIEVE ALL + CATEGORIE NAME
+	public ArrayList<SousCategoriesBean> getAllWithCategorieName() {
+		
+		ArrayList<SousCategoriesBean> list = new ArrayList<SousCategoriesBean>();
+		CategoriesDao cd = new CategoriesDao();
+		
+		try {
+
+			PreparedStatement ps = Database.connexion.prepareStatement("SELECT * FROM sous_categories");
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				
+				SousCategoriesBean o = new SousCategoriesBean();
+				o.setId(rs.getInt("id"));
+				o.setTitre(rs.getString("titre"));
+				o.setFk_categorie(rs.getInt("fk_categorie"));
+				
+				CategoriesBean cb = cd.getById( rs.getInt("fk_categorie") );
+				
+				o.setCategorie(cb);
 				
 				list.add(o);
 				

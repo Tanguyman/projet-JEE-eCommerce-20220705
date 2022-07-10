@@ -175,13 +175,13 @@ CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee"
     										for ( CategoriesBean cb : cats ) {
     										%>
     										
-                                                <li><a href="shop-detalis-page.html"><%= cb.getTitre() %></a>
+                                                <li><a href="#"><%= cb.getTitre() %></a>
                                                     <ul class="sub-menu">
                                                     
 												<%
 	    										for ( SousCategoriesBean scb : cb.getSousCategories() ) {
 	    										%>
-                                                        <li><a href="shop-grid-page.html"><%= scb.getTitre() %></a>
+                                                        <li><a href="Produits_List?idSousCat=<%= scb.getId() %>"><%= scb.getTitre() %></a>
                                                     <!--                                                 
                                                             <ul class="sub-menu">
                                                                 <li><a href="shop-grid-page.html">Shop Grid</a>
@@ -231,7 +231,7 @@ CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee"
  -->
 
 
-                                                <li><a href="Contact">Nous Contacter</a></li>
+                                                <li><a href="Contact">Contact</a></li>
                                             </ul>
                                         </nav>
                                     </div>
