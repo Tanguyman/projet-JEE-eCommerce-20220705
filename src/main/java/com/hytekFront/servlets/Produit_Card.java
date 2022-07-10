@@ -1,16 +1,20 @@
 package com.hytekFront.servlets;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import com.hytekFront.beans.ProduitsBean;
+import com.hytekFront.beans.VisitesBean;
 import com.hytekFront.dao.Database;
 import com.hytekFront.dao.ProduitsDao;
+import com.hytekFront.dao.VisitesDao;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Produit_Card
@@ -39,10 +43,37 @@ public class Produit_Card extends HttpServlet {
 		Database.Connect();
 		
 		ProduitsDao pd = new ProduitsDao();
+		VisitesDao vd = new VisitesDao();
 		
 		ProduitsBean pb = pd.getById(id);
 		ArrayList<ProduitsBean> pbCol = pd.getAllProductsForProduitsList( pb.getFk_sous_categorie() );
-		System.out.println(pbCol);
+		
+		// VISITES
+		HttpSession session = request.getSession(true);
+		if ( (boolean) session.getAttribute("isConnected") ) {
+			
+			VisitesBean vb = new VisitesBean();
+			
+			vb.setFk_user( (int) session.getAttribute("userId") );
+			long millis = System.currentTimeMillis();
+			Date date = new Date( millis );
+			vb.setDate( date );
+			vb.setFk_prod( id );
+			
+			vd.save( vb );
+			
+		} else {
+			
+			VisitesBean vb = new VisitesBean();
+			
+			vb.setFk_user( 1 ); // id Visiteur
+			long millis = System.currentTimeMillis();
+			Date date = new Date( millis );
+			vb.setDate( date );
+			vb.setFk_prod( id );
+			
+			vd.save( vb );
+		}
 		
 		request.setAttribute("produit", pb);
 		request.setAttribute("produitsList", pbCol);

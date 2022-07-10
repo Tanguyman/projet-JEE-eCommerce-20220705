@@ -75,7 +75,7 @@ CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee"
                                     	<%
                                     	if ( (boolean)session.getAttribute("isConnected") ) {
                                     	%>
-                                        <li><a href="#"><i class="fa-solid fa-user p-1"></i><%= session.getAttribute("userNameBySession")  %></a></li>
+                                        <li><a href="#"><i class="fa-solid fa-user p-1"></i><%= session.getAttribute("userLastNameBySession")  %></a></li>
                                         <li><a href="Deconnexion"><i class="fa-solid fa-up-right-from-square p-1"></i>Déconnexion</a></li>
                                         <%
                                         } else {
