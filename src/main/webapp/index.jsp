@@ -107,8 +107,8 @@ ArrayList<SliderBean> sliders = (ArrayList) request.getAttribute("sliders");
 
     <!-- =================Product-collection Area Starts================= -->
 
-        <div class="product-collection-area product-collection-area-2 product-collection-4 pt-50 pb-50 pr-65 pl-65">
 <!-- 
+        <div class="product-collection-area product-collection-area-2 product-collection-4 pt-50 pb-50 pr-65 pl-65">
         
             <div class="container-fluid">
                 <div class="row ">
@@ -146,8 +146,8 @@ ArrayList<SliderBean> sliders = (ArrayList) request.getAttribute("sliders");
                     </div>
                 </div>
             </div>
- -->
         </div>
+ -->
 
     <!-- =================Product-collection Area Ends================= -->
 
@@ -679,13 +679,13 @@ ArrayList<SliderBean> sliders = (ArrayList) request.getAttribute("sliders");
 
     <!-- =================Product Area Starts================= -->
 
-        <div class="product-area product-area-2 hot-todys-deal pt-50 ">
+        <div class="product-area product-area-2 hot-todys-deal pt-10 ">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                         <div class="section-title">
                             <h3>
-                                Nouveautés
+                                LES 10 NOUVELLES ENTRÉES EN CATALOGUE QUI NOUS FONT VIBRER !!!
                             </h3>
                         </div>
                     </div>
@@ -714,7 +714,6 @@ ArrayList<SliderBean> sliders = (ArrayList) request.getAttribute("sliders");
                 </div>
                 <hr>
             </div>
-
             <div class="container pl-0 pr-0">
                 <div class="custom-row ">
                     <div class="product-active  pt-30">
@@ -730,18 +729,18 @@ ArrayList<SliderBean> sliders = (ArrayList) request.getAttribute("sliders");
                                     <ul class="social-icon">
                                         <!-- <li><a href="#"><i class="fa fa-retweet" aria-hidden="true"></i></a></li> -->
                                         <li><a href="#"><i class="far fa-heart" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                        <li><a href="Produit_Card?id=<%= pb.getId() %>"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="flip-box">
                                     <div class="product-detalis pt-15 pl-20 pr-20 pb-25">
                                         <span><%= pb.getSous_categorie().getTitre() %></span>
                                         <% if ( pb.getTitre().length() > 80 ) { %>
-                                        <h6><a href="shop-detalis-page.html"><%= pb.getTitre().substring(0, 75) %>...</a></h6>
+                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getTitre().substring(0, 75) %>...</a></h6>
                                         <%
                                         } else {
                                         %>
-                                        <h6><a href="shop-detalis-page.html"><%= pb.getTitre() %>.</a></h6>
+                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getTitre() %>.</a></h6>
                                         <%
                                         }
                                         %>
@@ -759,8 +758,8 @@ ArrayList<SliderBean> sliders = (ArrayList) request.getAttribute("sliders");
                                         </div>
                                     </div>
                                     <div class="product-detalis product-detalis-2 pt-15 pl-20 pr-20 pb-25">
-                                        <span><%= pb.getSous_categorie().getTitre() %></span>
-                                        <h6><a href="shop-detalis-page.html"><%= pb.getTitre() %></a></h6>
+                                        <span><%= pb.getCommentaires().size() %> avis</span>
+                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getStock() %> en stock</a></h6>
                                         <div class="buy-info ">
                                             <div class="cart float-left">
                                                 <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -775,8 +774,7 @@ ArrayList<SliderBean> sliders = (ArrayList) request.getAttribute("sliders");
                                             <li>Nouveau <i class="fa-solid fa-seedling"></i></li>
                                             <%
                                             } else {
-                                            	for ( int i=0; i < pb.getNote_moyenne(); i++ ) {
-                                            		
+                                            	for ( int i=0; i < pb.getNote_moyenne(); i++ ) {	
                                             %>
                                                 <!-- <li><i class="fa-solid fa-star" aria-hidden="true"></i></li> -->
                                                 <li>⭐️</li>

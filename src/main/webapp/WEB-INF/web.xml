@@ -99,4 +99,14 @@
     <servlet-name>Produits_List</servlet-name>
     <url-pattern>/Produits_List</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Produit_Card</display-name>
+    <servlet-name>Produit_Card</servlet-name>
+    <servlet-class>com.hytekFront.servlets.Produit_Card</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Produit_Card</servlet-name>
+    <url-pattern>/Produit_Card</url-pattern>
+  </servlet-mapping>
 </web-app>

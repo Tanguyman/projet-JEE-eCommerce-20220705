@@ -17,6 +17,7 @@ public class ProduitsBean {
 	private SousCategoriesBean sous_categorie;
 	private ArrayList<CommentairesBean> commentaires;
 	private int note_moyenne;
+	private ArrayList<ImagesBean> images;
 
 	public ProduitsBean() {
 		super();
@@ -41,6 +42,25 @@ public class ProduitsBean {
 	}
 
 
+
+	public ProduitsBean(int id, String titre, String description, Double prix, String image, int fk_sous_categorie,
+			int stock, int stock_min, boolean archiver, SousCategoriesBean sous_categorie,
+			ArrayList<CommentairesBean> commentaires, int note_moyenne, ArrayList<ImagesBean> images) {
+		super();
+		this.id = id;
+		this.titre = titre;
+		this.description = description;
+		this.prix = prix;
+		this.image = image;
+		this.fk_sous_categorie = fk_sous_categorie;
+		this.stock = stock;
+		this.stock_min = stock_min;
+		this.archiver = archiver;
+		this.sous_categorie = sous_categorie;
+		this.commentaires = commentaires;
+		this.note_moyenne = note_moyenne;
+		this.images = images;
+	}
 
 	public int getId() {
 		return id;
@@ -138,12 +158,20 @@ public class ProduitsBean {
 		this.note_moyenne = note_moyenne;
 	}
 
+	public ArrayList<ImagesBean> getImages() {
+		return images;
+	}
+
+	public void setImages(ArrayList<ImagesBean> images) {
+		this.images = images;
+	}
+
 	@Override
 	public String toString() {
 		return "ProduitsBean [id=" + id + ", titre=" + titre + ", description=" + description + ", prix=" + prix
 				+ ", image=" + image + ", fk_sous_categorie=" + fk_sous_categorie + ", stock=" + stock + ", stock_min="
 				+ stock_min + ", archiver=" + archiver + ", sous_categorie=" + sous_categorie + ", commentaires="
-				+ commentaires + ", note_moyenne=" + note_moyenne + "]";
+				+ commentaires + ", note_moyenne=" + note_moyenne + ", images=" + images + "]";
 	}
 
 }

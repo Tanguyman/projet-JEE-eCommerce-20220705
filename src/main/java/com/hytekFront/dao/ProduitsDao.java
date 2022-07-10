@@ -105,7 +105,48 @@ public class ProduitsDao {
 			return null;
 		}
 	}
-	// SEARCH A WORD IN THE TITLE AND THEDESCRIPTION 
+	
+	// READ / RETRIEVE ONE LINE BY ID
+	public ProduitsBean getById(int id) {
+		try {
+
+			PreparedStatement ps = Database.connexion
+					.prepareStatement("SELECT * FROM produits WHERE id=?");
+			ps.setInt(1, id);
+
+			ResultSet rs = ps.executeQuery();
+
+			ProduitsBean o = new ProduitsBean();
+			SousCategoriesDao scd = new SousCategoriesDao();
+			CommentairesDao cd = new CommentairesDao();
+			ImagesDao iDao = new ImagesDao();
+			
+			rs.next();
+			
+			o.setId(rs.getInt("id"));
+			o.setTitre(rs.getString("titre"));
+			o.setDescription(rs.getString("description"));
+			o.setPrix(rs.getDouble("prix"));
+			o.setImage(rs.getString("image"));
+			o.setFk_sous_categorie(rs.getInt("fk_sous_categorie"));
+			o.setStock(rs.getInt("stock"));
+			o.setStock_min(rs.getInt("stock_min"));
+			o.setArchiver(rs.getBoolean("archiver"));
+			
+			o.setSous_categorie( scd.getById( rs.getInt( "fk_sous_categorie" ) ) );
+			o.setCommentaires( cd.getByFk_prod( id ) );
+			o.setNote_moyenne( cd.avrScoreProduct( rs.getInt( "id" ) ) );
+			o.setImages( iDao.getAllByFk_produit( id ) );
+			
+			return o;
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
+	// SEARCH A WORD IN THE TITLE AND THE DESCRIPTION 
 	public ArrayList<ProduitsBean> searchWordInName (String word) {
 		
 		ArrayList<ProduitsBean> list = new ArrayList<ProduitsBean>();

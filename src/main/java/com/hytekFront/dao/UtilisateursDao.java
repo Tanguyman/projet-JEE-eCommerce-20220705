@@ -90,6 +90,45 @@ public class UtilisateursDao {
 		
 	}
 	
+	// READ / RETRIEVE ONE LINE BY id
+	public UtilisateursBean getById( int id ) {
+		
+		try {
+			
+			PreparedStatement ps = Database.connexion
+					.prepareStatement("SELECT * FROM utilisateurs WHERE id=?");
+			ps.setInt(1, id);
+
+			ResultSet rs = ps.executeQuery();
+			// System.out.println(rs);
+			
+			if (rs.next()) {
+				
+				UtilisateursBean u = new UtilisateursBean();
+				
+				u.setId(rs.getInt("id"));
+				u.setNom(rs.getString("nom"));
+				u.setPrenom(rs.getString("prenom"));
+				u.setDate_inscription(rs.getDate("date_inscription"));
+				u.setEmail(rs.getString("email"));
+				u.setArchiver(rs.getBoolean("archiver"));
+				
+				return u;
+				
+			} else {
+				
+				return null;
+			}
+
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return null;
+			
+		}
+		
+	}
+		
 	// PASSWORD VERIFICATION
 	public UtilisateursBean passwordVerification(String mail, String password) {
 		try {

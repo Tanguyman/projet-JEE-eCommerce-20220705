@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.hytekFront.beans.CommentairesBean;
+import com.hytekFront.beans.UtilisateursBean;
 
 public class CommentairesDao {
 
@@ -12,6 +13,7 @@ public class CommentairesDao {
 	public ArrayList<CommentairesBean> getByFk_prod (int id) {
 		
 		ArrayList<CommentairesBean> list = new ArrayList<CommentairesBean>();
+		UtilisateursDao ud = new UtilisateursDao();
 		
 		try {
 
@@ -31,6 +33,9 @@ public class CommentairesDao {
 				o.setFk_prod(rs.getInt("fk_prod"));
 				o.setFk_user(rs.getInt("fk_user"));
 				o.setArchiver(rs.getBoolean("archiver"));
+				
+				UtilisateursBean ub = ud.getById(rs.getInt("fk_user"));
+				o.setUtilisateur(ub);
 				
 				list.add(o);
 				

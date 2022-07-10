@@ -12,6 +12,8 @@ public class CommentairesBean {
 	private int fk_user;
 	private boolean archiver;
 
+	private UtilisateursBean utilisateur;
+
 	public CommentairesBean() {
 		super();
 	}
@@ -26,6 +28,19 @@ public class CommentairesBean {
 		this.fk_prod = fk_prod;
 		this.fk_user = fk_user;
 		this.archiver = archiver;
+	}
+
+	public CommentairesBean(int id, String commentaire, int note, Date date, int fk_prod, int fk_user, boolean archiver,
+			UtilisateursBean utilisateur) {
+		super();
+		this.id = id;
+		this.commentaire = commentaire;
+		this.note = note;
+		this.date = date;
+		this.fk_prod = fk_prod;
+		this.fk_user = fk_user;
+		this.archiver = archiver;
+		this.utilisateur = utilisateur;
 	}
 
 	public int getId() {
@@ -82,6 +97,21 @@ public class CommentairesBean {
 
 	public void setArchiver(boolean archiver) {
 		this.archiver = archiver;
+	}
+
+	public UtilisateursBean getUtilisateur() {
+		return utilisateur;
+	}
+
+	public void setUtilisateur(UtilisateursBean utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+
+	@Override
+	public String toString() {
+		return "CommentairesBean [id=" + id + ", commentaire=" + commentaire + ", note=" + note + ", date=" + date
+				+ ", fk_prod=" + fk_prod + ", fk_user=" + fk_user + ", archiver=" + archiver + ", utilisateur="
+				+ utilisateur + "]";
 	}
 
 }
