@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import com.hytekFront.beans.PanierBean;
+import com.hytekFront.beans.Panier_DetailsBean;
 import com.hytekFront.beans.ProduitsBean;
 import com.hytekFront.beans.VisitesBean;
 import com.hytekFront.dao.Database;
@@ -75,6 +77,20 @@ public class Produit_Card extends HttpServlet {
 			vd.save( vb );
 		}
 		
+		// PANIER
+		if ( request.getParameter("quantite") != null ) {
+			
+			int qte = Integer.valueOf( request.getParameter("quantite") );
+			
+			Panier_DetailsBean pdB = new Panier_DetailsBean( pb, qte);
+			PanierBean pB = new PanierBean();
+			
+			pB = (PanierBean) session.getAttribute("panier");
+			pB.removeProduitFromPanier(id);
+			pB.addLineToBag(pdB);
+			
+			session.setAttribute("panier", pB);
+		}
 		request.setAttribute("produit", pb);
 		request.setAttribute("produitsList", pbCol);
 		request.getRequestDispatcher("produit_Card.jsp").forward(request, response);

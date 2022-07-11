@@ -328,13 +328,13 @@ PanierBean panier_tmp = (PanierBean) session.getAttribute("panier");
 													%>
                                                         <div class="product-wrapper d-flex">
                                                             <div class="product-img pr-15">
-                                                                <img src="<%= pdB.getProduit().getImage() %>" alt="product">
+                                                                <img src="<%= pdB.getProduit().getImage() %>" alt="product" style="height: 70px; width: 70px;">
                                                                 <!-- <div class="cart-icon">
                                                                     <img src="assets/img/icon/cart-white.png" alt="cart">
                                                                 </div> -->
                                                             </div>
                                                             <div class="product-detalis">
-                                                                <h6><a href="Produit_Card?id=<%= pdB.getProduit().getId() %>"><%= pdB.getProduit().getTitre() %></a></h6>
+                                                                <h6><a href="Produit_Card?id=<%= pdB.getProduit().getId() %>"><%= pdB.getProduit().getTitre().substring(0, 10) %>...</a></h6>
                                                                 <span><%= pdB.getQuantite() %> x <%= pdB.getProduit().getPrix() %>€</span>
                                                                 <div class="price d-flex">
                                                                     <span>

@@ -164,39 +164,41 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
                                 <span><%= p.getPrix() %>€</span>
                                 <!-- <del>$899</del> -->
                             </div>
-                            <div class="product-number d-flex pb-30">
-                                <div class="quty">
-                                    <span class="pr-10">Quantité :</span>
-                                    <input class="qty" type="number" value="1" min="1" max="<%= p.getStock() %>" style="text-align:center;" >                                       
-                                </div>
-                                <div class="availabillity pl-20">
-                                    <span><span class="pl-5"><%= p.getStock() %> EN STOCK</span> </span>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="page-share-icon  d-flex pt-15 pb-20"> <!-- pt-25 -->
-                            <!-- 
-                                <span>Share:</span>
-                                <ul class="icon pl-15  d-flex" >
-                                  <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
-                                  <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                  <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                  <li><a href="#"><i class="fab fa-skype"></i></a></li>
-                                  <li><a href="#"><i class="fas fa-rss"></i></a></li>
-                                </ul>
-                            -->
-                            </div> 
-                            <div class="cart-view d-flex">
-                                <div class="cart ">
-                                    <a href="#" tabindex="0"><img class="p-2" src="assets/img/icon/cart-red.png" alt="ajouter au panier">Ajouter</a>
-                               </div>
-                               <ul class="social-icon d-flex align-items-center pl-20">
-                                <!-- <li><a href="#" tabindex="0"><i class="fa fa-retweet" aria-hidden="true"></i></a></li> -->
-                                <li><a href="#" tabindex="0"><i class="far fa-heart" aria-hidden="true"></i></a></li>
-                                <!-- <li><a class="popup-img" href="assets/img/product/product-61.png"><i class="fa fa-eye" aria-hidden="true"></i></a></li> -->
-                                
-                            </ul>
-                            </div>
+                            <form id="panierForm" method="post" > <!-- action="Produit_Card" -->
+	                            <div class="product-number d-flex pb-30">
+	                                <div class="quty">
+	                                    <span class="pr-10">Quantité :</span>
+	                                    <input class="qty" type="number" value="1" min="1" max="<%= p.getStock() %>" style="text-align:center;" name="quantite">                                       
+	                                </div>
+	                                <div class="availabillity pl-20">
+	                                    <span><span class="pl-5"><%= p.getStock() %> EN STOCK</span> </span>
+	                                </div>
+	                            </div>
+                            	<hr>
+	                            <div class="page-share-icon  d-flex pt-15 pb-20"> <!-- pt-25 -->
+	                            <!-- 
+	                                <span>Share:</span>
+	                                <ul class="icon pl-15  d-flex" >
+	                                  <li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+	                                  <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+	                                  <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+	                                  <li><a href="#"><i class="fab fa-skype"></i></a></li>
+	                                  <li><a href="#"><i class="fas fa-rss"></i></a></li>
+	                                </ul>
+	                            -->
+	                            </div> 
+	                            <div class="cart-view d-flex">
+	                                <div class="cart ">
+	                                    <a id="panierButton" href="#" tabindex="0"><img class="p-2" src="assets/img/icon/cart-red.png" alt="ajouter au panier">Ajouter</a>
+	                               </div>
+	                               <ul class="social-icon d-flex align-items-center pl-20">
+	                                <!-- <li><a href="#" tabindex="0"><i class="fa fa-retweet" aria-hidden="true"></i></a></li> -->
+	                                <li><a href="#" tabindex="0"><i class="far fa-heart" aria-hidden="true"></i></a></li>
+	                                <!-- <li><a class="popup-img" href="assets/img/product/product-61.png"><i class="fa fa-eye" aria-hidden="true"></i></a></li> -->
+	                                
+		                            </ul>
+	                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -386,8 +388,8 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
                                     <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getStock() %> en stock</a></h6>
                                     <div class="buy-info ">
                                         <div class="cart float-left">
+                                        
                                             <a href="#"><img src="assets/img/icon/cart-red.png" alt="" class="p-1">Ajouter</a>
-                                                
                                         </div>
                                         <ul class="rating d-flex">
                                         <%
@@ -446,8 +448,11 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
     <script src="assets/js/vendor/wow-1.3.0.min.js"></script>  
     <script src="assets/js/main.js"></script>
 
+	<script type="text/javascript">
+		document.getElementById("panierButton").onclick = function() {
+			document.getElementById("panierForm").submit();
+		}
+	</script>
 </body>
 
 </html>
-
- 
