@@ -4,14 +4,12 @@
 <%@ page import="com.hytekFront.beans.CategoriesBean" %>
 <%@ page import="com.hytekFront.beans.SousCategoriesBean" %>
 <%@ page import="com.hytekFront.beans.CoordonneesBean"%>
-<%-- 
-<%@ page import="fr.commerceFront.beans.Shopping_ListBean" %>
-<%@ page import="fr.commerceFront.beans.Shopping_LineBean" %> 
---%>
+<%@ page import="com.hytekFront.beans.PanierBean"%>
+<%@ page import="com.hytekFront.beans.Panier_DetailsBean"%>
 <%
 ArrayList<CategoriesBean> cats = (ArrayList) request.getAttribute("cats");
 CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee");
-/* Shopping_ListBean shoppingBag_tmp = (Shopping_ListBean) session.getAttribute("shoppingBag"); */
+PanierBean panier_tmp = (PanierBean) session.getAttribute("panier");
 %>
 
     <!-- =============Preloader Starts=============-->
@@ -305,6 +303,7 @@ CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee"
                                                 }
                                             </script>
  -->
+                                        </div>
 
 
 
@@ -313,10 +312,9 @@ CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee"
 
 
     <!-- =================Session panier Area Starts================= -->
-                                        </div>
                                         <div class="cart pt-10 position-relative mr-10">
                                             <a href="#"><img src="assets/img/icon/bag.png" alt=""></a>
-                                            <div class="badge">0</div>
+                                            <div class="badge">${ panier.countProduitsPanier() }</div>
 
 
                                             <div id="cart-show"  class="product-area product-shop-page mini-cart-product-page " >
@@ -325,36 +323,55 @@ CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee"
 
 
 
-
+													<%
+													for ( Panier_DetailsBean pdB : panier_tmp.getPanierDetails() ) {
+													%>
                                                         <div class="product-wrapper d-flex">
                                                             <div class="product-img pr-15">
-                                                                <img src="assets/img/product/product-23.png" alt="product">
-                                                                <div class="cart-icon">
+                                                                <img src="<%= pdB.getProduit().getImage() %>" alt="product">
+                                                                <!-- <div class="cart-icon">
                                                                     <img src="assets/img/icon/cart-white.png" alt="cart">
-                                                                </div>
+                                                                </div> -->
                                                             </div>
                                                             <div class="product-detalis">
-                                                                <span>Men Dress</span>
-                                                                <h6><a href="shop-detalis-page.html">Military Patch Pocket Blazer</a></h6>
+                                                                <h6><a href="Produit_Card?id=<%= pdB.getProduit().getId() %>"><%= pdB.getProduit().getTitre() %></a></h6>
+                                                                <span><%= pdB.getQuantite() %> x <%= pdB.getProduit().getPrix() %>€</span>
                                                                 <div class="price d-flex">
-                                                                    <span>$999</span>
-                                                                    <del>$899</del>
+                                                                    <span>
+                                                                    <% double totalArticle = pdB.getQuantite() * pdB.getProduit().getPrix(); %>
+                                                                    <%= totalArticle %>€
+                                                                    </span>
+                                                                    <!-- <del>$899</del> -->
                                                                 </div>
                                                             </div>
                                                         </div>
+													<%
+													}
+													%>
 <!-- =================Session panier Area Ends================= -->
 
 
-
+													<%
+													if ( panier_tmp.countProduitsPanier() <= 0 ) {
+													%>
                                                         <div class="cart-price-area text-right pt-15 pr-20">
-                                                            <p>Sub total: <span class="d-inline-block pl-30"> $999.00</span></p>
-                                                            <p>Total:  <span class="d-inline-block pl-30"> $999.00</span></p>
+                                                            <!-- <p>Sub total: <span class="d-inline-block pl-30"> $999.00</span></p> -->
+                                                            <p>Votre panier est vide.</p>
+                                                        </div>
+													<%
+													} else {
+													%>
+														<div class="cart-price-area text-right pt-15 pr-20">
+                                                            <!-- <p>Sub total: <span class="d-inline-block pl-30"> $999.00</span></p> -->
+                                                            <p>Total:  <span class="d-inline-block pl-30"> ${ panier.total() }€</span></p>
                                                         </div>
                                                         <div class="table-button mini-cart-btn text-center pt-5">
-                                                            <a class="b-btn pt-15 pb-15 pr-20 pl-20" href="#">View Cart</a>
-                                                            <a class="b-btn pt-15 pb-15 pr-20 pl-20" href="#">Checkout</a>
+                                                            <a class="b-btn pt-15 pb-15 pr-20 pl-20" href="#">Panier</a>
+                                                            <a class="b-btn pt-15 pb-15 pr-20 pl-20" href="#">Commander</a>
                                                         </div>
-
+													<%
+													}
+													%>
                                                     </div>
                                                 </div>
                                             </div>

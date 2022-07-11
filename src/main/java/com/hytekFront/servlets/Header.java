@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.hytekFront.beans.CategoriesBean;
 import com.hytekFront.beans.CoordonneesBean;
+import com.hytekFront.beans.PanierBean;
 import com.hytekFront.beans.SousCategoriesBean;
 import com.hytekFront.dao.CategoriesDao;
 import com.hytekFront.dao.CoordonneesDao;
@@ -39,23 +40,21 @@ public class Header extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		/*
-		 * SESSION
-		 */
 		HttpSession session = request.getSession(true);
 		session.setMaxInactiveInterval(600);
 		if (session.getAttribute("isConnected") == null) {
 			session.setAttribute("isConnected", false);
 		}
 		
-		/*
-		 * if ((Shopping_ListBean) session.getAttribute("shoppingBag") == null ) {
-		 * Shopping_ListBean shoppingBag = new Shopping_ListBean();
-		 * session.setAttribute("shoppingBag", shoppingBag); }
-		 * 
-		 * if favoris
-		 * 
-		 */
+		if ((PanierBean) session.getAttribute("panier") == null ) {
+			PanierBean panier = new PanierBean();
+			System.out.println("panier : " + panier);
+			session.setAttribute("panier", panier); 
+		}
+		  
+		// if favoris
+		  
+		 
 		
 		String names[] = session.getValueNames();
 		for ( int i = 0, n = names.length; i < n; i++ ) {
@@ -63,9 +62,6 @@ public class Header extends HttpServlet {
 			System.out.println("Session key (Header) : " + key + "-> Session value : " + session.getValue(key));
 		}
 		
-		/*
-		 * DAO
-		 */
 		Database.Connect();
 		
 		CategoriesDao categoriesDao = new CategoriesDao();
