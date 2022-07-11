@@ -127,7 +127,7 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
                     for ( ImagesBean image : images) {
                     %>
                         <div class="product-img">
-                            <img src="<%= image.getUrl() %>" alt="" > <!-- 570x470 --> <!-- 90x90 -->
+                            <img src="<%= image.getUrl() %>" alt="" style="height: 470px; width: 470px;"> <!-- 570x470 --> <!-- 90x90 -->
                         </div>
 					<%
                     }
@@ -388,8 +388,9 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
                                     <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getStock() %> en stock</a></h6>
                                     <div class="buy-info ">
                                         <div class="cart float-left">
-                                        
-                                            <a href="#"><img src="assets/img/icon/cart-red.png" alt="" class="p-1">Ajouter</a>
+                                        	<form id="panierForm2" method="post">
+	                                            <a id="panierButton2" href="Produit_Card?id=<%= pb.getId() %>&qtePageProduit=1"><img src="assets/img/icon/cart-red.png" alt="" class="p-1">Ajouter</a>
+                                        	</form>
                                         </div>
                                         <ul class="rating d-flex">
                                         <%
@@ -451,6 +452,10 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
 	<script type="text/javascript">
 		document.getElementById("panierButton").onclick = function() {
 			document.getElementById("panierForm").submit();
+		}
+		
+		document.getElementById("panierButton2").onclick = function() {
+			document.getElementById("panierForm2").submit();
 		}
 	</script>
 </body>

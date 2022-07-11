@@ -216,10 +216,12 @@ SousCategoriesBean sousCategorie = (SousCategoriesBean) request.getAttribute("so
                                 }
                                 %>
                                 <div class="cart ">
-                                    <a href="#">
-                                    	<img class="cart-img-black" src="assets/img/icon/cart-black.png" alt="">
-                                    	<img class="cart-img-red d-none" src="assets/img/icon/cart-red.png" alt=""> Ajouter
-									</a>
+                                	<form id="panierForm" method="post">
+	                                    <a id="panierButton2" href="Produit_Card?id=<%= pb.getId() %>&qtePageProduit=1">
+	                                    	<img class="cart-img-black" src="assets/img/icon/cart-black.png" alt="">
+	                                    	<img class="cart-img-red d-none" src="assets/img/icon/cart-red.png" alt=""> Ajouter
+										</a>
+									</form>
                                 </div>
                             </div>
                         </div>
@@ -263,6 +265,11 @@ SousCategoriesBean sousCategorie = (SousCategoriesBean) request.getAttribute("so
     <script src="assets/js/vendor/wow-1.3.0.min.js"></script>  
     <script src="assets/js/main.js"></script>
 
+	<script type="text/javascript">
+		document.getElementById("panierButton").onclick = function() {
+			document.getElementById("panierForm").submit();
+		}
+	</script>
 </body>
 
 </html>

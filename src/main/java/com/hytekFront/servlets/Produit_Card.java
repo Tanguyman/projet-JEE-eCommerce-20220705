@@ -91,6 +91,21 @@ public class Produit_Card extends HttpServlet {
 			
 			session.setAttribute("panier", pB);
 		}
+		
+		if ( request.getParameter("qtePageProduit") != null ) {
+			System.out.println("chui dans");
+			int qte = Integer.valueOf( request.getParameter("qtePageProduit") );
+			
+			Panier_DetailsBean pdB = new Panier_DetailsBean( pb, qte);
+			PanierBean pB = new PanierBean();
+			
+			pB = (PanierBean) session.getAttribute("panier");
+			pB.removeProduitFromPanier(id);
+			pB.addLineToBag(pdB);
+			
+			session.setAttribute("panier", pB);
+		}
+		
 		request.setAttribute("produit", pb);
 		request.setAttribute("produitsList", pbCol);
 		request.getRequestDispatcher("produit_Card.jsp").forward(request, response);
