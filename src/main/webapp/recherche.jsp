@@ -679,14 +679,14 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("collectionP
                     <%
 					for ( ProduitsBean pb : produits ) {
 					%>
-                        <div class="col-xl-3 ">
+                        <div class="col-xl-3" style="margin-right: 150px;">
                             <div class="product-wrapper">
                                 <div class="product-img ">
-                                    <img src="<%= pb.getImage() %>" alt="product" width="100" height="200">
+                                    <img src="<%= pb.getImage() %>" alt="product" style="width: 270px; height: 270px;">
                                     <ul class="social-icon">
                                         <!-- <li><a href="#"><i class="fa fa-retweet" aria-hidden="true"></i></a></li> -->
                                         <li><a href="#"><i class="far fa-heart" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                        <li><a href="Produit_Card?id=<%= pb.getId() %>"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="flip-box">
@@ -716,10 +716,10 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("collectionP
                                     </div>
                                     <div class="product-detalis product-detalis-2 pt-15 pl-20 pr-20 pb-25">
                                         <span><%= pb.getSous_categorie().getTitre() %></span>
-                                        <h6><a href="shop-detalis-page.html"><%= pb.getTitre() %></a></h6>
+                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getTitre() %></a></h6>
                                         <div class="buy-info ">
                                             <div class="cart float-left">
-                                                <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                                <a id="panierButton2" href="Produit_Card?id=<%= pb.getId() %>&qtePageProduit=1"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                                 Ajouter
                                                 </a>
                                             </div>

@@ -1,3 +1,4 @@
+<%@page import="javax.crypto.interfaces.PBEKey"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -164,7 +165,7 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
                                 <span><%= p.getPrix() %>€</span>
                                 <!-- <del>$899</del> -->
                             </div>
-                            <form id="panierForm" method="post" > <!-- action="Produit_Card" -->
+                            <form id="panierForm" method="post" action="Produit_Card"> <!--  -->
 	                            <div class="product-number d-flex pb-30">
 	                                <div class="quty">
 	                                    <span class="pr-10">Quantité :</span>
@@ -189,7 +190,8 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
 	                            </div> 
 	                            <div class="cart-view d-flex">
 	                                <div class="cart ">
-	                                    <a id="panierButton" href="#" tabindex="0"><img class="p-2" src="assets/img/icon/cart-red.png" alt="ajouter au panier">Ajouter</a>
+	                                	<input type="hidden" name="id" value="<%= p.getId() %>">
+	                                    <a id="panierButton" tabindex="0"><img class="p-2" src="assets/img/icon/cart-red.png" alt="ajouter au panier">Ajouter</a>
 	                               </div>
 	                               <ul class="social-icon d-flex align-items-center pl-20">
 	                                <!-- <li><a href="#" tabindex="0"><i class="fa fa-retweet" aria-hidden="true"></i></a></li> -->

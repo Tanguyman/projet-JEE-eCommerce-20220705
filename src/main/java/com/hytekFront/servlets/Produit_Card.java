@@ -77,7 +77,7 @@ public class Produit_Card extends HttpServlet {
 			vd.save( vb );
 		}
 		
-		// PANIER
+		// PANIER Produit_Card
 		if ( request.getParameter("quantite") != null ) {
 			
 			int qte = Integer.valueOf( request.getParameter("quantite") );
@@ -92,6 +92,7 @@ public class Produit_Card extends HttpServlet {
 			session.setAttribute("panier", pB);
 		}
 		
+		// PANIER Index, Produits_List, Recherche
 		if ( request.getParameter("qtePageProduit") != null ) {
 			System.out.println("chui dans");
 			int qte = Integer.valueOf( request.getParameter("qtePageProduit") );

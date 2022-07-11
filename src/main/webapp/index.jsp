@@ -762,9 +762,11 @@ ArrayList<SliderBean> sliders = (ArrayList) request.getAttribute("sliders");
                                         <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getStock() %> en stock</a></h6>
                                         <div class="buy-info ">
                                             <div class="cart float-left">
-                                                <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                                Ajouter
-                                                </a>
+                                            	<form id="panierForm2" method="post">
+	                                                <a id="panierButton2" href="Produit_Card?id=<%= pb.getId() %>&qtePageProduit=1"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+    	                                            Ajouter
+        	                                        </a>
+												</form>
                                             </div>
                                             <ul class="rating d-flex">
                                             <%
