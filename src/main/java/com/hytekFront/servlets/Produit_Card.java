@@ -77,7 +77,7 @@ public class Produit_Card extends HttpServlet {
 			vd.save( vb );
 		}
 		
-		// PANIER Produit_Card
+		// AJOUTER AU PANIER DEPUIS LA FICHE PRODUIT : Produit_Card
 		if ( request.getParameter("quantite") != null ) {
 			
 			int qte = Integer.valueOf( request.getParameter("quantite") );
@@ -92,9 +92,9 @@ public class Produit_Card extends HttpServlet {
 			session.setAttribute("panier", pB);
 		}
 		
-		// PANIER Index, Produits_List, Recherche
+		// PANIER UN PRODUIT AU PANIER DEPUIS LES PAGES : Index, Produits_List, Recherche
 		if ( request.getParameter("qtePageProduit") != null ) {
-			System.out.println("chui dans");
+			
 			int qte = Integer.valueOf( request.getParameter("qtePageProduit") );
 			
 			Panier_DetailsBean pdB = new Panier_DetailsBean( pb, qte);

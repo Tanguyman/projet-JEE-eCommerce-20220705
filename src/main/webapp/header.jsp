@@ -366,8 +366,8 @@ PanierBean panier_tmp = (PanierBean) session.getAttribute("panier");
                                                             <p>Total:  <span class="d-inline-block pl-30"> ${ panier.total() }€</span></p>
                                                         </div>
                                                         <div class="table-button mini-cart-btn text-center pt-5">
-                                                            <a class="b-btn pt-15 pb-15 pr-20 pl-20" href="#">Panier</a>
-                                                            <a class="b-btn pt-15 pb-15 pr-20 pl-20" href="#">Commander</a>
+                                                            <a class="b-btn pt-15 pb-15 pr-20 pl-20" href="Panier">Panier</a>
+                                                            <a class="b-btn pt-15 pb-15 pr-20 pl-20" href="Commandes">Commander</a>
                                                         </div>
 													<%
 													}
