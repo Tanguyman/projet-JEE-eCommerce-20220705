@@ -74,7 +74,6 @@ public class Commandes extends HttpServlet {
 					Date date = new Date(millis);
 					
 					CommandesBean commande = new CommandesBean(id, date, total, idAdresse, 0, false);
-					System.out.println( commande );
 					int commandeId = cd.save(commande);
 					
 					// ENREGISTRER LES « DÉTAILS ( + primary key order table ) DE LA COMMANDE » 
@@ -88,39 +87,38 @@ public class Commandes extends HttpServlet {
 						dcB.setPrix(pdB.getProduit().getPrix());
 						dcB.setArchiver(false);
 						
+						// VÉRIFIER QTÉ STOCK
 						ProduitsBean pb =  pd.getById(pdB.getProduit().getId());
-						System.out.println(pb);
-						pb.setStock( ( pb.getStock() - pdB.getQuantite() ) );
-						System.out.println(pb.getStock());
 						
-						pd.save(pb);
-						dcd.save(dcB);
-						
-						// METTRE À JOUR LE STOCK
-						// 2ème - QUANTITÉ SUFFISANTE EN STOCK ???
-							/*
-							 * Scénario Nominal
-							 * 
-							 * Scénario Alternatif
-							 */
-							// Récupérer la quantité de produit en stock
-							// FIN SI qtéStock <= 0 -> Rupture de stock
-							// SI qtéStock > 0 -> En stock mais qté suffisante ?
-							// Comparer avec la quantité demandée par user : qtéStockTmp = qtéStock - qtéUser
-								// FIN SI qtéStockTmp >= 0 -> newQtéStock = qtéStockTmp
-								// SI qtéStockTmp < 0 
-									// Calculer :  qtéDispo = qtéUser - | qtéStockTmp (vareur absolue) | et newQtéStock = 0
+						if ( pb.getStock() - pdB.getQuantite() < 0 ) {
+							
+							String ruptureStock = "Vous a commandé " + pdB.getQuantite() + " "
+									+ pdB.getProduit().getSous_categorie().getTitre()
+									+ " mais nous n’en n’avons que " + pdB.getProduit().getStock() + " en stock. <br>"
+									+ " Désolé... <br>"
+									+ "Ceci dit vous avez tripoté le formulaire 😡🤬🖕";
+							request.setAttribute("ruptureStock", ruptureStock);
+							
+						} else {
+							
+							// METTRE À JOUR LE STOCK
+							pb.setStock( pb.getStock() - pdB.getQuantite() );
+							
+							pd.save(pb);
+							dcd.save(dcB);
+							
+							// NOUVEAU PANIER DE SESSION == VIDER LE PANIER
+							panier.clearPanier();
+							request.setAttribute("panier", panier);
+							
+							// INFORMER CLIENT
+							String orderValid = "Votre commande a bien été enregistré.<br>"
+									+ "Merci et à bientôt.";
+							request.setAttribute("orderValid", orderValid);
+							
+						}
 						
 					}
-					
-					// NOUVEAU PANIER DE SESSION == VIDER LE PANIER
-					panier.clearPanier();
-					request.setAttribute("panier", panier);
-
-					// INFORMER CLIENT
-					String orderValid = "Votre commande a bien été enregistré.<br>"
-							+ "Merci et à bientôt.";
-					request.setAttribute("orderValid", orderValid);
 										
 				} else {
 					

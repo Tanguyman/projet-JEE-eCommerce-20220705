@@ -116,6 +116,15 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("client");
                         <%
                         }
                         %>
+                        <%
+                        if ( request.getAttribute("ruptureStock") != null ) {
+                        %>
+                        <div class="pl-45 pt-25 pr-45" > <!-- pr-100 -->
+	                        <p class="alert alert-danger" role="alert"><%= request.getAttribute("ruptureStock") %></p>
+						</div>
+                        <%
+                        }
+                        %>
                         <% 
                         if ( request.getAttribute("orderValid") != null ) {
                         %>
