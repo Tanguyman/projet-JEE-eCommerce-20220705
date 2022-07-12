@@ -42,6 +42,10 @@ public class ConnexionInscription extends HttpServlet {
 		if (loginFrom.equals("index")) {
 			request.getRequestDispatcher("connexionInscription.jsp").forward(request, response);
 		}
+		
+		if (loginFrom.equals("commandes")) {
+			request.getRequestDispatcher("connexionInscription.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -80,6 +84,10 @@ public class ConnexionInscription extends HttpServlet {
 //					response.sendRedirect("User_Home");
 					request.getRequestDispatcher("connexionInscription.jsp").forward(request, response);
 					System.out.println("User_Home");
+				}
+				
+				if (loginFrom.equals("commandes")) {
+					response.sendRedirect("Commandes");
 				}
 				
 			} else {

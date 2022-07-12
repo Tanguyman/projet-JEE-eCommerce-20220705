@@ -21,6 +21,16 @@ public class CommandesBean {
 		super();
 	}
 
+	public CommandesBean(int fk_utilisateur, Date date, Double total, int fk_adresse, int etat, boolean archiver) {
+		super();
+		this.fk_utilisateur = fk_utilisateur;
+		this.date = date;
+		this.total = total;
+		this.fk_adresse = fk_adresse;
+		this.etat = etat;
+		this.archiver = archiver;
+	}
+
 	public CommandesBean(int id, int fk_utilisateur, Date date, Double total, int fk_adresse, int etat,
 			boolean archiver, ArrayList<Details_CommandeBean> details) {
 		super();

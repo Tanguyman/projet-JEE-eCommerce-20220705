@@ -78,7 +78,7 @@ PanierBean panier = (PanierBean) session.getAttribute("panier");
                                     <li class="breadcrumb-item"><a href="Index"> <i
                                                 class="fas fa-home "></i>Page d’accueil</a></li>
                                     <li class="breadcrumb-item active" aria-current="page"><a
-                                            href="#">Shope Page</a></li>
+                                            href="#">Panier</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -234,7 +234,7 @@ PanierBean panier = (PanierBean) session.getAttribute("panier");
                             </div>
 
                             <div class="table-button d-flex justify-content-end pt-20">
-                                <a href="#" class="b-btn  pt-20 pb-20 pr-50 pl-50 ">COMMANDER</a>
+                                <a href="Commandes" class="b-btn  pt-20 pb-20 pr-50 pl-50 ">COMMANDER</a>
                             </div>
 
                         </div>

@@ -101,24 +101,22 @@ public class UtilisateursDao {
 
 			ResultSet rs = ps.executeQuery();
 			// System.out.println(rs);
+			rs.next();
+				
+			UtilisateursBean u = new UtilisateursBean();
 			
-			if (rs.next()) {
-				
-				UtilisateursBean u = new UtilisateursBean();
-				
-				u.setId(rs.getInt("id"));
-				u.setNom(rs.getString("nom"));
-				u.setPrenom(rs.getString("prenom"));
-				u.setDate_inscription(rs.getDate("date_inscription"));
-				u.setEmail(rs.getString("email"));
-				u.setArchiver(rs.getBoolean("archiver"));
-				
-				return u;
-				
-			} else {
-				
-				return null;
-			}
+			u.setId(rs.getInt("id"));
+			u.setNom(rs.getString("nom"));
+			u.setPrenom(rs.getString("prenom"));
+			u.setDate_inscription(rs.getDate("date_inscription"));
+			u.setEmail(rs.getString("email"));
+			u.setArchiver(rs.getBoolean("archiver"));
+			
+			AdressesDao ad = new AdressesDao();
+			u.setAdresses(ad.getAllByUserId(id));
+			
+			return u;
+			
 
 		} catch (SQLException e) {
 			

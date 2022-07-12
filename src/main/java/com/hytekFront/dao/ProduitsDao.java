@@ -9,6 +9,58 @@ import com.hytekFront.beans.ProduitsBean;
 
 public class ProduitsDao {
 
+	// CREATE if !exist else UPDATE
+	public void save(ProduitsBean o) {
+		try {
+
+			if (o.getId() != 0) {
+				
+				PreparedStatement ps = Database.connexion
+						.prepareStatement("UPDATE produits SET titre=?, description=?, prix=?, image=?, "
+								+ "fk_sous_categorie=?, stock=?, stock_min=?, archiver=? WHERE id=?");
+				
+				ps.setString(1, o.getTitre());
+				ps.setString(2, o.getDescription());
+				ps.setDouble(3, o.getPrix());
+				ps.setString(4, o.getImage());
+				ps.setInt(5, o.getFk_sous_categorie());
+				ps.setInt(6, o.getStock());
+				ps.setInt(7, o.getStock_min());
+				ps.setBoolean(8, o.isArchiver());
+				
+				ps.setInt(9, o.getId());
+				
+				ps.executeUpdate();
+				
+			} else {
+				
+				PreparedStatement ps = Database.connexion
+						.prepareStatement("INSERT INTO coordonnees (titre, description, prix, image, "
+								+ "fk_sous_categorie, stock, stock_min, archiver) VALUES(?,?,?,?,?,?,?,?)");
+				
+				ps.setString(1, o.getTitre());
+				ps.setString(2, o.getDescription());
+				ps.setDouble(3, o.getPrix());
+				ps.setString(4, o.getImage());
+				ps.setInt(5, o.getFk_sous_categorie());
+				ps.setInt(6, o.getStock());
+				ps.setInt(7, o.getStock_min());
+				ps.setBoolean(8, o.isArchiver());
+				
+				ps.executeUpdate();
+				
+			}
+			
+			System.out.println("SAVED OK");
+
+		} catch (Exception ex) {
+			
+			ex.printStackTrace();
+			System.out.println("SAVED NO");
+			
+		}
+	}
+	
 	// READ / RETRIEVE ALL PRODUCTS OF A Sous Catégorie
 	public ArrayList<ProduitsBean> getAllProductsForProduitsList( int fk_sous_categorie ) {
 		

@@ -25,7 +25,7 @@ public class PanierBean {
 
 	@Override
 	public String toString() {
-		return "PanierBean [panierDetail=" + panierDetails + "]";
+		return "PanierBean [panierDetail=" + panierDetails.size() + "]";
 	}
 
 	// Compte le nombre de références contenues dans le panier

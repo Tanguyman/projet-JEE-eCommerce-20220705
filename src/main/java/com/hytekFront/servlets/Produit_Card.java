@@ -92,7 +92,7 @@ public class Produit_Card extends HttpServlet {
 			session.setAttribute("panier", pB);
 		}
 		
-		// PANIER UN PRODUIT AU PANIER DEPUIS LES PAGES : Index, Produits_List, Recherche
+		// AJOUTER AU PANIER UN PRODUIT AU PANIER DEPUIS LES PAGES : Index, Produits_List, Recherche
 		if ( request.getParameter("qtePageProduit") != null ) {
 			
 			int qte = Integer.valueOf( request.getParameter("qtePageProduit") );

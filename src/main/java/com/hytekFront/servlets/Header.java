@@ -48,7 +48,6 @@ public class Header extends HttpServlet {
 		
 		if ((PanierBean) session.getAttribute("panier") == null ) {
 			PanierBean panier = new PanierBean();
-			System.out.println("panier : " + panier);
 			session.setAttribute("panier", panier); 
 		}
 		  

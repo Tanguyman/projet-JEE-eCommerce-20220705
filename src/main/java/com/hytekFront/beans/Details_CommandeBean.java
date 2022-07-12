@@ -15,6 +15,15 @@ public class Details_CommandeBean {
 		super();
 	}
 
+	public Details_CommandeBean(int fk_commande, int fk_produit, int qte, Double prix, boolean archiver) {
+		super();
+		this.fk_commande = fk_commande;
+		this.fk_produit = fk_produit;
+		this.qte = qte;
+		this.prix = prix;
+		this.archiver = archiver;
+	}
+
 	public Details_CommandeBean(int id, int fk_commande, int fk_produit, int qte, Double prix, boolean archiver,
 			ProduitsBean produit) {
 		super();
