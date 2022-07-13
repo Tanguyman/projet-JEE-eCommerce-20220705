@@ -4,10 +4,12 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 
+import com.hytekFront.beans.CommentairesBean;
 import com.hytekFront.beans.PanierBean;
 import com.hytekFront.beans.Panier_DetailsBean;
 import com.hytekFront.beans.ProduitsBean;
 import com.hytekFront.beans.VisitesBean;
+import com.hytekFront.dao.CommentairesDao;
 import com.hytekFront.dao.Database;
 import com.hytekFront.dao.ProduitsDao;
 import com.hytekFront.dao.VisitesDao;
@@ -40,8 +42,8 @@ public class Produit_Card extends HttpServlet {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		int id = Integer.parseInt( request.getParameter( "id"));
-		
+		int id = Integer.parseInt( request.getParameter( "id") );
+		HttpSession session = request.getSession(true);
 		Database.Connect();
 		
 		ProduitsDao pd = new ProduitsDao();
@@ -51,7 +53,6 @@ public class Produit_Card extends HttpServlet {
 		ArrayList<ProduitsBean> pbCol = pd.getAllProductsForProduitsList( pb.getFk_sous_categorie() );
 		
 		// VISITES
-		HttpSession session = request.getSession(true);
 		if ( (boolean) session.getAttribute("isConnected") ) {
 			
 			VisitesBean vb = new VisitesBean();
@@ -77,7 +78,7 @@ public class Produit_Card extends HttpServlet {
 			vd.save( vb );
 		}
 		
-		// AJOUTER AU PANIER DEPUIS LA FICHE PRODUIT : Produit_Card
+		// AJOUTER UN PRODUIT AU PANIER DEPUIS LA FICHE PRODUIT : Produit_Card
 		if ( request.getParameter("quantite") != null ) {
 			
 			int qte = Integer.valueOf( request.getParameter("quantite") );
@@ -92,7 +93,7 @@ public class Produit_Card extends HttpServlet {
 			session.setAttribute("panier", pB);
 		}
 		
-		// AJOUTER AU PANIER UN PRODUIT AU PANIER DEPUIS LES PAGES : Index, Produits_List, Recherche
+		// AJOUTER UN PRODUIT AU PANIER DEPUIS LES PAGES : Index, Produits_List, Recherche
 		if ( request.getParameter("qtePageProduit") != null ) {
 			
 			int qte = Integer.valueOf( request.getParameter("qtePageProduit") );
@@ -107,7 +108,38 @@ public class Produit_Card extends HttpServlet {
 			session.setAttribute("panier", pB);
 		}
 		
-		request.setAttribute("produit", pb);
+		// AJOUTER UN COMMENTAIRE
+		if ( request.getParameter("commentaireForm") != null ) {
+			
+			int note = Integer.parseInt( request.getParameter("note") );
+			String story = request.getParameter("story");
+			System.out.println( note + " " + story);
+			int userId = (int) session.getAttribute("userId");
+			
+			CommentairesDao cd = new CommentairesDao();
+			CommentairesBean commenetaireUser = cd.getByFk_prodAndFk_user(id, userId);
+			
+			if ( note > 0 && note < 6) {
+				
+				CommentairesBean cb = new CommentairesBean();
+				
+				cb.setFk_user( userId );
+				cb.setFk_prod(id);
+				
+				long millis = System.currentTimeMillis();
+				Date date = new Date(millis);
+				cb.setDate(date);
+				
+				cb.setCommentaire(story);
+				cb.setNote(note);
+				
+				cd.save(cb);
+				
+			}
+		}
+		
+//		request.setAttribute("produit", pb); // les commentaires ne se mettent pas à jour
+		request.setAttribute("produit", pd.getById(id)); // commentaires se MAJ
 		request.setAttribute("produitsList", pbCol);
 		request.getRequestDispatcher("produit_Card.jsp").forward(request, response);
 	}

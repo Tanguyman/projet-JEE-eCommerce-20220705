@@ -36,7 +36,7 @@ public class ConnexionInscription extends HttpServlet {
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		String loginFrom = request.getParameter("loginFrom");
-		System.out.println("Login from : " + loginFrom + " (methode GET)");
+		// System.out.println("Login from : " + loginFrom + " (methode GET)");
 		request.setAttribute("loginFrom", loginFrom);
 		
 		if (loginFrom.equals("index")) {
@@ -45,6 +45,15 @@ public class ConnexionInscription extends HttpServlet {
 		
 		if (loginFrom.equals("commandes")) {
 			request.getRequestDispatcher("connexionInscription.jsp").forward(request, response);
+		}
+		
+		if (loginFrom.equals("produitCard")) {
+			
+			String idProduct = request.getParameter("idProduct");
+			
+			request.setAttribute("idProduct", idProduct);
+			request.getRequestDispatcher("connexionInscription.jsp").forward(request, response);
+			
 		}
 	}
 
@@ -64,15 +73,12 @@ public class ConnexionInscription extends HttpServlet {
 			String loginFrom = request.getParameter("loginFrom");
 			String mail = request.getParameter("mail");
 			String password = request.getParameter("password");
-			System.out.println("Login from login Button : " + loginFrom + " (methode POST)");
 		
 			UtilisateursDao utilisateursDao = new UtilisateursDao();
 			
 			UtilisateursBean passwordVerification = utilisateursDao.passwordVerification(mail, password);
 			
 			if ( passwordVerification != null ) {
-				
-				System.out.println("mdp OK");
 				
 				HttpSession session = request.getSession();
 				session.setAttribute("isConnected", true);
@@ -81,19 +87,28 @@ public class ConnexionInscription extends HttpServlet {
 				session.setAttribute("userMailBySession", passwordVerification.getEmail());
 				
 				if (loginFrom.equals("index")) {
-//					response.sendRedirect("User_Home");
+					
 					request.getRequestDispatcher("connexionInscription.jsp").forward(request, response);
-					System.out.println("User_Home");
+					
 				}
 				
 				if (loginFrom.equals("commandes")) {
+					
 					response.sendRedirect("Commandes");
+					
+				}
+				
+				if (loginFrom.equals("produitCard")) {
+					
+					String idProduct = request.getParameter("idProduct");
+					
+					response.sendRedirect("Produit_Card?id=" + idProduct);
+					
 				}
 				
 			} else {
 
 				String message = "Identifiants incorrects";
-				System.out.println(message);
 
 				request.setAttribute("message", message);
 				request.getRequestDispatcher("connexionInscription.jsp").forward(request, response);
@@ -104,7 +119,6 @@ public class ConnexionInscription extends HttpServlet {
 		
 		// BOUTON INSCRIPTION
 		if (request.getParameter("signInButton") != null) {
-			// System.out.println("Inscription ok");
 			
 			// Récupéerer les paramètres du Header (POST)
 			String nom = request.getParameter("firstName");
@@ -112,8 +126,6 @@ public class ConnexionInscription extends HttpServlet {
 			String email = request.getParameter("mail");
 			String password = request.getParameter("password");
 			String passwordConfirmation = request.getParameter("password2");
-			
-			// System.out.println(nom + prenom + email + password + passwordConfirmation);
 			
 			// TEST DE SÉCURITÉ
 			boolean isFirstNameValide = RegexValidator.nameValidator(nom);
@@ -125,8 +137,7 @@ public class ConnexionInscription extends HttpServlet {
 			boolean arePasswordsEquals = password.equals(passwordConfirmation);
 			
 			if (isFirstNameValide && isLastNameValide && isAnEmail && isPasswordValide && arePasswordsEquals && isEmailInDatabase == null) {
-
-				System.out.println("Inscription OK");
+				
 				String messageInscriptionValidated = "Un email de confirmation vient de vous être envoyé.";
 
 				request.setAttribute("messageInscriptionValidated", messageInscriptionValidated);
@@ -134,7 +145,6 @@ public class ConnexionInscription extends HttpServlet {
 
 			} else if (isEmailInDatabase != null) {
 
-				System.out.println("EmailInDatabase !");
 				String messageEmailIsInDatabase = "Cette email existe déjà";
 
 				request.setAttribute("messageEmailIsInDatabase", messageEmailIsInDatabase);
@@ -142,8 +152,7 @@ public class ConnexionInscription extends HttpServlet {
 
 			} else {
 				if (!isFirstNameValide) {
-
-					System.out.println("InvalidFirstName !");
+					
 					String messageInvalidName = "Votre nom de famille peut être composé de 3 noms au maximum "
 							+ "que vous pouvez séparer par un espace ou un tiret (-).<br>"
 							+ "Votre nom de famille doit commencer et terminer par une lettre "
@@ -154,25 +163,25 @@ public class ConnexionInscription extends HttpServlet {
 				}
 				
 				if (!isLastNameValide) {
-
-					System.out.println("InvalidLastName !");
+					
 					String messageInvalidName = "Votre prénom de famille peut être composé de 3 noms au maximum "
 							+ "que vous pouvez séparer par un espace ou un tiret (-).<br>"
 							+ "Votre nom de famille doit commencer et terminer par une lettre "
 							+ "et ne doit pas contenir de chiffres ou de caractères spéciaux.";
 
 					request.setAttribute("messageInvalidName", messageInvalidName);
+					
 				}
 				
 				if (!isAnEmail) {
-
-					System.out.println("InvalidMail !");
+					
 					String messageInvalidEmail = "Votre email n’est pas conforme.";
+					
 					request.setAttribute("messageInvalidEmail", messageInvalidEmail);
+					
 				}
 				if (!isPasswordValide) {
-
-					System.out.println("InValidePassword");
+					
 					String messageInvalidPassword = "Politique de sécurité concernant les mots de passe :<br>"
 							+ "- au moins un chiffre <br>"
 							+ "- au moins une lettre minuscule <br>"
@@ -180,17 +189,20 @@ public class ConnexionInscription extends HttpServlet {
 							+ "- au moins un caractère spécial @ # $ % ^ & + = <br>"
 							+ "- minimum 8 caractères <br>"
 							+ "- aucun espace";
+					
 					request.setAttribute("messageInvalidPassword", messageInvalidPassword);
+					
 				}
 				if (!arePasswordsEquals) {
-
-					System.out.println("PasswordNotEqual");
+					
 					String messagePasswordNotEqual = "Les mots de passe saisis ne sont pas identiques.";
+					
 					request.setAttribute("messagePasswordNotEqual", messagePasswordNotEqual);
+					
 				}
-
-				// Appeler la vue
+				
 				request.getRequestDispatcher("connexionInscription.jsp").forward(request, response);
+				
 			}
 		}
 

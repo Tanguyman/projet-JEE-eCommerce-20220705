@@ -9,6 +9,56 @@ import com.hytekFront.beans.UtilisateursBean;
 
 public class CommentairesDao {
 
+	// CREATE if !exist else UPDATE
+	public void save(CommentairesBean o) {
+		try {
+
+			if (o.getId() != 0) {
+				
+				PreparedStatement ps = Database.connexion
+						.prepareStatement("UPDATE commentaires SET commentaire=?, note=?, date=?, fk_prod=?, "
+								+ "fk_user=?, archiver=? WHERE id=?");
+				
+				ps.setString(1, o.getCommentaire());
+				ps.setInt(2, o.getNote());
+				ps.setDate(3, o.getDate());
+				ps.setInt(4, o.getFk_prod());
+				ps.setInt(5, o.getFk_user());
+				ps.setBoolean(6, o.isArchiver());
+				
+				ps.setInt(7, o.getId());
+				
+				ps.executeUpdate();
+				
+			} else {
+				
+				PreparedStatement ps = Database.connexion
+						.prepareStatement(
+								"INSERT INTO commentaires (commentaire, note, date, fk_prod, fk_user, archiver) "
+								+ "VALUES(?,?,?,?,?,?)");
+				
+				ps.setString(1, o.getCommentaire());
+				ps.setInt(2, o.getNote());
+				ps.setDate(3, o.getDate());
+				ps.setInt(4, o.getFk_prod());
+				ps.setInt(5, o.getFk_user());
+				ps.setBoolean(6, o.isArchiver());
+				
+				ps.executeUpdate();
+				
+			}
+			
+			System.out.println("SAVED OK");
+			
+
+		} catch (Exception ex) {
+			
+			ex.printStackTrace();
+			System.out.println("SAVED NO");
+			
+		}
+
+	}
 	// READ / RETRIEVE ALL commentaires FOR ONE produit
 	public ArrayList<CommentairesBean> getByFk_prod (int id) {
 		
@@ -50,6 +100,11 @@ public class CommentairesDao {
 			return null;
 			
 		}
+	}
+	// READ / RETRIEVE THE commentaires OF A THE user
+	public CommentairesBean getByFk_prodAndFk_user (int fk_prod, int fk_user) {
+		CommentairesBean c = new CommentairesBean();
+		return c;
 	}
 	
 	// CALCULER LA MOYENNE DES ÉTOILES

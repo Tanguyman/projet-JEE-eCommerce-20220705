@@ -18,10 +18,9 @@ public class CommentairesBean {
 		super();
 	}
 
-	public CommentairesBean(int id, String commentaire, int note, Date date, int fk_prod, int fk_user,
+	public CommentairesBean(String commentaire, int note, Date date, int fk_prod, int fk_user,
 			boolean archiver) {
 		super();
-		this.id = id;
 		this.commentaire = commentaire;
 		this.note = note;
 		this.date = date;

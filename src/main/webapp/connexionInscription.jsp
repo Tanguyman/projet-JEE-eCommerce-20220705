@@ -101,11 +101,21 @@
 							}
 							%>
 	                        <form id="loginForm" method="post" action="ConnexionInscription">
+								<input type="hidden" name="buttonConnection">
 	                        	<input type="hidden" class="form-control"
 									name="loginFrom" 
 									value="<%= request.getAttribute("loginFrom") %>"
 								/>
-								<input type="hidden" name="buttonConnection">
+								<%
+								if ( request.getAttribute("loginFrom").equals("produitCard") ) {
+								%>
+								<input type="hidden" class="form-control"
+									name="idProduct" 
+									value="<%= request.getAttribute("idProduct") %>" 
+								/>
+                                <%
+                                }
+                                %>
 		                        <div class="login-input pt-20">
 		                            <input type="text" placeholder="Entrer votre email..." value="dj.tanguy.paris@gmail.com" name="mail">
 		                            <input type="text" placeholder="Entrez votre mot de passe..." value="11aaAA@@" name="password">

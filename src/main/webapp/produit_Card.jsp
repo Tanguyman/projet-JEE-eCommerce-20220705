@@ -257,8 +257,71 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
 	                                </ul>
 	                            </div> -->
 							</div>
+							
+							
+							
+						<%
+						if ( (boolean) session.getAttribute("isConnected") ) {
+							/* p. */
+						%>
 							<div class="tab-pane " id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
-                          
+								<div class="item-features">
+									<div class="section-title">
+										<form>
+	                                    	<h4>AJOUTER VOTRE AVIS</h4>
+	                                    	<input 
+	                                    		type="hidden" 
+	                                    		name="id" 
+	                                    		value="<%= p.getId() %>" 
+	                                    	/>
+	                                    	<input 
+	                                    		type="hidden" 
+	                                    		name="commentaireForm" 
+	                                    		value="commentaireForm" 
+	                                    	/>
+											<div class="form-group col-md-2">
+												<label for="inputState">Note</label>
+												<select id="inputState" class="form-control" name="note">
+													<option value="1">⭐</option>
+													<option value="2">⭐⭐</option>
+													<option value="3">⭐⭐⭐</option>
+													<option value="4">⭐⭐⭐⭐</option>
+													<option value="5">⭐⭐⭐⭐⭐</option>
+												</select>
+											</div>
+											<div class="form-group col-md-2">							
+												<label for="story">Commentaire</label>
+												<textarea id="story" name="story" rows="7" cols="46"></textarea>
+											</div>						
+	                                    	<!-- <p class="p-2">Commentaire</p> -->
+	                                    	<button type="submit" class="btn btn-primary">ENREGISTRER</button>
+										</form>
+									</div>
+								</div>
+								<br>
+								<hr>
+								<br>
+						<%
+						} else {
+						%>
+							<div class="tab-pane pt-10" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
+								<div class="item-features">
+									<div class="section-title">
+										<form method="get" action="ConnexionInscription">
+	                                    	<h5>Pour ajouter votre avis il faut être connecté(e).</h5>					
+	                                    	<!-- <p class="p-2">Commentaire</p> -->
+	                                    	<input type="hidden" name="loginFrom" value="produitCard">
+	                                    	<input type="hidden" name="idProduct" value="<%= p.getId() %>">
+	                                    	<button type="submit" class="btn btn-outline-primary btn-sm" name="buttonConnection" value="toto">SE CONNECTER ou S'INSCRIRE</button>
+										</form>
+									</div>
+								</div>
+								<br>
+								<hr>
+								<br>
+						<%
+						}
+						%>
 						<%
 						if ( commentaire.isEmpty() ) {
 						%>
