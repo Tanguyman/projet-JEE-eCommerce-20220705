@@ -1,5 +1,7 @@
 package com.hytekFront.beans;
 
+import java.util.ArrayList;
+
 public class SousCategoriesBean {
 
 	// ATTRIBUTES
@@ -9,6 +11,7 @@ public class SousCategoriesBean {
 	private boolean archiver;
 	
 	private CategoriesBean categorie;
+	private ArrayList<ProduitsBean> produitsCollection;
 
 	// CONSTRUCTORS
 	public SousCategoriesBean() {
@@ -43,6 +46,17 @@ public class SousCategoriesBean {
 		this.fk_categorie = fk_categorie;
 		this.archiver = archiver;
 		this.categorie = categorie;
+	}
+
+	public SousCategoriesBean(int id, String titre, int fk_categorie, boolean archiver, CategoriesBean categorie,
+			ArrayList<ProduitsBean> produitsCollection) {
+		super();
+		this.id = id;
+		this.titre = titre;
+		this.fk_categorie = fk_categorie;
+		this.archiver = archiver;
+		this.categorie = categorie;
+		this.produitsCollection = produitsCollection;
 	}
 
 	// PROPERTIES	
@@ -86,9 +100,17 @@ public class SousCategoriesBean {
 		this.categorie = categorie;
 	}
 
+	public ArrayList<ProduitsBean> getProduitsCollection() {
+		return produitsCollection;
+	}
+
+	public void setProduitsCollection(ArrayList<ProduitsBean> produitsCollection) {
+		this.produitsCollection = produitsCollection;
+	}
+
 	@Override
 	public String toString() {
 		return "SousCategoriesBean [id=" + id + ", titre=" + titre + ", fk_categorie=" + fk_categorie + ", archiver="
-				+ archiver + ", categorie=" + categorie + "]";
+				+ archiver + ", categorie=" + categorie + ", produitsCollection=" + produitsCollection + "]";
 	}
 }

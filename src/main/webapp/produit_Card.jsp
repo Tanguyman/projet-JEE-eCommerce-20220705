@@ -83,7 +83,7 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                 	<li class="breadcrumb-item p-1"><a href="Index"><i class="fas fa-home "></i>Page d’accueil</a></li>
-                                    <li class="breadcrumb-item p-1"><a href="#"><%= p.getSous_categorie().getCategorie().getTitre() %></a></li>
+                                    <li class="breadcrumb-item p-1"><a href="Produits_Per_CategorieN0?idCatN0=<%= p.getSous_categorie().getCategorie().getId() %>"><%= p.getSous_categorie().getCategorie().getTitre() %></a></li>
                                     <li class="breadcrumb-item active p-1"><a href="Produits_List?idSousCat=<%= p.getFk_sous_categorie() %>"><%= p.getSous_categorie().getTitre() %></a></li>
                                     <li class="breadcrumb-item active p-1" aria-current="page"><a href="#">Page produit</a></li>
                                 </ol>

@@ -735,8 +735,8 @@ ArrayList<SliderBean> sliders = (ArrayList) request.getAttribute("sliders");
                                 <div class="flip-box">
                                     <div class="product-detalis pt-15 pl-20 pr-20 pb-25">
                                         <span><%= pb.getSous_categorie().getTitre() %></span>
-                                        <% if ( pb.getTitre().length() > 80 ) { %>
-                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getTitre().substring(0, 75) %>...</a></h6>
+                                        <% if ( pb.getTitre().length() > 70 ) { %>
+                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getTitre().substring(0, 70) %>...</a></h6>
                                         <%
                                         } else {
                                         %>

@@ -109,10 +109,8 @@ public class ProduitsDao {
 			
 		}
 	}
-		
-
-		
-	// READ / RETRIEVE THE LAST 10 PRODUCTS
+			
+	// READ / RETRIEVE THE LAST 10 PRODUCTS FOR HOME PAGE
 	public ArrayList<ProduitsBean> getAllProduitForHomePage() {
 		
 		ArrayList<ProduitsBean> list = new ArrayList<ProduitsBean>();

@@ -129,4 +129,14 @@
     <servlet-name>Commandes</servlet-name>
     <url-pattern>/Commandes</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Produits_Per_CategorieN0</display-name>
+    <servlet-name>Produits_Per_CategorieN0</servlet-name>
+    <servlet-class>com.hytekFront.servlets.Produits_Per_CategorieN0</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Produits_Per_CategorieN0</servlet-name>
+    <url-pattern>/Produits_Per_CategorieN0</url-pattern>
+  </servlet-mapping>
 </web-app>

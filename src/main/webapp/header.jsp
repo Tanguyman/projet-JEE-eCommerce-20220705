@@ -173,7 +173,7 @@ PanierBean panier_tmp = (PanierBean) session.getAttribute("panier");
     										for ( CategoriesBean cb : cats ) {
     										%>
     										
-                                                <li><a href="#"><%= cb.getTitre() %></a>
+                                                <li><a href="Produits_Per_CategorieN0?idCatN0=<%= cb.getId() %>"><%= cb.getTitre() %></a>
                                                     <ul class="sub-menu">
                                                     
 												<%

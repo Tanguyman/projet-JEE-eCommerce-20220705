@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.hytekFront.beans.CategoriesBean;
+import com.hytekFront.beans.ProduitsBean;
 import com.hytekFront.beans.SousCategoriesBean;
 
 public class SousCategoriesDao {
@@ -75,6 +76,7 @@ public class SousCategoriesDao {
 	public ArrayList<SousCategoriesBean> getByFk_categorie(int id) {
 		
 		ArrayList<SousCategoriesBean> list = new ArrayList<SousCategoriesBean>();
+		ProduitsDao pd = new ProduitsDao();
 		
 		try {
 
@@ -91,6 +93,9 @@ public class SousCategoriesDao {
 				o.setTitre(rs.getString("titre"));
 				o.setFk_categorie(rs.getInt("fk_categorie"));
 				o.setArchiver(rs.getBoolean("archiver"));
+				
+				ArrayList<ProduitsBean> pb = pd.getAllProductsForProduitsList( rs.getInt("id") );
+				o.setProduitsCollection(pb);
 				
 				list.add(o);
 				
@@ -139,7 +144,7 @@ public class SousCategoriesDao {
 		}
 	}
 	
-	// READ / RETRIEVE ALL + CATEGORIE NAME
+	// READ / RETRIEVE ALL + CATEGORIE N-1 NAME
 	public ArrayList<SousCategoriesBean> getAllWithCategorieName() {
 		
 		ArrayList<SousCategoriesBean> list = new ArrayList<SousCategoriesBean>();
