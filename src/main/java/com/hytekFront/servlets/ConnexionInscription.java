@@ -71,6 +71,7 @@ public class ConnexionInscription extends HttpServlet {
 		if (request.getParameter("buttonConnection") != null) {
 
 			String loginFrom = request.getParameter("loginFrom");
+			request.setAttribute("loginFrom", loginFrom);
 			String mail = request.getParameter("mail");
 			String password = request.getParameter("password");
 		

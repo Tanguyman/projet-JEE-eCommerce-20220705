@@ -134,12 +134,12 @@
 		                            <a id="loginButton" href="#">connexion</a>
 		                        </div>
 	                        </form>
-		                        <div class="login-information pt-25">
-		                            <div class="remember-me">
-		                                <input type="checkbox" id="checkbox-1"><label for="checkbox-1">Se rappeler de moi</label>
-		                                <span class="float-right"><span>Mot de passe</span> oublié ?</span>
-		                            </div>
-		                        </div>
+	                        <div class="login-information pt-25">
+	                            <div class="remember-me">
+	                                <input type="checkbox" id="checkbox-1"><label for="checkbox-1">Se rappeler de moi</label>
+	                                <span class="float-right"><span>Mot de passe</span> oublié ?</span>
+	                            </div>
+	                        </div>
 	                    </div>
 	                </div>
 	                
