@@ -101,10 +101,47 @@ public class CommentairesDao {
 			
 		}
 	}
+	
 	// READ / RETRIEVE THE commentaires OF A THE user
 	public CommentairesBean getByFk_prodAndFk_user (int fk_prod, int fk_user) {
-		CommentairesBean c = new CommentairesBean();
-		return c;
+		// SELECT * FROM `commentaires` WHERE fk_prod=18 AND fk_user=3
+		
+		UtilisateursDao ud = new UtilisateursDao();
+		
+		try {
+
+			PreparedStatement ps = Database.connexion
+					.prepareStatement("SELECT * FROM commentaires WHERE fk_prod=? AND fk_user=?");
+			ps.setInt(1, fk_prod);
+			ps.setInt(2, fk_user);
+
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+				
+			CommentairesBean o = new CommentairesBean();
+			
+			o.setId(rs.getInt("id"));
+			o.setCommentaire(rs.getString("commentaire"));
+			o.setNote(rs.getInt("note"));
+			o.setDate(rs.getDate("date"));
+			o.setFk_prod(rs.getInt("fk_prod"));
+			o.setFk_user(rs.getInt("fk_user"));
+			o.setArchiver(rs.getBoolean("archiver"));
+			
+			UtilisateursBean ub = ud.getById(rs.getInt("fk_user"));
+			o.setUtilisateur(ub);
+			
+			return o;
+
+
+		} catch (Exception ex) {
+			
+			ex.printStackTrace();
+			return null;
+			
+		}
+		
 	}
 	
 	// CALCULER LA MOYENNE DES ÉTOILES

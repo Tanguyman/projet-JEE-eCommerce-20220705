@@ -262,9 +262,50 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
 							
 						<%
 						if ( (boolean) session.getAttribute("isConnected") ) {
-							/* p. */
+							if ( request.getAttribute("commentaireUser") != null ) {
+								CommentairesBean commentaireUser = (CommentairesBean) request.getAttribute("commentaireUser");
 						%>
 							<div class="tab-pane " id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
+								<div class="item-features">
+									<div class="section-title">
+										<form>
+	                                    	<h4>MODIFIER VOTRE AVIS</h4>
+	                                    	<input 
+	                                    		type="hidden" 
+	                                    		name="id" 
+	                                    		value="<%= p.getId() %>" 
+	                                    	/>
+	                                    	<input 
+	                                    		type="hidden" 
+	                                    		name="commentaireForm" 
+	                                    		value="commentaireForm" 
+	                                    	/>
+											<div class="form-group col-md-2">
+												<label for="inputState">Note</label>
+												<select id="inputState" class="form-control" name="note">
+													<option value="1">⭐</option>
+													<option value="2">⭐⭐</option>
+													<option value="3">⭐⭐⭐</option>
+													<option value="4">⭐⭐⭐⭐</option>
+													<option value="5">⭐⭐⭐⭐⭐</option>
+												</select>
+											</div>
+											<div class="form-group col-md-2">							
+												<label for="story">Commentaire</label>
+												<textarea id="story" name="story" rows="7" cols="46"><%= commentaireUser.getCommentaire() %></textarea>
+											</div>						
+	                                    	<!-- <p class="p-2">Commentaire</p> -->
+	                                    	<button type="submit" class="btn btn-primary">ENREGISTRER</button>
+										</form>
+									</div>
+								</div>
+								<br>
+								<hr>
+								<br>
+						<%
+							} else {
+						%>
+								<div class="tab-pane " id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
 								<div class="item-features">
 									<div class="section-title">
 										<form>
@@ -301,7 +342,8 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
 								<br>
 								<hr>
 								<br>
-						<%
+						<%		
+							}
 						} else {
 						%>
 							<div class="tab-pane pt-10" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
@@ -408,7 +450,6 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
         <div class="container pl-0 pr-0">
             <div class="custom-row ">
                 <div class="product-active pt-30">
-                    
                     <% for ( ProduitsBean pb : produits ) { %>
                     <div class="col-xl-3">
                         <div class="product-wrapper">
@@ -513,7 +554,9 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
     <script src="assets/js/vendor/jquery.magnific-popup.min.js"></script>
     <script src="assets/js/vendor/wow-1.3.0.min.js"></script>  
     <script src="assets/js/main.js"></script>
-
+    <script>
+		document.getElementById("inputState").value=<%= request.getAttribute("note") %>;	
+	</script>
 	<script type="text/javascript">
 		document.getElementById("panierButton").onclick = function() {
 			document.getElementById("panierForm").submit();

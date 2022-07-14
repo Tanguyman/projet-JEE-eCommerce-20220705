@@ -108,39 +108,58 @@ public class Produit_Card extends HttpServlet {
 			session.setAttribute("panier", pB);
 		}
 		
-		// AJOUTER UN COMMENTAIRE
-		if ( request.getParameter("commentaireForm") != null ) {
+		// COMMENTAIRE
+		int note = 5;
+		String story = "";
+		if ( session.getAttribute("userId") != null ) {
 			
-			int note = Integer.parseInt( request.getParameter("note") );
-			String story = request.getParameter("story");
-			System.out.println( note + " " + story);
 			int userId = (int) session.getAttribute("userId");
 			
+			// COMMENTAIRE
 			CommentairesDao cd = new CommentairesDao();
-			CommentairesBean commenetaireUser = cd.getByFk_prodAndFk_user(id, userId);
+			CommentairesBean commentaireUser = cd.getByFk_prodAndFk_user(id, userId);
+			CommentairesBean cb = new CommentairesBean();
 			
-			if ( note > 0 && note < 6) {
+			// MODIFIER SI
+			if ( commentaireUser != null ) {
+
+				System.out.println(commentaireUser);
+				cb.setId(commentaireUser.getId());
+				note=commentaireUser.getNote();
+				story=commentaireUser.getCommentaire();
+				request.setAttribute("commentaireUser", commentaireUser);
 				
-				CommentairesBean cb = new CommentairesBean();
+			}
+			
+			// AJOUTER ou MAJ LE COMMENTAIRE
+			if ( request.getParameter("commentaireForm") != null ) {
 				
-				cb.setFk_user( userId );
-				cb.setFk_prod(id);
-				
-				long millis = System.currentTimeMillis();
-				Date date = new Date(millis);
-				cb.setDate(date);
-				
-				cb.setCommentaire(story);
-				cb.setNote(note);
-				
-				cd.save(cb);
-				
+				note = Integer.parseInt( request.getParameter("note") );
+				story = request.getParameter("story");
+								
+				if ( note > 0 && note < 6) {	
+					
+					cb.setFk_user( userId );
+					cb.setFk_prod(id);
+					
+					long millis = System.currentTimeMillis();
+					Date date = new Date(millis);
+					cb.setDate(date);
+					
+					cb.setCommentaire(story);
+					cb.setNote(note);
+					
+					cd.save(cb);
+					
+				}
 			}
 		}
 		
 //		request.setAttribute("produit", pb); // les commentaires ne se mettent pas à jour
 		request.setAttribute("produit", pd.getById(id)); // commentaires se MAJ
 		request.setAttribute("produitsList", pbCol);
+		request.setAttribute("note", note);
+		request.setAttribute("story", story);
 		request.getRequestDispatcher("produit_Card.jsp").forward(request, response);
 	}
 
