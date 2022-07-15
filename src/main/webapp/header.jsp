@@ -10,7 +10,6 @@
 ArrayList<CategoriesBean> cats = (ArrayList) request.getAttribute("cats");
 CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee");
 PanierBean panier_tmp = (PanierBean) session.getAttribute("panier");
-int nbFavoris = (int) session.getAttribute("nbFavoris"); 
 %>
 
     <!-- =============Preloader Starts=============-->
@@ -250,7 +249,7 @@ int nbFavoris = (int) session.getAttribute("nbFavoris");
                                         if ( (boolean) session.getAttribute("isConnected") ) {
                                         %>
                                             <a href="Favoris" <%-- onClick="showh();" --%> ><i class="far fa-heart"></i></a>
-                                            <div class="badge"><%= nbFavoris %></div>
+                                            <div class="badge">${ Favoris.size() }</div>
 <!-- 
                                             <div id="cart-showh"  class="product-area  product-shop-page "  style="display:none;">
                                                 <div class="hot-sale-product-area "  >

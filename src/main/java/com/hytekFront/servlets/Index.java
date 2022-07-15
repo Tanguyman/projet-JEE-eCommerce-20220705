@@ -58,16 +58,13 @@ public class Index extends HttpServlet {
 				if ( fd.getByFk_user( userId ) != null ) {
 					
 					ArrayList<FavorisBean> fbCol = fd.getByFk_user( userId );
-					//System.out.println("fao bean Col : " + fbCol.size());
-					
 					ArrayList<ProduitsBean> productsFavoris = new ArrayList<ProduitsBean>();
+					
 					for ( FavorisBean f : fbCol) {
 						
 						productsFavoris.add( f.getProduit() );
-						//System.out.println("contains :" + productsForHomePage.contains(f.getProduit()) );
 						
 					}
-					// System.out.println("Fav Prod Col : " + productsFavoris.size());
 					
 					ArrayList<ProduitsBean> favForHomePage = new ArrayList<>();
 					for ( ProduitsBean pb : productsForHomePage ) {

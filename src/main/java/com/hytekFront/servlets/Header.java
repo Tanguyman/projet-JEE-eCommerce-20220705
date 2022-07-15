@@ -60,16 +60,13 @@ public class Header extends HttpServlet {
 				
 				if ( fd.getByFk_user( userId ) != null ) {
 					
-					
 					ArrayList<FavorisBean> fbCol = fd.getByFk_user( userId );
-					int nbFavoris = fbCol.size();
 					
-					session.setAttribute("nbFavoris", nbFavoris);
+					session.setAttribute("Favoris", fbCol);
 										
 				}
 				
 			}
-			
 			
 		}
 		
