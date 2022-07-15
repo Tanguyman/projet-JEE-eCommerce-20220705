@@ -10,6 +10,7 @@
 ArrayList<CategoriesBean> cats = (ArrayList) request.getAttribute("cats");
 CoordonneesBean coordonnee = (CoordonneesBean) request.getAttribute("coordonnee");
 PanierBean panier_tmp = (PanierBean) session.getAttribute("panier");
+int nbFavoris = (int) session.getAttribute("nbFavoris"); 
 %>
 
     <!-- =============Preloader Starts=============-->
@@ -75,6 +76,7 @@ PanierBean panier_tmp = (PanierBean) session.getAttribute("panier");
                                     	%>
                                         <li><a href="#"><i class="fa-solid fa-user p-1"></i><%= session.getAttribute("userLastNameBySession")  %></a></li>
                                         <li><a href="Deconnexion"><i class="fa-solid fa-up-right-from-square p-1"></i>Déconnexion</a></li>
+                                        <li><a href="cart-page.html"><i class="fa-solid fa-heart p-1"></i>Favoris</a></li>
                                         <%
                                         } else {
                                         %>
@@ -82,7 +84,6 @@ PanierBean panier_tmp = (PanierBean) session.getAttribute("panier");
                                         <%
                                         }
                                         %>
-                                        <li><a href="cart-page.html"><i class="fa-solid fa-heart p-1"></i>Favoris</a></li>
                                         <li><a href="#"><img src="assets/img/icon/bag.png" alt="" height="25px" class="align-top p-1">Pannier</a></li>
                                         <li><a href="checkout-page.html"><i class="fa-solid fa-credit-card p-1"></i>Commande</a></li>
 
@@ -249,7 +250,7 @@ PanierBean panier_tmp = (PanierBean) session.getAttribute("panier");
                                         if ( (boolean) session.getAttribute("isConnected") ) {
                                         %>
                                             <a href="Favoris" <%-- onClick="showh();" --%> ><i class="far fa-heart"></i></a>
-                                            <div class="badge">0</div>
+                                            <div class="badge"><%= nbFavoris %></div>
 <!-- 
                                             <div id="cart-showh"  class="product-area  product-shop-page "  style="display:none;">
                                                 <div class="hot-sale-product-area "  >

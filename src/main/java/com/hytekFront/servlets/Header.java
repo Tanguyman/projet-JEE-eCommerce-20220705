@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.hytekFront.beans.CategoriesBean;
 import com.hytekFront.beans.CoordonneesBean;
+import com.hytekFront.beans.FavorisBean;
 import com.hytekFront.beans.PanierBean;
 import com.hytekFront.beans.SousCategoriesBean;
 import com.hytekFront.dao.CategoriesDao;
@@ -48,11 +49,28 @@ public class Header extends HttpServlet {
 			
 			session.setAttribute("isConnected", false);
 			
-		} else {
+		} 
+		if (session.getAttribute("isConnected") != null) {
 			
-			FavorisDao fd = new FavorisDao();
+			if ( (boolean) session.getAttribute("isConnected") ) {
+				
+				int userId = (int) session.getAttribute("userId");
+
+				FavorisDao fd = new FavorisDao();
+				
+				if ( fd.getByFk_user( userId ) != null ) {
+					
+					
+					ArrayList<FavorisBean> fbCol = fd.getByFk_user( userId );
+					int nbFavoris = fbCol.size();
+					
+					session.setAttribute("nbFavoris", nbFavoris);
+										
+				}
+				
+			}
 			
-			//ArrayList<FavorisBean> fbCol = fd.getByFk_user( (int) session.getAttribute( "idUser"));
+			
 		}
 		
 		if ((PanierBean) session.getAttribute("panier") == null ) {
