@@ -139,4 +139,14 @@
     <servlet-name>Produits_Per_CategorieN0</servlet-name>
     <url-pattern>/Produits_Per_CategorieN0</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Favoris</display-name>
+    <servlet-name>Favoris</servlet-name>
+    <servlet-class>com.hytekFront.servlets.Favoris</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Favoris</servlet-name>
+    <url-pattern>/Favoris</url-pattern>
+  </servlet-mapping>
 </web-app>

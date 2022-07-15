@@ -55,6 +55,15 @@ public class ConnexionInscription extends HttpServlet {
 			request.getRequestDispatcher("connexionInscription.jsp").forward(request, response);
 			
 		}
+		
+		if (loginFrom.equals("indexFavoris")) {
+			
+			String idProduct = request.getParameter("idProduct");
+			
+			request.setAttribute("idProduct", idProduct);
+			request.getRequestDispatcher("connexionInscription.jsp").forward(request, response);
+			
+		}
 	}
 
 	/**
@@ -104,6 +113,14 @@ public class ConnexionInscription extends HttpServlet {
 					String idProduct = request.getParameter("idProduct");
 					
 					response.sendRedirect("Produit_Card?id=" + idProduct);
+					
+				}
+				
+				if (loginFrom.equals("indexFavoris")) {
+					
+					String idProduct = request.getParameter("idProduct");
+					
+					response.sendRedirect("Favoris?idProduct=" + idProduct + "&loginFrom=indexFavoris");
 					
 				}
 				

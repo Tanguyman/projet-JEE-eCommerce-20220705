@@ -1,7 +1,5 @@
 package com.hytekFront.beans;
 
-import java.util.ArrayList;
-
 public class FavorisBean {
 
 	private int id;
@@ -9,19 +7,19 @@ public class FavorisBean {
 	private int fk_user;
 	private boolean archiver;
 
-	ArrayList<ProduitsBean> produits;
+	private ProduitsBean produit;
 
 	public FavorisBean() {
 		super();
 	}
 
-	public FavorisBean(int id, int fk_prod, int fk_user, boolean archiver, ArrayList<ProduitsBean> produits) {
+	public FavorisBean(int id, int fk_prod, int fk_user, boolean archiver, ProduitsBean produit) {
 		super();
 		this.id = id;
 		this.fk_prod = fk_prod;
 		this.fk_user = fk_user;
 		this.archiver = archiver;
-		this.produits = produits;
+		this.produit = produit;
 	}
 
 	public int getId() {
@@ -56,18 +54,18 @@ public class FavorisBean {
 		this.archiver = archiver;
 	}
 
-	public ArrayList<ProduitsBean> getProduits() {
-		return produits;
+	public ProduitsBean getProduit() {
+		return produit;
 	}
 
-	public void setProduits(ArrayList<ProduitsBean> produits) {
-		this.produits = produits;
+	public void setProduit(ProduitsBean produit) {
+		this.produit = produit;
 	}
 
 	@Override
 	public String toString() {
 		return "FavorisBean [id=" + id + ", fk_prod=" + fk_prod + ", fk_user=" + fk_user + ", archiver=" + archiver
-				+ ", produits=" + produits + "]";
+				+ ", produit=" + produit + "]";
 	}
 
 }

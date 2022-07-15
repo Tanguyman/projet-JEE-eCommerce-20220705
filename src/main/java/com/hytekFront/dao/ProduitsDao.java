@@ -124,6 +124,7 @@ public class ProduitsDao {
 
 			SousCategoriesDao scd = new SousCategoriesDao();
 			CommentairesDao cd = new CommentairesDao();
+			// ImagesDao iDao = new ImagesDao();
 			
 			while (rs.next()) {
 				
@@ -142,6 +143,7 @@ public class ProduitsDao {
 				o.setSous_categorie( scd.getById( rs.getInt( "fk_sous_categorie" ) ) );
 				o.setCommentaires( cd.getByFk_prod( rs.getInt( "id" ) ) );
 				o.setNote_moyenne( cd.avrScoreProduct( rs.getInt( "id" ) ) );
+				// o.setImages( iDao.getAllByFk_produit( rs.getInt( "id" ) ) );
 				
 
 				list.add(o);

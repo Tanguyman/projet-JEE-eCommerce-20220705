@@ -245,7 +245,10 @@ PanierBean panier_tmp = (PanierBean) session.getAttribute("panier");
                                             </div>
                                         </div>
                                         <div class="react pt-10 position-relative mr-15">
-                                            <a href="#" onClick="showh();"><i class="far fa-heart"></i></a>
+                                        <%
+                                        if ( (boolean) session.getAttribute("isConnected") ) {
+                                        %>
+                                            <a href="Favoris" <%-- onClick="showh();" --%> ><i class="far fa-heart"></i></a>
                                             <div class="badge">0</div>
 <!-- 
                                             <div id="cart-showh"  class="product-area  product-shop-page "  style="display:none;">
@@ -303,6 +306,9 @@ PanierBean panier_tmp = (PanierBean) session.getAttribute("panier");
                                                 }
                                             </script>
  -->
+                                        <%
+                                        }
+                                        %>
                                         </div>
 
 

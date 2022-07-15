@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@page import="com.hytekFront.beans.ProduitsBean"%>
-<%@page import="com.hytekFront.beans.SliderBean"%>
+<%@ page import="com.hytekFront.beans.ProduitsBean"%>
+<%@ page import="com.hytekFront.beans.SliderBean"%>
+<%@ page import="com.hytekFront.beans.FavorisBean"%>
 <%
 ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produits");
 ArrayList<SliderBean> sliders = (ArrayList) request.getAttribute("sliders");
+ArrayList<ProduitsBean> productsFavoris = (ArrayList) request.getAttribute("productsFavoris");
 %>
 <!DOCTYPE html>
 <html lang="fr">
@@ -35,7 +37,66 @@ ArrayList<SliderBean> sliders = (ArrayList) request.getAttribute("sliders");
     <link rel="stylesheet" href="assets/css/mean-menu.css">
     <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/style.css">
-
+    
+    <!-- INFO-BULLE FAVORIS -->    
+    <style type="text/css">
+		.picto-item {
+		  position: relative;  /*les .picto-item deviennent référents*/
+		  cursor: help;
+		  border-radius: 50%;
+		}
+		
+		/* on génère un élément :after lors du survol et du focus :*/
+		
+		.picto-item:hover:after,
+		.picto-item:focus:after {
+		  content: attr(aria-label);  /* on affiche aria-label */
+		  position: absolute;
+		  top: -2.4em;
+		  left: 50%;
+			transform: translateX(-50%); /* on centre horizontalement  */
+		  z-index: 1; /* pour s'afficher au dessus des éléments en position relative */
+		  white-space: nowrap; /* on interdit le retour à la ligne*/
+		  padding: 5px 14px;
+		  background: #f05036;
+		  color: #fff;
+		  border-radius: 4px;
+		  font-size: 0.8rem; /* Taille du texte */
+		}
+		
+		/* on génère un second élément en :before pour la flèche */
+		
+		[aria-label]:hover:before,
+		[aria-label]:focus:before {
+		  content: "▼";
+		  position: absolute;
+		  top: -1em;
+			left: 50%;
+			transform: translateX(-50%); /* on centre horizontalement  */
+		  font-size: 10px; /* J’ai mis 10 à la place de 20 et ça ne change rien !!? */
+		  color: #413219;
+		}
+		
+		/* pas de contour durant le :focus */
+		[aria-label]:focus {
+		  outline: none;
+		}
+		
+		/* déco */ 
+		.picto-item {
+		  display: inline-flex;
+		  justify-content: center;
+		  align-items: center;
+		  margin: 0 .2em;
+		  width: 1.2em;
+		  height: 1.2em;
+		  color: #413219;
+		  background: #e1d3bd;
+		  font-size: 1rem; /* J’ai mis 1 à la place de 3 mais ça ne change rien non plus */
+		  text-align: center;
+		  text-decoration: none;
+		}
+    </style>
 </head>
 
 <body>
@@ -719,16 +780,243 @@ ArrayList<SliderBean> sliders = (ArrayList) request.getAttribute("sliders");
                     <div class="product-active  pt-30">
                     
                     
-                    <%
-					for ( ProduitsBean pb : produits ) {
-					%>
+<%
+if ( (boolean) session.getAttribute("isConnected") ) {
+	if ( productsFavoris != null) {
+		for ( ProduitsBean pb : productsFavoris ) {
+%>
                         <div class="col-xl-3 ">
                             <div class="product-wrapper">
                                 <div class="product-img ">
                                     <img src="<%= pb.getImage() %>" alt="product" width="100" height="200">
                                     <ul class="social-icon">
                                         <!-- <li><a href="#"><i class="fa fa-retweet" aria-hidden="true"></i></a></li> -->
-                                        <li><a href="#"><i class="far fa-heart" aria-hidden="true"></i></a></li>
+										<li><a href="Favoris?idProduit=<%= pb.getId() %>&crud=delete"><!-- <i class="fa-solid fa-heart" aria-hidden="true"></i> -->❤️</a></li>
+										<li><a href="Produit_Card?id=<%= pb.getId() %>"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="flip-box">
+                                    <div class="product-detalis pt-15 pl-20 pr-20 pb-25">
+                                        <span><%= pb.getSous_categorie().getTitre() %></span>
+                                        <% if ( pb.getTitre().length() > 70 ) { %>
+                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getTitre().substring(0, 70) %>...</a></h6>
+                                        <%
+                                        } else {
+                                        %>
+                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getTitre() %>.</a></h6>
+                                        <%
+                                        }
+                                        %>
+                                        <div class="price-color ">
+                                            <div class="price d-inline-block">
+                                                <span><%= pb.getPrix() %>€</span>
+                                                <!-- <del>$899</del> -->
+                                            </div>
+                                            <!-- <div class="color float-right d-flex">
+                                                <span>Color:</span>
+                                                <div class="color-set">
+        
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="product-detalis product-detalis-2 pt-15 pl-20 pr-20 pb-25">
+                                        <span><%= pb.getCommentaires().size() %> avis</span>
+                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getStock() %> en stock</a></h6>
+                                        <div class="buy-info ">
+                                            <div class="cart float-left">
+                                            	<form id="panierForm2" method="post">
+	                                                <a id="panierButton2" href="Produit_Card?id=<%= pb.getId() %>&qtePageProduit=1"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+    	                                            Ajouter
+        	                                        </a>
+												</form>
+                                            </div>
+                                            <ul class="rating d-flex">
+                                            <%
+                                            ArrayList commentaire = pb.getCommentaires();
+                                            if ( commentaire.isEmpty() ){
+                                            %>
+                                            <li>Nouveau <i class="fa-solid fa-seedling"></i></li>
+                                            <%
+                                            } else {
+                                            	for ( int i=0; i < pb.getNote_moyenne(); i++ ) {	
+                                            %>
+                                                <!-- <li><i class="fa-solid fa-star" aria-hidden="true"></i></li> -->
+                                                <li>⭐️</li>
+                                            <%
+                                            	}
+                                            }
+                                            %>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<%
+		}
+		for ( ProduitsBean pb : produits ) { /* si produit ne fait pas partie de sa liste */
+%>
+						<div class="col-xl-3 ">
+                            <div class="product-wrapper">
+                                <div class="product-img ">
+                                    <img src="<%= pb.getImage() %>" alt="product" width="100" height="200">
+                                    <ul class="social-icon">
+                                        <!-- <li><a href="#"><i class="fa fa-retweet" aria-hidden="true"></i></a></li> -->
+										<li><a href="Favoris?idProduit=<%= pb.getId() %>&crud=save"><i class="fa-solid fa-heart-crack" aria-hidden="true"></i></a></li>
+										<li><a href="Produit_Card?id=<%= pb.getId() %>"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="flip-box">
+                                    <div class="product-detalis pt-15 pl-20 pr-20 pb-25">
+                                        <span><%= pb.getSous_categorie().getTitre() %></span>
+                                        <% if ( pb.getTitre().length() > 70 ) { %>
+                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getTitre().substring(0, 70) %>...</a></h6>
+                                        <%
+                                        } else {
+                                        %>
+                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getTitre() %>.</a></h6>
+                                        <%
+                                        }
+                                        %>
+                                        <div class="price-color ">
+                                            <div class="price d-inline-block">
+                                                <span><%= pb.getPrix() %>€</span>
+                                                <!-- <del>$899</del> -->
+                                            </div>
+                                            <!-- <div class="color float-right d-flex">
+                                                <span>Color:</span>
+                                                <div class="color-set">
+        
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="product-detalis product-detalis-2 pt-15 pl-20 pr-20 pb-25">
+                                        <span><%= pb.getCommentaires().size() %> avis</span>
+                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getStock() %> en stock</a></h6>
+                                        <div class="buy-info ">
+                                            <div class="cart float-left">
+                                            	<form id="panierForm2" method="post">
+	                                                <a id="panierButton2" href="Produit_Card?id=<%= pb.getId() %>&qtePageProduit=1"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+    	                                            Ajouter
+        	                                        </a>
+												</form>
+                                            </div>
+                                            <ul class="rating d-flex">
+                                            <%
+                                            ArrayList commentaire = pb.getCommentaires();
+                                            if ( commentaire.isEmpty() ){
+                                            %>
+                                            <li>Nouveau <i class="fa-solid fa-seedling"></i></li>
+                                            <%
+                                            } else {
+                                            	for ( int i=0; i < pb.getNote_moyenne(); i++ ) {	
+                                            %>
+                                                <!-- <li><i class="fa-solid fa-star" aria-hidden="true"></i></li> -->
+                                                <li>⭐️</li>
+                                            <%
+                                            	}
+                                            }
+                                            %>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<%			
+		}
+	} else { /* si liste de favoris null */
+		for ( ProduitsBean pb : produits ) {
+%>
+						<div class="col-xl-3 ">
+                            <div class="product-wrapper">
+                                <div class="product-img ">
+                                    <img src="<%= pb.getImage() %>" alt="product" width="100" height="200">
+                                    <ul class="social-icon">
+                                        <!-- <li><a href="#"><i class="fa fa-retweet" aria-hidden="true"></i></a></li> -->
+										<li><a href="Favoris?idProduit=<%= pb.getId() %>"><i class="fa-solid fa-heart-crack" aria-hidden="true"></i></a></li>
+										<li><a href="Produit_Card?id=<%= pb.getId() %>"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="flip-box">
+                                    <div class="product-detalis pt-15 pl-20 pr-20 pb-25">
+                                        <span><%= pb.getSous_categorie().getTitre() %></span>
+                                        <% if ( pb.getTitre().length() > 70 ) { %>
+                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getTitre().substring(0, 70) %>...</a></h6>
+                                        <%
+                                        } else {
+                                        %>
+                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getTitre() %>.</a></h6>
+                                        <%
+                                        }
+                                        %>
+                                        <div class="price-color ">
+                                            <div class="price d-inline-block">
+                                                <span><%= pb.getPrix() %>€</span>
+                                                <!-- <del>$899</del> -->
+                                            </div>
+                                            <!-- <div class="color float-right d-flex">
+                                                <span>Color:</span>
+                                                <div class="color-set">
+        
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="product-detalis product-detalis-2 pt-15 pl-20 pr-20 pb-25">
+                                        <span><%= pb.getCommentaires().size() %> avis</span>
+                                        <h6><a href="Produit_Card?id=<%= pb.getId() %>"><%= pb.getStock() %> en stock</a></h6>
+                                        <div class="buy-info ">
+                                            <div class="cart float-left">
+                                            	<form id="panierForm2" method="post">
+	                                                <a id="panierButton2" href="Produit_Card?id=<%= pb.getId() %>&qtePageProduit=1"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+    	                                            Ajouter
+        	                                        </a>
+												</form>
+                                            </div>
+                                            <ul class="rating d-flex">
+                                            <%
+                                            ArrayList commentaire = pb.getCommentaires();
+                                            if ( commentaire.isEmpty() ){
+                                            %>
+                                            <li>Nouveau <i class="fa-solid fa-seedling"></i></li>
+                                            <%
+                                            } else {
+                                            	for ( int i=0; i < pb.getNote_moyenne(); i++ ) {	
+                                            %>
+                                                <!-- <li><i class="fa-solid fa-star" aria-hidden="true"></i></li> -->
+                                                <li>⭐️</li>
+                                            <%
+                                            	}
+                                            }
+                                            %>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+<%
+		}
+	}									
+} else { /* si pas connecté(e) */
+	for ( ProduitsBean pb : produits ) {
+%>
+						<div class="col-xl-3 ">
+                            <div class="product-wrapper">
+                                <div class="product-img ">
+                                    <img src="<%= pb.getImage() %>" alt="product" width="100" height="200">
+                                    <ul class="social-icon">
+                                        <!-- <li><a href="#"><i class="fa fa-retweet" aria-hidden="true"></i></a></li> -->
+										<li>
+											<div class="pictos">
+												<a class="picto-item" href="ConnexionInscription?loginFrom=indexFavoris&idProduct=<%= pb.getId() %>"  aria-label="Se connecter pour ajouter aux favoris">
+													<i class="far fa-heart" aria-hidden="true"></i>
+												</a>
+											</div>
+										</li>
                                         <li><a href="Produit_Card?id=<%= pb.getId() %>"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
                                     </ul>
                                 </div>
@@ -790,9 +1078,10 @@ ArrayList<SliderBean> sliders = (ArrayList) request.getAttribute("sliders");
                                 </div>
                             </div>
                         </div>
-					<%
-					}
-					%>
+<%
+	}
+}
+%>
 <!-- 
                         <div class="col-xl-3 ">
                             <div class="product-wrapper">

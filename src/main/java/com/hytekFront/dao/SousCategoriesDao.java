@@ -18,15 +18,20 @@ public class SousCategoriesDao {
 				
 				PreparedStatement ps = Database.connexion
 						.prepareStatement("UPDATE sous_categories SET titre=? WHERE id=?");
+				
 				ps.setString(1, o.getTitre());
+				
 				ps.setInt(2, o.getId());
+				
 				ps.executeUpdate();
 				
 			} else {
 				
 				PreparedStatement ps = Database.connexion
 						.prepareStatement("INSERT INTO sous_categories (titre) VALUES(?)");
+				
 				ps.setString(1, o.getTitre());
+				
 				ps.executeUpdate();
 				
 			}

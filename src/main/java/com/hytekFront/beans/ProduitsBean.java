@@ -36,6 +36,7 @@ public class ProduitsBean {
 		this.stock = stock;
 		this.stock_min = stock_min;
 		this.archiver = archiver;
+		
 		this.sous_categorie = sous_categorie;
 		this.commentaires = commentaires;
 		this.note_moyenne = note_moyenne;
@@ -56,6 +57,7 @@ public class ProduitsBean {
 		this.stock = stock;
 		this.stock_min = stock_min;
 		this.archiver = archiver;
+		
 		this.sous_categorie = sous_categorie;
 		this.commentaires = commentaires;
 		this.note_moyenne = note_moyenne;

@@ -10,6 +10,7 @@ import com.hytekFront.beans.SousCategoriesBean;
 import com.hytekFront.dao.CategoriesDao;
 import com.hytekFront.dao.CoordonneesDao;
 import com.hytekFront.dao.Database;
+import com.hytekFront.dao.FavorisDao;
 import com.hytekFront.dao.SousCategoriesDao;
 
 import jakarta.servlet.ServletException;
@@ -42,18 +43,24 @@ public class Header extends HttpServlet {
 		
 		HttpSession session = request.getSession(true);
 		session.setMaxInactiveInterval(600);
+		
 		if (session.getAttribute("isConnected") == null) {
+			
 			session.setAttribute("isConnected", false);
+			
+		} else {
+			
+			FavorisDao fd = new FavorisDao();
+			
+			//ArrayList<FavorisBean> fbCol = fd.getByFk_user( (int) session.getAttribute( "idUser"));
 		}
 		
 		if ((PanierBean) session.getAttribute("panier") == null ) {
+			
 			PanierBean panier = new PanierBean();
-			session.setAttribute("panier", panier); 
+			session.setAttribute("panier", panier);
+			
 		}
-		  
-		// if favoris
-		  
-		 
 		
 		String names[] = session.getValueNames();
 		for ( int i = 0, n = names.length; i < n; i++ ) {
