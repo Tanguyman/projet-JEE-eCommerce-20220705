@@ -124,4 +124,26 @@ public class FavorisDao {
 			
 		}
 	}
+	
+	// DELETE
+	public void deleteByFk_prodAndFk_user (int fk_prod, int fk_user) {
+		try {
+			
+			PreparedStatement ps = Database.connexion
+					.prepareStatement("DELETE FROM favoris WHERE fk_prod=? AND fk_user=?");
+			
+			ps.setInt(1, fk_prod);
+			ps.setInt(2, fk_user);
+			
+			ps.executeUpdate();
+			
+			System.out.println("DELETED OK");
+			
+		} catch (Exception ex) {
+			
+			ex.printStackTrace();
+			System.out.println("DELETED NO");
+			
+		}
+	}
 }

@@ -41,10 +41,14 @@ public class Favoris extends HttpServlet {
 			String loginFrom = request.getParameter("loginFrom");
 			int userId = (int) session.getAttribute("userId");
 			
-			if (loginFrom.equals("indexFavoris")) {
-				
-				
-				FavorisDao fd = new FavorisDao();
+			FavorisDao fd = new FavorisDao();
+			
+			/*
+			 * Le User vient de la page d’accueil
+			 */
+			// Se connecter et persister le favoris
+			// en cliquant sur ajouter aux favoris
+			if ( loginFrom.equals( "indexFavoris" ) ) {	
 				
 				if ( fd.getByFk_userAndFk_prod(userId, idProduct) != null ) {
 					
@@ -62,6 +66,14 @@ public class Favoris extends HttpServlet {
 					
 				}
 				
+			}
+			
+			// Effacer le favoris depuis la page d’accueil
+			if ( loginFrom.equals( "delete" ) ) {
+				
+				fd.deleteByFk_prodAndFk_user(idProduct, userId);
+				
+				response.sendRedirect("Index");
 			}
 			
 		}

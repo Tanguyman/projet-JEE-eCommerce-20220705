@@ -82,9 +82,8 @@ public class Index extends HttpServlet {
 							
 						}
 					}
+					
 					productsForHomePage.removeAll(favForHomePage);
-					System.out.println( productsForHomePage.size() );
-					System.out.println( "Fav Home Page : " + favForHomePage.size() );
 					
 					request.setAttribute("productsFavoris", favForHomePage);
 					request.setAttribute("produits", productsForHomePage);
