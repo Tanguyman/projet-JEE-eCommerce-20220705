@@ -863,7 +863,7 @@ if ( (boolean) session.getAttribute("isConnected") ) {
                                     <img src="<%= pb.getImage() %>" alt="product" width="100" height="200">
                                     <ul class="social-icon">
                                         <!-- <li><a href="#"><i class="fa fa-retweet" aria-hidden="true"></i></a></li> -->
-										<li><a href="Favoris?idProduit=<%= pb.getId() %>&crud=save"><i class="fa-solid fa-heart-crack" aria-hidden="true"></i></a></li>
+										<li><a href="Favoris?idProduct=<%= pb.getId() %>&loginFrom=save"><i class="fa-solid fa-heart-crack" aria-hidden="true"></i></a></li>
 										<li><a href="Produit_Card?id=<%= pb.getId() %>"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
                                     </ul>
                                 </div>

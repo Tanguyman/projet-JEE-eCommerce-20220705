@@ -76,6 +76,18 @@ public class Favoris extends HttpServlet {
 				response.sendRedirect("Index");
 			}
 			
+			// Ajouter le favoris depuis la page d’accueil
+			if ( loginFrom.equals( "save" ) ) {	
+				
+				FavorisBean fb = new FavorisBean();
+				fb.setFk_prod(idProduct);
+				fb.setFk_user(userId);
+				
+				fd.save(fb);
+				
+				response.sendRedirect("Index");
+				
+			}
 		}
 	}
 
