@@ -2,7 +2,9 @@ package com.hytekFront.servlets;
 
 import java.io.IOException;
 
+import com.hytekFront.beans.AdressesBean;
 import com.hytekFront.beans.UtilisateursBean;
+import com.hytekFront.dao.AdressesDao;
 import com.hytekFront.dao.CommentairesDao;
 import com.hytekFront.dao.Database;
 import com.hytekFront.dao.FavorisDao;
@@ -224,6 +226,30 @@ public class Utilisateurs_Index extends HttpServlet {
 				}
 				
 				request.setAttribute("user", ub);
+				request.getRequestDispatcher("user_Index.jsp").forward(request, response);
+			}
+			
+		}
+		
+		// BOUTON MODIFIER ADRESSE
+		if (request.getParameter("updateAddress") != null ) {
+			
+			for ( AdressesBean ab : ub.getAdresses() ) {
+				
+				String address = request.getParameter( ab.getAdresse() );
+				System.out.println(address);
+				String cp = request.getParameter( ab.getCp());
+				String ville = request.getParameter( ab.getVille() );
+				String pays = request.getParameter( ab.getPays() );
+
+				ab.setAdresse(address);
+				ab.setCp(cp);
+				ab.setVille(ville);
+				ab.setPays(pays);
+				
+				System.out.println(ab);
+				
+				AdressesDao.save(ab);
 				request.getRequestDispatcher("user_Index.jsp").forward(request, response);
 			}
 			

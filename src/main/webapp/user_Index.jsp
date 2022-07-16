@@ -343,38 +343,49 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
                         <%
                         }
                         %> --%>
-                        <div class="table-scroll">
-                            <table id="clicAdresse-search" class="display table table-hover" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>Adresse</th>
-                                        <th>Code postal</th>
-                                        <th>Ville</th>
-                                        <th>Pays</th>
-                                        <th class="text-center dt-no-sorting">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <%
-		                        int i = 1;
-		                        for ( AdressesBean a : client.getAdresses() ) {
-		                        %>
-		                        	<tr>
-		                        		<td><%= a.getAdresse() %></td>
-		                        		<td><%= a.getCp() %></td>
-		                        		<td><%= a.getVille() %></td>
-		                        		<td><%= a.getPays() %></td>
-		                        		<td class="text-center">
-		                        			<button data-bs-toggle="modal" data-bs-target="#comment-edit<%=i%>" class="btn-primary btn-sm btn-block">Modifier</button>
-	                                        <button onclick="window.location.href='Index';" class="btn-danger btn-sm btn-block">Supprimer</button>
-										</td>
-		                        	</tr>
-		                        <%
-		                        }
-		                        %>
-		                        </tbody>
-							</table>
-						</div>
+						<form method="post" action="Utilisateurs_Index">
+	                        <div class="table-scroll">
+	                            <table id="clicAdresse-search" class="multi-table table table-hover" style="width:100%">
+	                                <thead>
+	                                    <tr>
+	                                        <th>Adresse</th>
+	                                        <th>Code postal</th>
+	                                        <th>Ville</th>
+	                                        <th>Pays</th>
+	                                        <th class="text-center dt-no-sorting">Actions</th>
+	                                    </tr>
+	                                </thead>
+	                                <tbody>
+	                                <%
+			                        for ( AdressesBean a : client.getAdresses() ) {
+			                        %>
+			                        	<tr>
+			                        		<td>
+			                        			<input type='text' class='form-control' value='<%= a.getAdresse() %>' name='<%= a.getAdresse() %>'>
+			                        		</td>
+			                        		<td>
+			                        			<input type='text' class='form-control' value='<%= a.getCp() %>' name='<%= a.getCp() %>'>
+			                        		</td>
+			                        		<td>
+			                        			<input type='text' class='form-control' value='<%= a.getVille() %>' name='<%= a.getVille() %>'>
+			                        		</td>
+			                        		<td>
+			                        			<input type='text' class='form-control' value='<%= a.getPays() %>' name='<%= a.getPays() %>'>
+			                        		</td>
+			                        		<td class="text-center">
+			                        			<%-- <button data-bs-toggle="modal" data-bs-target="#comment-edit<%=i%>" class="btn-primary btn-sm btn-block">Modifier</button> --%>
+			                        			<button type="submit" name="updateAddress" class="btn btn-primary btn-sm">Modifier</button><!-- class="btn btn-outline-primary btn-sm -->
+		                                        <!-- <button onclick="window.location.href='Index';" class="btn-danger btn-sm btn-block">Supprimer</button> -->
+		                                        <button onclick="window.location.href='Utilisateurs_Index?deleteAddress=<%= a.getId() %>';" class="btn btn-danger btn-sm">Éffacer</button>
+											</td>
+			                        	</tr>
+			                        <%
+			                        }
+			                        %>
+			                        </tbody>
+								</table>
+							</div>
+						</form>
                                 
                                 
                        <%--  <form method="post" action="Commandes" class="pl-45 pt-30 pr-100" >

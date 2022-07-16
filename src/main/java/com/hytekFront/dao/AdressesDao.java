@@ -8,6 +8,53 @@ import com.hytekFront.beans.AdressesBean;
 
 public class AdressesDao {
 
+	public static void save(AdressesBean o) {
+		
+		try {
+
+			if (o.getId() != 0) {
+				
+				PreparedStatement ps = Database.connexion
+						.prepareStatement("UPDATE adresses_livraison SET fk_user=?, adresse=?, "
+								+ "cp=?, ville=?, archiver=? WHERE id=?");
+				
+				ps.setInt(1, o.getFk_user());
+				ps.setString(2, o.getAdresse());
+				ps.setString(3, o.getCp());
+				ps.setString(4, o.getVille());
+				ps.setBoolean(5, o.isArchiver());
+				
+				ps.setInt(6, o.getId());
+				
+				ps.executeUpdate();
+				
+			} else {
+				
+				PreparedStatement ps = Database.connexion
+						.prepareStatement("INSERT INTO adresses_livraison "
+								+ "(fk_user, adresse, cp, ville, archiver) "
+								+ "VALUES(?,?,?,?,?)");
+				
+				ps.setInt(1, o.getFk_user());
+				ps.setString(2, o.getAdresse());
+				ps.setString(3, o.getCp());
+				ps.setString(4, o.getVille());
+				ps.setBoolean(5, o.isArchiver());
+				
+				ps.executeUpdate();
+			}
+			
+			System.out.println("SAVED OK");
+
+		} catch (Exception ex) {
+			
+			ex.printStackTrace();
+			System.out.println("SAVED NO");
+			
+		}
+		
+	}
+	
 	// READ / RETRIEVE ALL ADDRESS FROM USER
 	public ArrayList<AdressesBean> getAllByUserId(int id) {
 		
