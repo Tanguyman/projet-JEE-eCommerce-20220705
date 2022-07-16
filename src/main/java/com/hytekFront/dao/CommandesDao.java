@@ -86,6 +86,9 @@ public class CommandesDao {
 				o.setEtat(rs.getInt("etat"));
 				o.setArchiver(rs.getBoolean("archiver"));
 				
+//				Details_CommandeDao dcd = new Details_CommandeDao();
+//				o.setDetails( dcd.getAllByFk_commande( rs.getInt("id") ) );
+				
 				list.add(o);
 			}
 

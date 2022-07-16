@@ -80,7 +80,7 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("client");
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="Index"> <i
-                                                class="fas fa-home "></i>Home</a></li>
+                                                class="fas fa-home "></i>Page d’accueil</a></li>
                                     <li class="breadcrumb-item active" aria-current="page"><a
                                             href="#">Commande</a></li>
                                 </ol>
@@ -156,7 +156,7 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("client");
 	                    	<div class="col-xl-12">
                     			<div class="table-button text-center pt-30">
                        		 	<!-- <a href="#" class="b-btn  pl-45 pr-45 pb-15 pt-15">Place Order</a> -->
-									<input name="commande" class="b-btn  pl-45 pr-45 pb-15 pt-15" type="submit" value="COMMANDER">
+									<input name="commande" class="b-btn  pl-45 pr-45 pb-15 pt-15" type="submit" value="COMMANDER" >
                     			</div>
 							</div>
 	                    <%										

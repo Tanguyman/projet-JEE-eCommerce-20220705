@@ -103,7 +103,7 @@ ArrayList<SousCategoriesBean> categories = (ArrayList) request.getAttribute("cat
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                         <div class="section-title">
                             <h3>
-                                <%= categorie.getTitre() %>
+                                <a href="Produits_List?idSousCat=<%= categorie.getId() %>"><%= categorie.getTitre() %></a>
                             </h3>
                         </div>
                     </div>

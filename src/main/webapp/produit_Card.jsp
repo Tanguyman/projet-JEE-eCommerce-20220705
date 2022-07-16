@@ -335,7 +335,7 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
 												<textarea id="story" name="story" rows="7" cols="46"></textarea>
 											</div>						
 	                                    	<!-- <p class="p-2">Commentaire</p> -->
-	                                    	<button type="submit" class="btn btn-primary">ENREGISTRER</button>
+	                                    	<button type="submit" class="btn btn-primary"  style="background-color: #F05036;">ENREGISTRER</button>
 										</form>
 									</div>
 								</div>

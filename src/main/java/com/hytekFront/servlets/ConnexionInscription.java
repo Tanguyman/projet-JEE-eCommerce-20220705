@@ -40,11 +40,15 @@ public class ConnexionInscription extends HttpServlet {
 		request.setAttribute("loginFrom", loginFrom);
 		
 		if (loginFrom.equals("index")) {
+			
 			request.getRequestDispatcher("connexionInscription.jsp").forward(request, response);
+			
 		}
 		
 		if (loginFrom.equals("commandes")) {
+			
 			request.getRequestDispatcher("connexionInscription.jsp").forward(request, response);
+			
 		}
 		
 		if (loginFrom.equals("produitCard")) {
@@ -98,7 +102,8 @@ public class ConnexionInscription extends HttpServlet {
 				
 				if (loginFrom.equals("index")) {
 					
-					request.getRequestDispatcher("connexionInscription.jsp").forward(request, response);
+					// request.getRequestDispatcher("connexionInscription.jsp").forward(request, response);
+					response.sendRedirect("Utilisateurs_Index");
 					
 				}
 				

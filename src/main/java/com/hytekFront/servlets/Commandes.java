@@ -96,7 +96,7 @@ public class Commandes extends HttpServlet {
 									+ pdB.getProduit().getSous_categorie().getTitre()
 									+ " mais nous n’en n’avons que " + pdB.getProduit().getStock() + " en stock. <br>"
 									+ " Désolé... <br>"
-									+ "Ceci dit vous avez tripoté le formulaire 😡🤬🖕";
+									+ "Ceci dit vous avez tripoté le formulaire 😡🤬";
 							request.setAttribute("ruptureStock", ruptureStock);
 							
 						} else {

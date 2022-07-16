@@ -97,25 +97,36 @@ public class UtilisateursDao {
 			
 			PreparedStatement ps = Database.connexion
 					.prepareStatement("SELECT * FROM utilisateurs WHERE id=?");
+			
 			ps.setInt(1, id);
 
 			ResultSet rs = ps.executeQuery();
-			// System.out.println(rs);
+			
 			rs.next();
 				
-			UtilisateursBean u = new UtilisateursBean();
+			UtilisateursBean o = new UtilisateursBean();
 			
-			u.setId(rs.getInt("id"));
-			u.setNom(rs.getString("nom"));
-			u.setPrenom(rs.getString("prenom"));
-			u.setDate_inscription(rs.getDate("date_inscription"));
-			u.setEmail(rs.getString("email"));
-			u.setArchiver(rs.getBoolean("archiver"));
+			o.setId(rs.getInt("id"));
+			o.setNom(rs.getString("nom"));
+			o.setPrenom(rs.getString("prenom"));
+			o.setDate_inscription(rs.getDate("date_inscription"));
+			o.setEmail(rs.getString("email"));
+			o.setPassword(rs.getString("password"));
+			o.setArchiver(rs.getBoolean("archiver"));
 			
 			AdressesDao ad = new AdressesDao();
-			u.setAdresses(ad.getAllByUserId(id));
+			o.setAdresses(ad.getAllByUserId(id));
 			
-			return u;
+			CommandesDao cd = new CommandesDao();
+			o.setCommandes(cd.getAllByUserId(id));
+			
+//			CommentairesDao cd2 = new CommentairesDao();
+//			o.setCommentaires(cd2.getByFk_user(id));
+			
+//			FavorisDao fd = new FavorisDao();
+//			o.setFavoris(fd.getByFk_user(id));
+			
+			return o;
 			
 
 		} catch (SQLException e) {

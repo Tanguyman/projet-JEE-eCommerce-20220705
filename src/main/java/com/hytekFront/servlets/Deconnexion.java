@@ -35,9 +35,11 @@ public class Deconnexion extends HttpServlet {
 
 		// Vider la mémoire
 		// session.invalidate(); // Avec invalidate() je perds le panier
-		session.setAttribute("isConnected", null);
-		session.setAttribute("userId", 0);
+		session.setAttribute("userMailBySession", "");
 		session.setAttribute("userNameBySession", "");
+		session.setAttribute("isConnected", null);
+		session.setAttribute("userLastNameBySession", "");
+		session.setAttribute("userId", 0);
 
 		response.sendRedirect("Index");
 	}

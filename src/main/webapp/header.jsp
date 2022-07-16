@@ -73,7 +73,7 @@ PanierBean panier_tmp = (PanierBean) session.getAttribute("panier");
                                     	<%
                                     	if ( (boolean)session.getAttribute("isConnected") ) {
                                     	%>
-                                        <li><a href="#"><i class="fa-solid fa-user p-1"></i><%= session.getAttribute("userLastNameBySession")  %></a></li>
+                                        <li><a href="Utilisateurs_Index"><i class="fa-solid fa-user p-1"></i><%= session.getAttribute("userLastNameBySession")  %></a></li>
                                         <li><a href="Deconnexion"><i class="fa-solid fa-up-right-from-square p-1"></i>Déconnexion</a></li>
                                         <li><a href="cart-page.html"><i class="fa-solid fa-heart p-1"></i>Favoris</a></li>
                                         <%

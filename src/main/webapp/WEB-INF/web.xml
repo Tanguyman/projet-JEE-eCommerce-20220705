@@ -149,4 +149,14 @@
     <servlet-name>Favoris</servlet-name>
     <url-pattern>/Favoris</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Utilisateurs_Index</display-name>
+    <servlet-name>Utilisateurs_Index</servlet-name>
+    <servlet-class>com.hytekFront.servlets.Utilisateurs_Index</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Utilisateurs_Index</servlet-name>
+    <url-pattern>/Utilisateurs_Index</url-pattern>
+  </servlet-mapping>
 </web-app>
