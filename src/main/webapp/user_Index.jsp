@@ -219,7 +219,7 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
 			<div class="row">
 				<div class="mx-auto">
 					<a href="FavorisPage" class="btn btn-outline-primary" role="button" ">Liste des favoris</a>
-					<a href="Utilisateurs_Index" class="btn btn-outline-secondary" role="button" >Historique des commandes</a>
+					<a href="CommandesHistorique" class="btn btn-outline-secondary" role="button" >Historique des commandes</a>
 					<a href="Utilisateurs_Index" class="btn btn-outline-info" role="button" >Liste des commentaires</a>
 				</div>	
 			</div> 

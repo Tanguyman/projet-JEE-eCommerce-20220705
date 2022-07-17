@@ -179,4 +179,14 @@
     <servlet-name>FavorisPage</servlet-name>
     <url-pattern>/FavorisPage</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CommandesHistorique</display-name>
+    <servlet-name>CommandesHistorique</servlet-name>
+    <servlet-class>com.hytekFront.servlets.CommandesHistorique</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CommandesHistorique</servlet-name>
+    <url-pattern>/CommandesHistorique</url-pattern>
+  </servlet-mapping>
 </web-app>

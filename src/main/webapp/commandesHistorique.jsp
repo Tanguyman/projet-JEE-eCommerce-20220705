@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@page import="com.hytekFront.beans.FavorisBean"%>
+<%@page import="com.hytekFront.beans.CommandesBean"%>
+<%@page import="com.hytekFront.tools.DateManipulator"%>
 <%
-ArrayList<FavorisBean> favoris = (ArrayList) request.getAttribute("favoris");
+ArrayList<CommandesBean> commandes = (ArrayList) request.getAttribute("commandes");
 %>
 <!DOCTYPE html>
 <html lang="fr">
@@ -20,7 +21,7 @@ ArrayList<FavorisBean> favoris = (ArrayList) request.getAttribute("favoris");
 	<script src="https://kit.fontawesome.com/bff2375f4b.js" crossorigin="anonymous"></script>
 	
     <!-- title -->
-    <title>Favoris</title>
+    <title>Mes Commandes</title>
 
     <!-- stylesheets -->
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
@@ -74,7 +75,7 @@ ArrayList<FavorisBean> favoris = (ArrayList) request.getAttribute("favoris");
                 <div class="col-xl-12">
                     <div class="page-titel-detalis  ">
                         <div class="page-title position-relative">
-                            <h2>Panier</h2>
+                            <h2>Commandes</h2>
                         </div>
                         <div class="page-bc">
                             <nav aria-label="breadcrumb">
@@ -83,10 +84,10 @@ ArrayList<FavorisBean> favoris = (ArrayList) request.getAttribute("favoris");
                                     	<a href="Index"><i class="fas fa-home "></i>Page d’accueil</a>
                                     </li>
                                     <li class="breadcrumb-item">
-                                    	<a href="Utilisateurs_Index">Dashboard</a>
+                                    	<a href="Utilisateurs_Index"></i>Dashboard</a>
                                     </li>
                                     <li class="breadcrumb-item active" aria-current="page">
-                                    	<a href="#">Favoris</a>
+                                    	<a href="#">Historique des commandes</a>
                                     </li>
                                 </ol>
                             </nav>
@@ -111,43 +112,23 @@ ArrayList<FavorisBean> favoris = (ArrayList) request.getAttribute("favoris");
                             <thead>
                                 <tr>
                                     <!-- <th scope="col">Model</th> -->
-                                    <th>Produit</th>
-                                    <th>Catégorie</th>
-                                    <th>Sous-catégorie</th>
-                                    <th>Nom</th>
-                                    <th>Stock</th>
-                                    <th>Prix Unitaire</th>
-                                    <th class="text-center dt-no-sorting" >Actions</th> <!-- poubelle -->
+                                    <th>Date d’achat</th>
+                                    <th>Adresse de livraison</th>
+                                    <th>Montant</th>
+                                    <th class="text-center dt-no-sorting" >Détail</th> <!-- poubelle -->
                                 </tr>
                             </thead>
                             <tbody>
                             
                             <%
-                            for ( FavorisBean p : favoris ) {
+                            for ( CommandesBean p : commandes ) {
                             %>
                                 <tr>
-                                    <td>
+                                    <%-- <td>
                                         <div class="cart-img">
                                             <img src="<%= p.getProduit().getImage() %>" alt="product" style="height: 120px; width: 120px;">
                                         </div>
-                                    </td>
-                                    <td>
-                                        <div class="cart-price text-center ">
-                                            <span><%= p.getProduit().getSous_categorie().getCategorie().getTitre() %></span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="cart-price text-center ">
-                                            <span><%= p.getProduit().getSous_categorie().getTitre() %></span>
-                                        </div>
-                                    </td>
-                                    <td class="td-width">
-                                        <div class="cart-description text-left pl-20">
-                                        	<a href="Produit_Card?id=<%= p.getProduit().getId() %>">
-                                            	<span><%= p.getProduit().getTitre() %></span>
-                                        	</a>
-                                        </div>
-                                    </td>
+                                    </td> --%>
                                     <%-- <td>
                                         <div class="cart-model">
                                             <span>Product-23</span>
@@ -157,24 +138,26 @@ ArrayList<FavorisBean> favoris = (ArrayList) request.getAttribute("favoris");
                                         <div class="product-number ">
                                         </div>
                                     </td> --%>
-                                    <td>
-                                        <div class="cart-price text-center ">
-                                            <span><%= p.getProduit().getStock() %></span>
+                                    
+                                    <td class="td-width">
+                                        <div class="cart-description text-left pl-20">
+                                            <span><% String d = DateManipulator.dateConvertToDDmmYYYY( p.getDate() ); %><%= d %></span>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="cart-price text-center ">
-                                            <span><%= p.getProduit().getPrix() %>€</span>
+                                    <td class="td-width">
+                                        <div class="cart-description text-left pl-20">
+                                            <span><%= p.getFk_adresse() %></span>
+                                        </div>
+                                    </td>
+                                    <td class="td-width">
+                                        <div class="cart-description text-left pl-20">
+                                            <span><%= p.getTotal() %>€</span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="cart-edit">
                                             <!-- <a href="#"> <i class="fas fa-pencil-alt"></i> </a> -->
-                                            <a class="btn btn-success btn-block" href="Produit_Card?id=<%= p.getProduit().getId() %>&qtePageProduit=1" >
-                                            	<i class="fa fa-shopping-cart"></i>
-											</a>
-                                            <a class="btn btn-primary btn-block" href="Produit_Card?id=<%= p.getProduit().getId() %>"><i class="fa-solid fa-eye"></i></i></a>
-                                            <a class="btn btn-danger btn-block" href="FavorisPage?idProduct=<%= p.getProduit().getId() %>"><i class="fas fa-trash-alt"></i></a>
+                                            <a class="btn btn-primary btn-block" href="Commande_Details?idCommande=<%= p.getId() %>"><i class="fa-solid fa-eye"></i></i></a>
                                         </div>
                                     </td>
                                 </tr>
