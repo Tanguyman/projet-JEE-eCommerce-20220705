@@ -126,7 +126,7 @@ public class FavorisDao {
 	}
 	
 	// DELETE
-	public void deleteByFk_prodAndFk_user (int fk_prod, int fk_user) {
+	public static void deleteByFk_prodAndFk_user (int fk_prod, int fk_user) {
 		try {
 			
 			PreparedStatement ps = Database.connexion

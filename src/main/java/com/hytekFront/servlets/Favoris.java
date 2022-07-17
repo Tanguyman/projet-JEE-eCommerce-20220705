@@ -44,7 +44,7 @@ public class Favoris extends HttpServlet {
 			FavorisDao fd = new FavorisDao();
 			
 			/*
-			 * Le User vient de la page d’accueil
+			 * Le User vient de la page index.jsp
 			 */
 			// Se connecter et persister le favoris
 			// en cliquant sur ajouter aux favoris
@@ -88,6 +88,14 @@ public class Favoris extends HttpServlet {
 				response.sendRedirect("Index");
 				
 			}
+			
+			/*
+			 * Le User vient de la page produits_List.jsp
+			 */
+			
+			/*
+			 * Le User vient de la page produits_Per_CategorieN0.jsp
+			 */
 		}
 	}
 

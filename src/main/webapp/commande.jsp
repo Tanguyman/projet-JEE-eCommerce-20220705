@@ -200,13 +200,13 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("client");
                         <div class="row">
                             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-xl-1 offset-lg-1 offset-md-1 offset-sm-1 offset-1">
                                 <div class="checkout-product-detalis pt-40 pb-45">
-                                    <div class="product-title pb-5">
+                                    <!-- <div class="product-title pb-5">
                                         <span>Product</span>
                                         <span class="float-right">Total</span>
                                     </div>
-                                    <hr>
+                                    <hr> -->
         
-                                    <ul class="product-total pt-20 pb-15">
+                                    <ul class="product-total pb-15"> 
                                     <%
                                     for ( Panier_DetailsBean pdB : panier.getPanierDetails() ) {
                                     %>

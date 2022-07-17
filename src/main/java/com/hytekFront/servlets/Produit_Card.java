@@ -2,7 +2,6 @@ package com.hytekFront.servlets;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.util.ArrayList;
 
 import com.hytekFront.beans.CommentairesBean;
 import com.hytekFront.beans.PanierBean;
@@ -50,7 +49,7 @@ public class Produit_Card extends HttpServlet {
 		VisitesDao vd = new VisitesDao();
 		
 		ProduitsBean pb = pd.getById(id);
-		ArrayList<ProduitsBean> pbCol = pd.getAllProductsForProduitsList( pb.getFk_sous_categorie() );
+		//ArrayList<ProduitsBean> pbCol = pd.getAllProductsForProduitsList( pb.getFk_sous_categorie() );
 		
 		// VISITES
 		if ( (boolean) session.getAttribute("isConnected") ) {
@@ -120,17 +119,6 @@ public class Produit_Card extends HttpServlet {
 			CommentairesBean commentaireUser = cd.getByFk_prodAndFk_user(id, userId);
 			CommentairesBean cb = new CommentairesBean();
 			
-			// MODIFIER SI
-			if ( commentaireUser != null ) {
-
-				System.out.println(commentaireUser);
-				cb.setId(commentaireUser.getId());
-				note=commentaireUser.getNote();
-				story=commentaireUser.getCommentaire();
-				request.setAttribute("commentaireUser", commentaireUser);
-				
-			}
-			
 			// AJOUTER ou MAJ LE COMMENTAIRE
 			if ( request.getParameter("commentaireForm") != null ) {
 				
@@ -153,11 +141,23 @@ public class Produit_Card extends HttpServlet {
 					
 				}
 			}
+			
+			// MODIFIER SI
+			if ( commentaireUser != null ) {
+
+				System.out.println(commentaireUser);
+				cb.setId(commentaireUser.getId());
+				note=commentaireUser.getNote();
+				story=commentaireUser.getCommentaire();
+				request.setAttribute("commentaireUser", commentaireUser);
+				
+			}
+						
 		}
 		
 //		request.setAttribute("produit", pb); // les commentaires ne se mettent pas à jour
 		request.setAttribute("produit", pd.getById(id)); // commentaires se MAJ
-		request.setAttribute("produitsList", pbCol);
+		request.setAttribute("produitsList", pd.getAllProductsForProduitsList( pb.getFk_sous_categorie() ));
 		request.setAttribute("note", note);
 		request.setAttribute("story", story);
 		request.getRequestDispatcher("produit_Card.jsp").forward(request, response);

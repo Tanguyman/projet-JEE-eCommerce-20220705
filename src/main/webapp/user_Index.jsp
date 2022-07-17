@@ -218,7 +218,7 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
 		%>
 			<div class="row">
 				<div class="mx-auto">
-					<a href="Utilisateurs_Index" class="btn btn-outline-primary" role="button" ">Liste des favoris</a>
+					<a href="FavorisPage" class="btn btn-outline-primary" role="button" ">Liste des favoris</a>
 					<a href="Utilisateurs_Index" class="btn btn-outline-secondary" role="button" >Historique des commandes</a>
 					<a href="Utilisateurs_Index" class="btn btn-outline-info" role="button" >Liste des commentaires</a>
 				</div>	
@@ -535,7 +535,7 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
 
 	<!-- BEGIN PAGE LEVEL SCRIPTS -->
    	<script src="assets/plugins/table/datatable/datatables.js"></script>
-   	<!-- TABLEAU PERMETTANT D’AFFICHER LE NOMBRE DE COMMANDES -->
+   	<!-- TABLEAU PERMETTANT D’AFFICHER LES ADRESSES DE LIVRAISON -->
     <script>
 	    $(document).ready(function() {
             var table = $('#clicAdresse-search').DataTable({

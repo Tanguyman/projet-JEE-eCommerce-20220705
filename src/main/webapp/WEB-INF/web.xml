@@ -169,4 +169,14 @@
     <servlet-name>Utilisateurs_UpdatePassword</servlet-name>
     <url-pattern>/Utilisateurs_UpdatePassword</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FavorisPage</display-name>
+    <servlet-name>FavorisPage</servlet-name>
+    <servlet-class>com.hytekFront.servlets.FavorisPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FavorisPage</servlet-name>
+    <url-pattern>/FavorisPage</url-pattern>
+  </servlet-mapping>
 </web-app>

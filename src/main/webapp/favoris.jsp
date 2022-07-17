@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@page import="com.hytekFront.beans.PanierBean"%>
-<%@page import="com.hytekFront.beans.Panier_DetailsBean"%>
+<%@page import="com.hytekFront.beans.FavorisBean"%>
 <%
-PanierBean panier = (PanierBean) session.getAttribute("panier");
+ArrayList<FavorisBean> favoris = (ArrayList) request.getAttribute("favoris");
 %>
 <!DOCTYPE html>
 <html lang="fr">
@@ -21,7 +20,7 @@ PanierBean panier = (PanierBean) session.getAttribute("panier");
 	<script src="https://kit.fontawesome.com/bff2375f4b.js" crossorigin="anonymous"></script>
 	
     <!-- title -->
-    <title>Panier</title>
+    <title>Favoris</title>
 
     <!-- stylesheets -->
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
@@ -34,6 +33,11 @@ PanierBean panier = (PanierBean) session.getAttribute("panier");
     <link rel="stylesheet" href="assets/css/mean-menu.css">
     <link rel="stylesheet" href="assets/css/default.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
+	<!-- DATATABLE -->
+	<link rel="stylesheet" type="text/css" href="assets/plugins/table/datatable/datatables.css">
+	<link rel="stylesheet" type="text/css" href="assets/plugins/table/datatable/dt-global_style.css">
+	<link rel="stylesheet" type="text/css" href="assets/plugins/table/datatable/custom_dt_multiple_tables.css">
 
 </head>
 
@@ -78,7 +82,7 @@ PanierBean panier = (PanierBean) session.getAttribute("panier");
                                     <li class="breadcrumb-item"><a href="Index"> <i
                                                 class="fas fa-home "></i>Page d’accueil</a></li>
                                     <li class="breadcrumb-item active" aria-current="page"><a
-                                            href="#">Panier</a></li>
+                                            href="#">Favoris</a></li>
                                 </ol>
                             </nav>
                         </div>
@@ -98,22 +102,23 @@ PanierBean panier = (PanierBean) session.getAttribute("panier");
             <div class="row">
                 <div class="col-xl-12">
                     <div class="cart-table table-responsive">
-                        <table class="table table-bordered text-center">
+                        <table id="clicFavoris-search" class="display"> <!-- table table-bordered text-center -->
                             <thead>
                                 <tr>
-                                    <th scope="col">Produit</th>
-                                    <th scope="col">Nom</th>
                                     <!-- <th scope="col">Model</th> -->
-                                    <th scope="col">Quantite</th>
-                                    <th scope="col">Prix Unitaire</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col">Retirer</th> <!-- poubelle -->
+                                    <th>Produit</th>
+                                    <th>Catégorie</th>
+                                    <th>Sous-catégorie</th>
+                                    <th>Nom</th>
+                                    <th>Stock</th>
+                                    <th>Prix Unitaire</th>
+                                    <th class="text-center dt-no-sorting" >Actions</th> <!-- poubelle -->
                                 </tr>
                             </thead>
                             <tbody>
                             
                             <%
-                            for ( Panier_DetailsBean p : panier.getPanierDetails() ) {
+                            for ( FavorisBean p : favoris ) {
                             %>
                                 <tr>
                                     <td>
@@ -121,45 +126,50 @@ PanierBean panier = (PanierBean) session.getAttribute("panier");
                                             <img src="<%= p.getProduit().getImage() %>" alt="product" style="height: 120px; width: 120px;">
                                         </div>
                                     </td>
-                                    <td class="td-width">
-                                        <div class="cart-description text-left pl-20">
-                                            <a href="Produit_Card?id=<%= p.getProduit().getId() %>"><span><%= p.getProduit().getTitre() %></span></a>
-                                            <!-- <p>Lorem Ipsum is simply dummy text of the type setting.</p> -->
+                                    <td>
+                                        <div class="cart-price text-center ">
+                                            <span><%= p.getProduit().getSous_categorie().getCategorie().getTitre() %></span>
                                         </div>
                                     </td>
-                                    <!-- <td>
+                                    <td>
+                                        <div class="cart-price text-center ">
+                                            <span><%= p.getProduit().getSous_categorie().getTitre() %></span>
+                                        </div>
+                                    </td>
+                                    <td class="td-width">
+                                        <div class="cart-description text-left pl-20">
+                                        	<a href="Produit_Card?id=<%= p.getProduit().getId() %>">
+                                            	<span><%= p.getProduit().getTitre() %></span>
+                                        	</a>
+                                        </div>
+                                    </td>
+                                    <%-- <td>
                                         <div class="cart-model">
                                             <span>Product-23</span>
                                         </div>
-                                    </td> -->
+                                    </td>
                                     <td>
                                         <div class="product-number ">
-                                            <div class="quty">
-	                                            <form method="post" action="Panier">
-	                                            	<input type="hidden" name="idProduit" value="<%= p.getProduit().getId() %>">
-	                                                <input class="qty" type="number" value="<%= p.getQuantite() %>" min="1" max="<%= p.getProduit().getStock() %>" style="text-align:center;" name="quantite"  >
-	                                                <button type="submit" class="btn btn-primary" >Modifier</button>                                       
-                                            	</form>
-                                            </div>
+                                        </div>
+                                    </td> --%>
+                                    <td>
+                                        <div class="cart-price text-center ">
+                                            <span><%= p.getProduit().getStock() %></span>
                                         </div>
                                     </td>
                                     <td>
-                                        <div class="cart-price">
+                                        <div class="cart-price text-center ">
                                             <span><%= p.getProduit().getPrix() %>€</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="cart-price">
-                                            <span>
-                                            	<% double t = p.getProduit().getPrix() * p.getQuantite(); %>
-                                            	<%= t %>€
-                                            </span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="cart-edit">
                                             <!-- <a href="#"> <i class="fas fa-pencil-alt"></i> </a> -->
-                                            <a class="btn btn-danger btn-block" href="Panier?id=<%= p.getProduit().getId() %>"><i class="fas fa-trash-alt"></i></a>
+                                            <a class="btn btn-success btn-block" href="Produit_Card?id=<%= p.getProduit().getId() %>&qtePageProduit=1" >
+                                            	<i class="fa fa-shopping-cart"></i>
+											</a>
+                                            <a class="btn btn-primary btn-block" href="Produit_Card?id=<%= p.getProduit().getId() %>"><i class="fa-solid fa-eye"></i></i></a>
+                                            <a class="btn btn-danger btn-block" href="FavorisPage?idProduct=<%= p.getProduit().getId() %>"><i class="fas fa-trash-alt"></i></a>
                                         </div>
                                     </td>
                                 </tr>
@@ -180,66 +190,6 @@ PanierBean panier = (PanierBean) session.getAttribute("panier");
                         </table>
                     </div>
                 </div>
-            </div>
-            <div class="product-cart pt-35">
-                <div class="row justify-content-center justify-content-lg-start">
-                    <!-- <div class="col-xl-4 col-lg-4 col-md-8 col-sm-9 col-12">
-                        <div class="cart-wrapper pl-20 pt-30 pr-20 pb-30">
-                            <div class="section-title">
-                                <h6>
-                                    Estimate Shopping And Tax
-                                </h6>
-                            </div>
-                            <div class="country pt-15">
-                                <span>Country</span>
-                                <input type="text" placeholder="United States">
-                            </div>
-                            <div class="state pt-15">
-                                <span>State/Province</span>
-                                <input type="text" placeholder="Please select region, state or province">
-                            </div>
-                            <div class="zip-code pt-15 pb-20">
-                                <span>Zip/Postal Code</span>
-                                <input type="text">
-                            </div>
-                            <div class="table-button d-flex justify-content-end">
-                                <a href="#" class="b-btn  pl-20 pr-20 pb-15 pt-15">GET QUOTE</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-8 col-sm-9 col-12">
-                        <div class="cart-wrapper pl-20 pt-30 pr-20 pb-30 mt-50 mb-50 mt-lg-0 mb-lg-0">
-                            <div class="section-title">
-                                <h6>
-                                    Discount Code
-                                </h6>
-                            </div>
-                            <div class="country pt-15 pb-20">
-                                <span class="pb-10">Enter your coupon code if you have one.</span>
-                                <input type="text" >
-                            </div>
-                            <div class="table-button d-flex justify-content-end ">
-                                <a href="#" class="b-btn  pt-15 pb-15 pr-30 pl-30 ">APPLY</a>
-                            </div>
-
-                        </div>
-                    </div> -->
-                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-12">
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-8 col-sm-9 col-12">
-                        <div class="cart-wrapper pl-20 pt-30 pr-20 pb-50">
-                            <div class="cart-price-area text-right">
-                                <!-- <p>Subtotal <span class="d-inline-block"> $999.00</span></p> -->
-                                <p>Total  <span class="d-inline-block">${ panier.total() }€</span></p>
-                            </div>
-
-                            <div class="table-button d-flex justify-content-end pt-20">
-                                <a href="Commandes" class="b-btn  pt-20 pb-20 pr-50 pl-50 ">COMMANDER</a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>    
             </div>
             <div class="product-cart pt-35">
             </div>
@@ -272,11 +222,32 @@ PanierBean panier = (PanierBean) session.getAttribute("panier");
     <script src="assets/js/vendor/wow-1.3.0.min.js"></script>  
     <script src="assets/js/main.js"></script>
 
-	<script type="text/javascript">
-		document.getElementById("panierButton").onclick = function() {
-			document.getElementById("panierForm").submit();
-		}
-	</script>
+	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+   	<script src="assets/plugins/table/datatable/datatables.js"></script>
+   	<!-- TABLEAU PERMETTANT D’AFFICHER LES FAVORIS -->
+    <script>
+	    $(document).ready(function() {
+            var table = $('#clicFavoris-search').DataTable({
+             	"dom": 
+            		"<'dt--top-section'<'row'<'col-12 col-sm-6 d-flex justify-content-sm-start justify-content-center'l><'col-12 col-sm-6 d-flex justify-content-sm-end justify-content-center mt-sm-0 mt-3'f>>>" +
+            		"<'table-responsive'tr>" + 
+            		"<'dt--bottom-section d-sm-flex justify-content-sm-between text-center'<'dt--pages-count  mb-sm-0 mb-3'i><'dt--pagination'p>>",
+                "oLanguage": {
+                    "oPaginate": { 
+                 		"sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' 
+                 	},
+					"sInfo": "Showing page _PAGE_ of _PAGES_",
+					"sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+					"sSearchPlaceholder": "Search...",
+					"sLengthMenu": "Results :  _MENU_",
+                },
+            	"stripeClasses": [],
+                "lengthMenu": [5, 10, 20, 40, 80],
+                "pageLength": 5
+            });             
+        });
+    </script>
+
 </body>
 
 </html>
