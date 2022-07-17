@@ -168,24 +168,29 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
                 <!-- 
         	<div class="row justify-content-center justify-content-md-start"> 
                 <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10"> -->
+                
+                
                     <div class="billing-detalis check-border ">
                     	<div class="row">
                             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-xl-1 offset-lg-1 offset-md-1 offset-sm-1 offset-1">
                             
-                            	<button type="submit" class="btn btn-warning <%-- btn-block --%>">Modifier votre mot de passe</button>
-                            	
+	                            <button type="submit" class="btn btn-warning <%-- btn-block --%>">Modifier votre mot de passe</button>
+	                                                    	
                             	<button type="submit" class="btn btn-light">Historique des commandes</button>
                                 	
                                 <button type="submit" class="btn btn-info">Liste des commentaires</button>
                                 	
                                 <a class="btn btn-primary" href="" role="button">Liste des favoris</a>
+
 							</div>
 						</div>
 					</div>
 				<!-- </div> 
 			</div>
 				-->
-			<div class="row justify-content-center justify-content-md-start"> 
+				
+			<div class="row">  <!-- justify-content-center justify-content-md-start --> 
+			
                 <div class="col-xl-3 col-lg-3 col-md-10 col-sm-12">
                 	<div class="row">
                 		
@@ -195,28 +200,46 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-10 col-sm-10">
                 	<div class="row">
+                		
+                			<button type="submit" class="btn btn-warning btn-block">Historique des commandes</button>
+                		
+                	</div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-10 col-sm-10">
+                	<div class="row">
                 		<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-xl-1 offset-lg-1 offset-md-1 offset-sm-1 offset-1">
-                			<button type="submit" class="btn btn-warning <%-- btn-block --%>">Modifier votre mot de passe</button>
+                			<button type="submit" class="btn btn-warning <%-- btn-block --%>">Liste des commentaires</button>
                 		</div>
                 	</div>
                 </div>
                 <div class="col-xl-3 col-lg-3 col-md-10 col-sm-10">
                 	<div class="row">
                 		<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-xl-1 offset-lg-1 offset-md-1 offset-sm-1 offset-1">
-                			<button type="submit" class="btn btn-warning <%-- btn-block --%>">Modifier votre mot de passe</button>
-                		</div>
-                	</div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-10 col-sm-10">
-                	<div class="row">
-                		<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-xl-1 offset-lg-1 offset-md-1 offset-sm-1 offset-1">
-                			<button type="submit" class="btn btn-warning btn-block">Modifier votre mot de passe</button>
+                			<button type="submit" class="btn btn-warning btn-block">Liste des favoris</button>
                 		</div>
                 	</div>
                 </div>
 			</div>
-                
-                
+			
+			<div class="row">
+				<div class="col-4">
+					<a href="Utilisateurs_Index" class="btn btn-outline-warning btn-block" role="button">Modifier votre mot de passe</a>
+				</div>
+				
+				<div class="col-8">
+					<a href="Utilisateurs_Index" class="btn btn-outline-primary" role="button">Liste des favoris</a>
+					<a href="Utilisateurs_Index" class="btn btn-secondary" role="button">Historique des commandes</a>
+					<a href="Utilisateurs_Index" class="btn btn-outline-info" role="button">Liste des commentaires</a>
+				</div>
+				
+				
+			</div> 
+			
+			
+			<div class="row pt-30">
+			 
+			</div>
+			
             <div class="row justify-content-center justify-content-md-start"> 
                 <div class="col-xl-4 col-lg-4 col-md-10 col-sm-10">
                     <div class="billing-detalis check-border ">
@@ -325,6 +348,7 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
                     </div> -->
                 </div>
                 <div class="col-xl-8 col-lg-8 col-md-10 col-sm-10">
+                
                     <div class="buyer-info check-border pb-30 mb-50 mb-md-0">
                     <%
                     if ( (boolean) session.getAttribute("isConnected") ) {
@@ -349,7 +373,7 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
 	                                <thead>
 	                                    <tr>
 	                                        <th>Adresse</th>
-	                                        <th>Code postal</th>
+	                                        <th>CP</th>
 	                                        <th>Ville</th>
 	                                        <th>Pays</th>
 	                                        <th class="text-center dt-no-sorting">Actions</th>
@@ -376,7 +400,7 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
 			                        			<%-- <button data-bs-toggle="modal" data-bs-target="#comment-edit<%=i%>" class="btn-primary btn-sm btn-block">Modifier</button> --%>
 			                        			<button type="submit" name="updateAddress" class="btn btn-primary btn-sm">Modifier</button><!-- class="btn btn-outline-primary btn-sm -->
 		                                        <!-- <button onclick="window.location.href='Index';" class="btn-danger btn-sm btn-block">Supprimer</button> -->
-		                                        <button onclick="window.location.href='Utilisateurs_Index?deleteAddress=<%= a.getId() %>';" class="btn btn-danger btn-sm">Éffacer</button>
+		                                        <a href="Utilisateurs_Index?deleteAddress=<%= a.getId() %>" class="btn btn-danger btn-sm" role="button">Éffacer</a>
 											</td>
 			                        	</tr>
 			                        <%
@@ -415,30 +439,8 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
                         </form> --%>
                     
 					<%                        
-                    } else {
+                    }
                     %>
-                        <div class="section-title">
-                            <h6>vous n’êtes pas connecté(e).</h6>
-                            <!-- <h6 class="float-right">Login Here</h6> -->
-                        </div>
-                        <!-- <form action="#" class="pl-45 pt-50 pr-100" > -->
-                        
-                        <div class="pl-45 pt-25" > <!-- pr-100 -->	
-                        </div>
-                        
-                        <div class="pl-45 pt-25 pr-45" > <!-- pr-100 -->
-                        	<p class="alert alert-danger" role="alert">Vous devez créer un compte ou vous connectez pour passer commande.</p>
-                        </div>
-                        
-                        <div class="pl-45 pt-25" > <!-- pr-100 -->	
-                        </div>
-                        
-                        <div class="d-grid gap-2 col-6 mx-auto">
-                        	<a href="ConnexionInscription?loginFrom=commandes" class="btn btn-danger btn-sm btn-block ">Créer un compte / Se connecter</a>
-                        </div>  
-					<%
-					}
-					%>
                     </div>
                 </div>
                 <div class="col-xl-12">

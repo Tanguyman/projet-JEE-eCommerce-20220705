@@ -92,4 +92,28 @@ public class Details_CommandeDao {
 			
 		}
 	}
+	
+	// DELETE
+	public void deleteById (int id) {
+		
+		try {
+
+			PreparedStatement ps = Database.connexion
+					.prepareStatement("DELETE FROM details_commande WHERE id=?");
+			
+			ps.setInt(1, id);
+
+			ps.executeUpdate();
+
+			System.out.println("DELETED OK");
+			
+		} catch (Exception ex) {
+			
+			ex.printStackTrace();
+			System.out.println("DELETED NO");
+			
+		}
+		
+	}
+	
 }

@@ -47,34 +47,37 @@ public class Utilisateurs_Index extends HttpServlet {
 		if ( (boolean) session.getAttribute("isConnected") ) {
 			
 			int idUserSession = (int) session.getAttribute("userId");
-			
-			// SÉCURITÉ 2
-//			if ( idUserForm == idUserSession) {
 				
-				Database.Connect();
-				UtilisateursDao ud = new UtilisateursDao();
+			Database.Connect();
+			UtilisateursDao ud = new UtilisateursDao();
 //				AdressesDao ad = new AdressesDao();
 //				CommandesDao cd = new CommandesDao();
-				CommentairesDao cd = new CommentairesDao();
+			CommentairesDao cd = new CommentairesDao();
 //				Details_CommandeDao dcd = new Details_CommandeDao();
-				FavorisDao fd = new FavorisDao();
+			FavorisDao fd = new FavorisDao();
 //				ProduitsDao pd = new ProduitsDao();
-				
-				UtilisateursBean ub = ud.getById(idUserSession);
-				System.out.println(ub);
-				
-				request.setAttribute("user", ub);
-				request.getRequestDispatcher("user_Index.jsp").forward(request, response);
-				
-//			}
 			
+			UtilisateursBean ub = ud.getById(idUserSession);
+			System.out.println(ub);
+			
+			if ( request.getParameter("deleteAddress") != null ) {
+				
+				int id = Integer.parseInt( request.getParameter( "deleteAddress" ) );
+				System.out.println( id );
+				
+				AdressesDao.deleteById( id );
+				
+			}
+			
+			request.setAttribute("user", ub);
+			request.getRequestDispatcher("user_Index.jsp").forward(request, response);
+				
 		} else {
 			
 			System.out.println("Sécurité Ok");
 			
 		}
-		
-		
+			
 	}
 
 	/**
@@ -250,8 +253,11 @@ public class Utilisateurs_Index extends HttpServlet {
 				System.out.println(ab);
 				
 				AdressesDao.save(ab);
-				request.getRequestDispatcher("user_Index.jsp").forward(request, response);
+				
 			}
+			
+			request.setAttribute("user", ub);
+			request.getRequestDispatcher("user_Index.jsp").forward(request, response);
 			
 		}
 

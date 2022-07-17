@@ -93,5 +93,28 @@ public class AdressesDao {
 		}
 		
 	}
+	
+	// DELETE
+	public static void deleteById (int id) {
+		
+		try {
+
+			PreparedStatement ps = Database.connexion
+					.prepareStatement("DELETE FROM adresses_livraison WHERE id=?");
+			
+			ps.setInt(1, id);
+
+			ps.executeUpdate();
+
+			System.out.println("DELETED OK");
+			
+		} catch (Exception ex) {
+			
+			ex.printStackTrace();
+			System.out.println("DELETED NO");
+			
+		}
+		
+	}
 		
 }
