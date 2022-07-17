@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@page import="com.hytekFront.beans.CommandesBean"%>
+<%@page import="com.hytekFront.beans.Details_CommandeBean"%>
 <%@page import="com.hytekFront.tools.DateManipulator"%>
 <%
-ArrayList<CommandesBean> commandes = (ArrayList) request.getAttribute("commandes");
+ArrayList<Details_CommandeBean> commandes = (ArrayList) request.getAttribute("commandes");
 %>
 <!DOCTYPE html>
 <html lang="fr">
@@ -21,7 +21,7 @@ ArrayList<CommandesBean> commandes = (ArrayList) request.getAttribute("commandes
 	<script src="https://kit.fontawesome.com/bff2375f4b.js" crossorigin="anonymous"></script>
 	
     <!-- title -->
-    <title>Mes Commandes</title>
+    <title>Détails Commande</title>
 
     <!-- stylesheets -->
     <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
@@ -86,8 +86,11 @@ ArrayList<CommandesBean> commandes = (ArrayList) request.getAttribute("commandes
                                     <li class="breadcrumb-item">
                                     	<a href="Utilisateurs_Index"></i>Dashboard</a>
                                     </li>
+                                    <li class="breadcrumb-item" aria-current="page">
+                                    	<a href="CommandesHistorique">Historique des commandes</a>
+                                    </li>
                                     <li class="breadcrumb-item active" aria-current="page">
-                                    	<a href="#">Historique des commandes</a>
+                                    	<a href="#">Détails commande</a>
                                     </li>
                                 </ol>
                             </nav>
@@ -112,16 +115,16 @@ ArrayList<CommandesBean> commandes = (ArrayList) request.getAttribute("commandes
                             <thead>
                                 <tr>
                                     <!-- <th scope="col">Model</th> -->
-                                    <th>Date d’achat</th>
-                                    <th>Adresse de livraison</th>
-                                    <th>Montant</th>
+                                    <th>Produit</th>
+                                    <th>Quantité</th>
+                                    <th>Prix</th>
                                     <th class="text-center dt-no-sorting" >Détail</th> <!-- poubelle -->
                                 </tr>
                             </thead>
                             <tbody>
                             
                             <%
-                            for ( CommandesBean p : commandes ) {
+                            for ( Details_CommandeBean p : commandes ) {
                             %>
                                 <tr>
                                     <%-- <td>
@@ -141,23 +144,23 @@ ArrayList<CommandesBean> commandes = (ArrayList) request.getAttribute("commandes
                                     
                                     <td class="td-width">
                                         <div class="cart-description text-left pl-20">
-                                            <span><% String d = DateManipulator.dateConvertToDDmmYYYY( p.getDate() ); %><%= d %></span>
+                                            <span><%= p.getFk_produit() %></span>
                                         </div>
                                     </td>
                                     <td class="td-width">
                                         <div class="cart-description text-left pl-20">
-                                            <span><%= p.getFk_adresse() %></span>
+                                            <span><%= p.getQte() %></span>
                                         </div>
                                     </td>
                                     <td class="td-width">
                                         <div class="cart-description text-left pl-20">
-                                            <span><%= p.getTotal() %>€</span>
+                                            <span><%= p.getPrix() %>€</span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="cart-edit">
                                             <!-- <a href="#"> <i class="fas fa-pencil-alt"></i> </a> -->
-                                            <a class="btn btn-primary btn-block" href="CommandesHistoriqueDetails?idCommande=<%= p.getId() %>"><i class="fa-solid fa-eye"></i></i></a>
+                                            <a class="btn btn-primary btn-block" href="Commande_Details?idCommande=<%= p.getId() %>"><i class="fa-solid fa-eye"></i></i></a>
                                         </div>
                                     </td>
                                 </tr>

@@ -189,4 +189,14 @@
     <servlet-name>CommandesHistorique</servlet-name>
     <url-pattern>/CommandesHistorique</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CommandesHistoriqueDetails</display-name>
+    <servlet-name>CommandesHistoriqueDetails</servlet-name>
+    <servlet-class>com.hytekFront.servlets.CommandesHistoriqueDetails</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CommandesHistoriqueDetails</servlet-name>
+    <url-pattern>/CommandesHistoriqueDetails</url-pattern>
+  </servlet-mapping>
 </web-app>
