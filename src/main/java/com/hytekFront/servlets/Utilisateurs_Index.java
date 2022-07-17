@@ -293,6 +293,70 @@ public class Utilisateurs_Index extends HttpServlet {
 			request.getRequestDispatcher("user_Index.jsp").forward(request, response);
 			
 		}
+		
+		// BOUTON MODIFIER MOT DE PASSE
+		if (request.getParameter("buttonUpdatePassword") != null) {
+			System.out.println("buttonUpdatePassword");
+			
+			// Récupéerer les paramètres du Header (POST)
+			String passwordOld = request.getParameter("passwordOld");
+			String passwordNew = request.getParameter("passwordNew");
+			String passwordConfirmation = request.getParameter("passwordConfirmation");
+			System.out.println(passwordNew);
+			
+			// TEST DE SÉCURITÉ
+			boolean isUserValide = ub.getPassword().equals(passwordOld); // @@11aaAA
+			boolean isPasswordValide = RegexValidator.passwordValidator(passwordNew);
+			boolean arePasswordsEquals = passwordNew.equals(passwordConfirmation);
+			System.out.println("isUserValide : " + isUserValide);
+			System.out.println("isPasswordValide : " + isPasswordValide);
+			System.out.println("arePasswordsEquals : " + arePasswordsEquals);
+			
+			if (isUserValide && isPasswordValide && arePasswordsEquals) {
+				
+				ub.setPassword(passwordConfirmation);
+				UtilisateursDao.save(ub);
+
+				String messagePasswordUpdated = "Votre mot de passe a bien été modifié.";
+				
+				request.setAttribute("messagePasswordUpdated", messagePasswordUpdated);
+				request.setAttribute("user", ud.getById( idUserSession ));
+				request.getRequestDispatcher("user_Index.jsp").forward(request, response);
+				
+			} else {
+				
+				if ( !isUserValide ) {
+					
+					String messageNotUserPassword = "Ce n’est pas Votre ancien mot de passe.";
+					request.setAttribute("messageNotUserPassword", messageNotUserPassword);
+					
+				}
+				
+				if ( !isPasswordValide ) {
+					
+					String messageInvalidPassword = "Politique de sécurité concernant les mots de passe :<br>"
+							+ "- au moins un chiffre <br>"
+							+ "- au moins une lettre minuscule <br>"
+							+ "- au moins une lettre majuscule <br>"
+							+ "- au moins un caractère spécial @ # $ % ^ & + = <br>"
+							+ "- minimum 8 caractères <br>"
+							+ "- aucun espace";
+					request.setAttribute("messageInvalidPassword", messageInvalidPassword);
+					
+				}
+				
+				if (!arePasswordsEquals) {
+					
+					String messagePasswordNotEqual = "Les mots de passe saisis ne sont pas identiques.";
+					request.setAttribute("messagePasswordNotEqual", messagePasswordNotEqual);
+					
+				}
+				
+				request.setAttribute("user", ud.getById( idUserSession ));
+				request.getRequestDispatcher("user_Index.jsp").forward(request, response);
+				
+			}
+		}
 
 	}
 

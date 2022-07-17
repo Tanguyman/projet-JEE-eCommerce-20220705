@@ -164,23 +164,65 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
 		<%
 		}
         %>
-			
+		<%
+		if(request.getAttribute("messagePasswordUpdated") != null) {
+		%>
+	    	<div class="row">
+	   			<div class="col-lg-12">
+	   				<div class="alert alert-success text-center" role="alert">
+	    				<%=request.getAttribute("messagePasswordUpdated")%>
+	    			</div>
+	    		</div>
+	    	</div>
+		<%
+		}
+		%>
+		<%
+		if(request.getAttribute("messageInvalidPassword") != null) {
+		%>
+	    	<div class="row">
+	   			<div class="col-lg-12">
+	   				<div class="alert alert-danger text-center" role="alert">
+	    				<%=request.getAttribute("messageInvalidPassword")%>
+	    			</div>
+	    		</div>
+	    	</div>
+		<%
+		}
+		%>
+		<%
+		if(request.getAttribute("messagePasswordNotEqual") != null) {
+		%>
+	    	<div class="row">
+	   			<div class="col-lg-12">
+	   				<div class="alert alert-danger text-center" role="alert">
+	    				<%=request.getAttribute("messagePasswordNotEqual")%>
+	    			</div>
+	    		</div>
+	    	</div>
+		<%
+		}
+		%>
+		<%
+		if(request.getAttribute("messageNotUserPassword") != null) {
+		%>
+	    	<div class="row">
+	   			<div class="col-lg-12">
+	   				<div class="alert alert-danger text-center" role="alert">
+	    				<%=request.getAttribute("messageNotUserPassword")%>
+	    			</div>
+	    		</div>
+	    	</div>
+		<%
+		}
+		%>
 			<div class="row">
-				<div class="col-4">
-					<a href="Utilisateurs_Index" class="btn btn-outline-warning btn-block" role="button">Modifier votre mot de passe</a>
-				</div>
-				
-				<div class="col-8 mx-auto">
 				<div class="mx-auto">
-					<a href="Utilisateurs_Index" class="btn btn-outline-primary" role="button" style="width: 250px;">Liste des favoris</a>
-					<a href="Utilisateurs_Index" class="btn btn-secondary" role="button" style="width: 250px;">Historique des commandes</a>
-					<a href="Utilisateurs_Index" class="btn btn-outline-info" role="button" style="width: 250px;">Liste des commentaires</a>
-				</div>
-				</div>
-				
-				
+					<a href="Utilisateurs_Index" class="btn btn-outline-primary" role="button" ">Liste des favoris</a>
+					<a href="Utilisateurs_Index" class="btn btn-outline-secondary" role="button" >Historique des commandes</a>
+					<a href="Utilisateurs_Index" class="btn btn-outline-info" role="button" >Liste des commentaires</a>
+				</div>	
 			</div> 
-			
 			
 			<div class="row pt-30">
 			 
@@ -217,6 +259,7 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
 											</div>
 										</div>
 										<button type="submit" class="btn btn-primary btn-block" name="buttonEditProfile">Mettre à jour votre profil</button>
+										<a href="Utilisateurs_UpdatePassword" class="btn btn-warning btn-block" role="button">Modifier votre mot de passe</a>
 									</form>
                                 </div>
                             </div>

@@ -159,4 +159,14 @@
     <servlet-name>Utilisateurs_Index</servlet-name>
     <url-pattern>/Utilisateurs_Index</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Utilisateurs_UpdatePassword</display-name>
+    <servlet-name>Utilisateurs_UpdatePassword</servlet-name>
+    <servlet-class>com.hytekFront.servlets.Utilisateurs_UpdatePassword</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Utilisateurs_UpdatePassword</servlet-name>
+    <url-pattern>/Utilisateurs_UpdatePassword</url-pattern>
+  </servlet-mapping>
 </web-app>

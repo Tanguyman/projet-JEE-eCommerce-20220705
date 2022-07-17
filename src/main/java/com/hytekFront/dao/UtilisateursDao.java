@@ -10,7 +10,7 @@ import com.hytekFront.beans.UtilisateursBean;
 public class UtilisateursDao {
 	
 	// CREATE if !exist else UPDATE
-	public void save(UtilisateursBean o) {
+	public static void save(UtilisateursBean o) {
 		try {
 
 			if (o.getId() != 0) {
