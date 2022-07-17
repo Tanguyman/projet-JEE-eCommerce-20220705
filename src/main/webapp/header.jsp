@@ -82,10 +82,15 @@ PanierBean panier_tmp = (PanierBean) session.getAttribute("panier");
                                         <li><a href="ConnexionInscription?loginFrom=index"><i class="fa-solid fa-arrow-right-to-bracket p-1"></i>Connexion / Inscription</a></li>
                                         <%
                                         }
+                                    	if ( panier_tmp.countProduitsPanier() == 0 ) {
+                                    		
+                                    	} else {
                                         %>
-                                        <li><a href="#"><img src="assets/img/icon/bag.png" alt="" height="25px" class="align-top p-1">Pannier</a></li>
-                                        <li><a href="checkout-page.html"><i class="fa-solid fa-credit-card p-1"></i>Commande</a></li>
-
+                                        <li><a href="Panier"><img src="assets/img/icon/bag.png" alt="" height="25px" class="align-top p-1">Pannier</a></li>
+                                        <li><a href="Commandes"><i class="fa-solid fa-credit-card p-1"></i>Commande</a></li>
+                                        <%
+                                    	}
+                                        %>
                                     </ul>
                                 </div>
     <!-- =================Page Area Ends================= -->

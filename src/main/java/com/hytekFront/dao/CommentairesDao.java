@@ -188,6 +188,30 @@ public class CommentairesDao {
 		
 	}
 	
+	// DELETE
+	// Interdit sinon les commander n’ont plus d’adresse
+	public static void deleteById (int id) {
+		
+		try {
+
+			PreparedStatement ps = Database.connexion
+					.prepareStatement("DELETE FROM commentaires WHERE id=?");
+			
+			ps.setInt(1, id);
+
+			ps.executeUpdate();
+
+			System.out.println("DELETED OK");
+			
+		} catch (Exception ex) {
+			
+			ex.printStackTrace();
+			System.out.println("DELETED NO");
+			
+		}
+		
+	}
+	
 	// CALCULER LA MOYENNE DES ÉTOILES
 	public int avrScoreProduct(int id) {
 		

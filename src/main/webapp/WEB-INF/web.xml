@@ -199,4 +199,14 @@
     <servlet-name>CommandesHistoriqueDetails</servlet-name>
     <url-pattern>/CommandesHistoriqueDetails</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UtilisateursPageCommentaire</display-name>
+    <servlet-name>UtilisateursPageCommentaire</servlet-name>
+    <servlet-class>com.hytekFront.servlets.UtilisateursPageCommentaire</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UtilisateursPageCommentaire</servlet-name>
+    <url-pattern>/UtilisateursPageCommentaire</url-pattern>
+  </servlet-mapping>
 </web-app>
