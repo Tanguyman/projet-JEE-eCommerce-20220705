@@ -57,19 +57,25 @@ public class Utilisateurs_Index extends HttpServlet {
 			FavorisDao fd = new FavorisDao();
 //				ProduitsDao pd = new ProduitsDao();
 			
-			UtilisateursBean ub = ud.getById(idUserSession);
-			System.out.println(ub);
+//			UtilisateursBean ub = ud.getById(idUserSession);
 			
+			// BOUTON SUPPRIMER ADRESSE
+			// /!\ ne pas supprimer sinon plus d’adresse sur la commande / facture
 			if ( request.getParameter("deleteAddress") != null ) {
 				
 				int id = Integer.parseInt( request.getParameter( "deleteAddress" ) );
 				System.out.println( id );
 				
-				AdressesDao.deleteById( id );
+				AdressesDao ad = new AdressesDao();
+				
+				AdressesBean ab = ad.getById( id );
+				ab.setArchiver(true);
+				
+				AdressesDao.save( ab );
 				
 			}
 			
-			request.setAttribute("user", ub);
+			request.setAttribute( "user", ud.getById( idUserSession ) );
 			request.getRequestDispatcher("user_Index.jsp").forward(request, response);
 				
 		} else {
@@ -89,11 +95,12 @@ public class Utilisateurs_Index extends HttpServlet {
 		// doGet(request, response);
 		
 		HttpSession session = request.getSession(true);
+		int idUserSession = (int) session.getAttribute("userId");
 		
 //		Database.Connect();
 		
 		UtilisateursDao ud = new UtilisateursDao();
-		UtilisateursBean ub = ud.getById( (int) session.getAttribute("userId") );
+		UtilisateursBean ub = ud.getById( idUserSession );
 		
 		// BOUTON MODIFIER PROFILE
 		if (request.getParameter("buttonEditProfile") != null) {
@@ -169,7 +176,7 @@ public class Utilisateurs_Index extends HttpServlet {
 				}
 				
 				
-				request.setAttribute("user", ub);
+				request.setAttribute("user", ud.getById( idUserSession ));
 				request.getRequestDispatcher("user_Index.jsp").forward(request, response);
 				
 			} else {
@@ -228,7 +235,7 @@ public class Utilisateurs_Index extends HttpServlet {
 					
 				}
 				
-				request.setAttribute("user", ub);
+				request.setAttribute("user", ud.getById( idUserSession ));
 				request.getRequestDispatcher("user_Index.jsp").forward(request, response);
 			}
 			
@@ -240,7 +247,6 @@ public class Utilisateurs_Index extends HttpServlet {
 			for ( AdressesBean ab : ub.getAdresses() ) {
 				
 				String address = request.getParameter( ab.getAdresse() );
-				System.out.println(address);
 				String cp = request.getParameter( ab.getCp());
 				String ville = request.getParameter( ab.getVille() );
 				String pays = request.getParameter( ab.getPays() );
@@ -256,7 +262,34 @@ public class Utilisateurs_Index extends HttpServlet {
 				
 			}
 			
-			request.setAttribute("user", ub);
+			request.setAttribute("user", ud.getById( idUserSession ));
+			request.getRequestDispatcher("user_Index.jsp").forward(request, response);
+			
+		}
+		
+		// BOUTON AJOUTER ADRESSE
+		if (request.getParameter("buttonCreateAddress") != null ) {
+			
+			String address = request.getParameter( "address" );
+			String cp = request.getParameter( "cp" );
+			String ville = request.getParameter( "city" );
+			String pays = request.getParameter( "country" );
+
+			AdressesDao ad = new AdressesDao();
+			AdressesBean ab = new AdressesBean();
+			
+			ab.setFk_user(ub.getId());
+			ab.setAdresse(address);
+			ab.setCp(cp);
+			ab.setVille(ville);
+			ab.setPays(pays);
+			ab.setArchiver(false);
+			
+			System.out.println(ab);
+			
+			AdressesDao.save(ab);
+			
+			request.setAttribute("user", ud.getById( idUserSession ));
 			request.getRequestDispatcher("user_Index.jsp").forward(request, response);
 			
 		}

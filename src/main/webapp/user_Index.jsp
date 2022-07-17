@@ -164,72 +164,18 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
 		<%
 		}
         %>
-        
-                <!-- 
-        	<div class="row justify-content-center justify-content-md-start"> 
-                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10"> -->
-                
-                
-                    <div class="billing-detalis check-border ">
-                    	<div class="row">
-                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-xl-1 offset-lg-1 offset-md-1 offset-sm-1 offset-1">
-                            
-	                            <button type="submit" class="btn btn-warning <%-- btn-block --%>">Modifier votre mot de passe</button>
-	                                                    	
-                            	<button type="submit" class="btn btn-light">Historique des commandes</button>
-                                	
-                                <button type="submit" class="btn btn-info">Liste des commentaires</button>
-                                	
-                                <a class="btn btn-primary" href="" role="button">Liste des favoris</a>
-
-							</div>
-						</div>
-					</div>
-				<!-- </div> 
-			</div>
-				-->
-				
-			<div class="row">  <!-- justify-content-center justify-content-md-start --> 
-			
-                <div class="col-xl-3 col-lg-3 col-md-10 col-sm-12">
-                	<div class="row">
-                		
-                			<button type="submit" class="btn btn-warning btn-block>">Modifier votre mot de passe</button>
-                		
-                	</div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-10 col-sm-10">
-                	<div class="row">
-                		
-                			<button type="submit" class="btn btn-warning btn-block">Historique des commandes</button>
-                		
-                	</div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-10 col-sm-10">
-                	<div class="row">
-                		<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-xl-1 offset-lg-1 offset-md-1 offset-sm-1 offset-1">
-                			<button type="submit" class="btn btn-warning <%-- btn-block --%>">Liste des commentaires</button>
-                		</div>
-                	</div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-10 col-sm-10">
-                	<div class="row">
-                		<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-xl-1 offset-lg-1 offset-md-1 offset-sm-1 offset-1">
-                			<button type="submit" class="btn btn-warning btn-block">Liste des favoris</button>
-                		</div>
-                	</div>
-                </div>
-			</div>
 			
 			<div class="row">
 				<div class="col-4">
 					<a href="Utilisateurs_Index" class="btn btn-outline-warning btn-block" role="button">Modifier votre mot de passe</a>
 				</div>
 				
-				<div class="col-8">
-					<a href="Utilisateurs_Index" class="btn btn-outline-primary" role="button">Liste des favoris</a>
-					<a href="Utilisateurs_Index" class="btn btn-secondary" role="button">Historique des commandes</a>
-					<a href="Utilisateurs_Index" class="btn btn-outline-info" role="button">Liste des commentaires</a>
+				<div class="col-8 mx-auto">
+				<div class="mx-auto">
+					<a href="Utilisateurs_Index" class="btn btn-outline-primary" role="button" style="width: 250px;">Liste des favoris</a>
+					<a href="Utilisateurs_Index" class="btn btn-secondary" role="button" style="width: 250px;">Historique des commandes</a>
+					<a href="Utilisateurs_Index" class="btn btn-outline-info" role="button" style="width: 250px;">Liste des commentaires</a>
+				</div>
 				</div>
 				
 				
@@ -240,8 +186,8 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
 			 
 			</div>
 			
-            <div class="row justify-content-center justify-content-md-start"> 
-                <div class="col-xl-4 col-lg-4 col-md-10 col-sm-10">
+			<div class="row"> 
+                <div class="col-12">
                     <div class="billing-detalis check-border ">
                         <div class="section-title">
                             <h6>mon profil</h6>
@@ -250,52 +196,117 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
                             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-xl-1 offset-lg-1 offset-md-1 offset-sm-1 offset-1">
                                 <div class="checkout-product-detalis pt-40 pb-45">
 									<form method="post" action="Utilisateurs_Index">
-										<div class="form-group">
-											<label for="firstName">Nom</label>
-											<input type="text" class="form-control" id="firstName" 
-												name="firstName" value="<%= client.getNom() %>">
-										</div>
-										<div class="form-group">
-											<label for="lastName">Prenom</label>
-											<input type="text" class="form-control" id="lastName"
-												name="lastName" value="<%= client.getPrenom() %>">
-										</div>
-										<div class="form-group pb-10">
-											<label for="exampleInputEmail1">Adresse mail</label>
-											<input type="email" class="form-control" id="exampleInputEmail1"
-												name="mail" value="<%= client.getEmail() %>">
+										<div class="form-row">
+	    									<div class="form-group col-md-4">
+											
+												<label for="firstName">Nom</label>
+												<input type="text" class="form-control" id="firstName" 
+													name="firstName" value="<%= client.getNom() %>">
+											</div>
+										
+	    									<div class="form-group col-md-4">
+												<label for="lastName">Prenom</label>
+												<input type="text" class="form-control" id="lastName"
+													name="lastName" value="<%= client.getPrenom() %>">
+											</div>
+										
+	    									<div class="form-group col-md-4">
+												<label for="exampleInputEmail1">Adresse mail</label>
+												<input type="email" class="form-control" id="exampleInputEmail1"
+													name="mail" value="<%= client.getEmail() %>">
+											</div>
 										</div>
 										<button type="submit" class="btn btn-primary btn-block" name="buttonEditProfile">Mettre à jour votre profil</button>
 									</form>
-                                    <!-- <div class="product-title pb-5">
-                                        <span>Product</span>
-                                        <span class="float-right">Total</span>
-                                    </div>
-                                    <hr>
-        
-                                    <ul class="product-total pt-20 pb-15">
-                                        <li>
-                                        	<span></span>
-                                            <span class="float-right"></span>
-                                        </li>
-                                        <li>
-                                            <span class="pr-50">Size</span>
-                                            <span>Xl</span>
-                                        </li>
-                                        <li>
-                                            <span class="pr-50">Color</span>
-                                            <span>RED</span>
-                                        </li>
-                                        <li>
-                                            <span>Delivary Cost</span>
-                                            <span class="float-right">$9.0</span>
-                                        </li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="payment-method check-border mt-50 pb-20">
+                        <div class="section-title mb-40">
+                            <h6>
+                                Payment Methods
+                            </h6>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-xl-1 offset-lg-1 offset-md-1 offset-sm-1 offset-1">
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry lorem.</p>
+                                <div class="paymen-icon pb-40">
+                                    <ul class=" d-flex">
+                                        <li><a href="#"><i class="fab fa-cc-paypal" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-cc-stripe" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-cc-visa" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-cc-mastercard" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fab fa-cc-amex" aria-hidden="true"></i></a></li>
                                     </ul>
-                                    <hr>
-                                    <div class="oreder-total pt-10">
-                                        <span>TOTAL COMMANDE</span>
-                                        <span class="float-right">1234€</span>
-                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-xl-3 col-lg-4 col-md-5 col-sm-4 col-5">
+                                    <div class="payment-label text-right">
+                                        <label for="card-number">Card Number :</label>
+                                        <label for="cvv">CVV :</label>
+                                        <label for="month">Month:</label>
+                                        <label class="d-lg-none" for="year">Year:</label>
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-6 col-lg-7 col-md-7 col-sm-8 col-7">
+                                    <div class="payment-input mr-10 mr-lg-0">
+                                        <input type="text" id="card-number">
+                                        <input type="text" id="cvv">
+                                        <input class="d-block d-lg-inline" type="text" id="month">
+                                        <input class="float-lg-right" type="text" id="year">
+                                        <label class="d-none d-lg-inline-block float-lg-right pr-15 pt-5" for="year">Year:</label>
+                                        
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div> -->
+                </div>
+			</div>
+			
+			<div class="row pt-30">
+			 
+			</div>
+			
+            <div class="row justify-content-center justify-content-md-start"> 
+                <div class="col-xl-4 col-lg-4 col-md-10 col-sm-10">
+                    <div class="billing-detalis check-border ">
+                        <div class="section-title">
+                            <h6>Ajouter une adresse</h6>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10 offset-xl-1 offset-lg-1 offset-md-1 offset-sm-1 offset-1">
+                                <div class="checkout-product-detalis pt-40 pb-45">
+									<form method="post" action="Utilisateurs_Index">
+										<div class="form-group">
+											<label for="firstName">Adresse</label>
+											<input type="text" class="form-control" 
+												name="address" value="98 rue de Conflans">
+										</div>
+										<div class="form-group">
+											<label for="cp">Code postal</label>
+											<input type="text" class="form-control"
+												name="cp" value="95220">
+										</div>
+										<div class="form-group">
+											<label for="city">Ville</label>
+											<input type="text" class="form-control"
+												name="city" value="Herblay">
+										</div>
+										<div class="form-group">
+											<label for="country">Pays</label>
+											<input type="text" class="form-control"
+												name="country" value="France">
+										</div>
+										<button type="submit" class="btn btn-primary btn-block" name="buttonCreateAddress">Enregistrer</button>
+									</form>
                                 </div>
                             </div>
                         </div>
@@ -385,7 +396,7 @@ UtilisateursBean client = (UtilisateursBean) request.getAttribute("user");
 			                        %>
 			                        	<tr>
 			                        		<td>
-			                        			<input type='text' class='form-control' value='<%= a.getAdresse() %>' name='<%= a.getAdresse() %>'>
+			                        			<input type='text' class='form-control form-control-sm' value='<%= a.getAdresse() %>' name='<%= a.getAdresse() %>'>
 			                        		</td>
 			                        		<td>
 			                        			<input type='text' class='form-control' value='<%= a.getCp() %>' name='<%= a.getCp() %>'>
