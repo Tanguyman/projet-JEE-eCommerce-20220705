@@ -4,12 +4,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
 <%@page import="com.hytekFront.beans.ProduitsBean"%>
-<%@page import="com.hytekFront.beans.SousCategoriesBean"%>
 <%@page import="com.hytekFront.beans.CommentairesBean"%>
 <%@page import="com.hytekFront.beans.ImagesBean"%>
 <%
 ProduitsBean p = (ProduitsBean) request.getAttribute("produit");
-SousCategoriesBean sousCategorie = (SousCategoriesBean) request.getAttribute("sousCategorie");
 ArrayList<ImagesBean> images = p.getImages();
 ArrayList<CommentairesBean> commentaire = p.getCommentaires();
 ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsList");
@@ -326,7 +324,7 @@ ArrayList<ProduitsBean> produits = (ArrayList) request.getAttribute("produitsLis
 													<option value="1">⭐</option>
 													<option value="2">⭐⭐</option>
 													<option value="3">⭐⭐⭐</option>
-													<option value="4">⭐⭐⭐⭐</option>
+													<option value="4" selected>⭐⭐⭐⭐</option>
 													<option value="5">⭐⭐⭐⭐⭐</option>
 												</select>
 											</div>

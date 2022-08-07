@@ -137,19 +137,18 @@ public class Produit_Card extends HttpServlet {
 					cb.setCommentaire(story);
 					cb.setNote(note);
 					
+					if ( commentaireUser != null ) {
+						cb.setId( commentaireUser.getId() );
+					}
 					cd.save(cb);
 					
 				}
 			}
 			
-			// MODIFIER SI
+			// PERMET D’AFFICHER SOIT LE FORM D’AJOUT SOIT LE FORM DE MODIFICATION DE COMMENTAIRES
 			if ( commentaireUser != null ) {
 
-				System.out.println(commentaireUser);
-				cb.setId(commentaireUser.getId());
-				note=commentaireUser.getNote();
-				story=commentaireUser.getCommentaire();
-				request.setAttribute("commentaireUser", commentaireUser);
+				request.setAttribute("commentaireUser", cd.getByFk_prodAndFk_user(id, userId));
 				
 			}
 						
@@ -158,8 +157,6 @@ public class Produit_Card extends HttpServlet {
 //		request.setAttribute("produit", pb); // les commentaires ne se mettent pas à jour
 		request.setAttribute("produit", pd.getById(id)); // commentaires se MAJ
 		request.setAttribute("produitsList", pd.getAllProductsForProduitsList( pb.getFk_sous_categorie() ));
-		request.setAttribute("note", note);
-		request.setAttribute("story", story);
 		request.getRequestDispatcher("produit_Card.jsp").forward(request, response);
 	}
 
